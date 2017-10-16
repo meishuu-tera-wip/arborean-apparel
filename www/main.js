@@ -569,7 +569,7 @@ jQuery(($) => {
 
   // .changer [mouseenter] -> show changer command
   $('.changer').mouseenter(function() {
-    $('.changer-text').text('/w /aa ' + $(this).data('change'));
+    $('.changer-text').text('!aa ' + $(this).data('change'));
   // .changer [mouseleave] -> hide changer command
   }).mouseleave(function() {
     $('.changer-text').text('');
@@ -580,7 +580,7 @@ jQuery(($) => {
 
   // .emote [mouseenter] -> show emote command
   $('.emote').mouseenter(function() {
-    $('.emote-text').text('/w /aa ' + $(this).data('emote'));
+    $('.emote-text').text('!aa ' + $(this).data('emote'));
   // .emote [mouseleave] -> hide emote command
   }).mouseleave(function() {
     $('.emote-text').text('');
