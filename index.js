@@ -1,6 +1,6 @@
 const path = require('path');
 const Slash = require('slash');
-
+const Command = require('command')
 const Networking = require('./networking');
 const Window = require('./window');
 
@@ -32,7 +32,8 @@ function dye2int({r, g, b, a, o}) {
 }
 
 module.exports = function ArboreanApparel(dispatch) {
-  const slash = new Slash(dispatch);
+const command = Command(dispatch)
+  //const slash = new Slash(dispatch);
   const net = new Networking();
   const win = new Window();
 
@@ -119,7 +120,7 @@ module.exports = function ArboreanApparel(dispatch) {
 
     if (!options.hideidle && (emote === 44 || emote === 51)) {
       setOption('hideidle', true);
-      slash.print('[AA] Idle animations disabled.');
+      command.message('[AA] Idle animations disabled.');
     }
 
     net.send('emote', emote);
@@ -144,7 +145,7 @@ module.exports = function ArboreanApparel(dispatch) {
       });
       changer.state = 1;
     } else {
-      slash.print('[AA] Changer already in use.');
+      command.message('[AA] Changer already in use.');
     }
   }
 
@@ -187,10 +188,10 @@ module.exports = function ArboreanApparel(dispatch) {
     const changed = setOption(option, value);
 
     if (option === 'hideidle') {
-      slash.print(`[AA] Idle animations ${value ? 'dis' : 'en'}abled.`);
+      command.message(`[AA] Idle animations ${value ? 'dis' : 'en'}abled.`);
     } else if (option === 'hidecb') {
       if (changed) toggleCrystalbind();
-      slash.print(`[AA] Crystalbind ${value ? 'dis' : 'en'}abled.`);
+      command.message(`[AA] Crystalbind ${value ? 'dis' : 'en'}abled.`);
     }
   });
 
@@ -200,26 +201,26 @@ module.exports = function ArboreanApparel(dispatch) {
     startChanger(name);
   });
 
-  slash.on('aa', (args) => {
-    const [, cmd, arg] = args;
-    switch (cmd) {
+  command.add('aa', (command, args) => {
+
+    switch (command) {
       case 'open': {
         win.show();
         break;
       }
 
       case 'idle': {
-        setOption('hideidle', arg
+        setOption('hideidle', args
           ? !!arg.match(/^(0|no|off|disabled?)$/i)
           : !options.hideidle
         );
-        slash.print("[AA] Idle animations " + (options.hideidle ? 'dis' : 'en') + "abled.");
+        command.message("[AA] Idle animations " + (options.hideidle ? 'dis' : 'en') + "abled.");
         break;
       }
 
       case 'cb':
       case 'crystalbind': {
-        const changed = setOption('hidecb', arg
+        const changed = setOption('hidecb', args
           ? !!args[1].match(/^(0|no|off|disabled?)$/i)
           : !options.hidecb
         );
@@ -228,7 +229,7 @@ module.exports = function ArboreanApparel(dispatch) {
           toggleCrystalbind();
         }
 
-        slash.print("[AA] Crystalbind " + (options.hidecb ? 'dis' : 'en') + "abled.");
+        command.message("[AA] Crystalbind " + (options.hidecb ? 'dis' : 'en') + "abled.");
         break;
       }
 
@@ -245,11 +246,11 @@ module.exports = function ArboreanApparel(dispatch) {
           break;
         }
 
-        slash.print([
+        command.message([
           '[AA] Usage:',
-          '* /w /aa open - Opens the AA interface.',
-          '* /w /aa idle [on|off] - Shows or hides your idle animations.',
-          '* /w /aa cb [on|off] - Shows or hides your Crystalbind.',
+          '* !aa open - Opens the AA interface.',
+          '* !aa idle [on|off] - Shows or hides your idle animations.',
+          '* !aa cb [on|off] - Shows or hides your Crystalbind.',
         ].join('<br>'), true);
         break;
       }
