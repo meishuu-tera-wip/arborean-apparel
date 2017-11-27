@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Arborean Apparel</title>
+<title>Arborean Apparel (VERY ALPHA)</title>
 <link rel="stylesheet" href="style.css">
 <script>window.module = module; module = undefined;</script>
 <script src="js/jquery-3.2.0.slim.min.js"></script>
@@ -12,179 +12,179 @@
 <body>
 
 <div class="over">
-  <div class="thing">
-    <input class="typeahead" type="text">
-  </div>
+	<div class="thing">
+		<input class="typeahead" type="text">
+	</div>
 </div>
 
 <div class="container">
-  <div class="row character">
-    <div class="character-name"></div>
-    <div class="character-desc"></div>
-  </div>
-  <div class="row tabs">
-    <div class="tab"><a href="#gear">Gear</a></div>
-    <div class="tab"><a href="#costume">Costume</a></div>
-    <div class="tab"><a href="#extra">Extra</a></div>
-  </div>
-  <div id="gear" class="page">
-    <div class="row">
-      <div class="slot slot-left"></div>
-      <div class="slot slot-top">Equip.</div>
-      <div class="slot slot-top">Over.</div>
-    </div>
-    <div id="slot-weapon" class="row">
-      <div class="slot slot-left">Weapon</div>
-      <div class="slot"><div class="gear-icon slot-weapon equipped"><div class="toggle-display"></div></div></div>
-      <div class="slot"><div class="gear-icon slot-weapon override"></div></div>
-      <div class="selection">
-        <a class="item" data-type="weapon">None</a>
-        <div class="options">
-          <label for="weapon-enchant">Glow:</label>
-          <div class="select">
-            <select id="weapon-enchant">
-              <option>x</option>
-              <option>0</option>
-              <option>9</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>14</option>
-              <option>15</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="slot-chest" class="row">
-      <div class="slot slot-left">Chest</div>
-      <div class="slot"><div class="gear-icon slot-chest equipped"><div class="toggle-display"></div></div></div>
-      <div class="slot"><div class="gear-icon slot-chest override"></div></div>
-      <div class="selection"><a class="item" data-type="chest">None</a><div class="dye"></div></div>
-    </div>
-    <div id="slot-gloves" class="row">
-      <div class="slot slot-left">Gloves</div>
-      <div class="slot"><div class="gear-icon slot-gloves equipped"><div class="toggle-display"></div></div></div>
-      <div class="slot"><div class="gear-icon slot-gloves override"></div></div>
-      <div class="selection"><a class="item" data-type="gloves">None</a><div class="dye"></div></div>
-    </div>
-    <div id="slot-boots" class="row">
-      <div class="slot slot-left">Boots</div>
-      <div class="slot"><div class="gear-icon slot-boots equipped"><div class="toggle-display"></div></div></div>
-      <div class="slot"><div class="gear-icon slot-boots override"></div></div>
-      <div class="selection"><a class="item" data-type="boots">None</a><div class="dye"></div></div>
-    </div>
-    <div id="slot-innerwear" class="row">
-      <div class="slot slot-left">Inner</div>
-      <div class="slot"><div class="gear-icon slot-innerwear equipped"></div></div>
-      <div class="slot"><div class="gear-icon slot-innerwear override"></div></div>
-      <div class="selection"><a class="item" data-type="innerwear">None</a></div>
-    </div>
-  </div>
-  <div id="costume" class="page">
-    <div class="row">
-      <div class="slot slot-left"></div>
-      <div class="slot slot-top">Equip.</div>
-      <div class="slot slot-top">Over.</div>
-    </div>
-    <div id="slot-hairAdornment" class="row">
-      <div class="slot slot-left">Head</div>
-      <div class="slot"><div class="gear-icon slot-hairAdornment equipped"><div class="toggle-display"></div></div></div>
-      <div class="slot"><div class="gear-icon slot-hairAdornment override"></div></div>
-      <div class="selection"><a class="item" data-type="hairAdornment">None</a></div>
-    </div>
-    <div id="slot-mask" class="row">
-      <div class="slot slot-left">Face</div>
-      <div class="slot"><div class="gear-icon slot-mask equipped"><div class="toggle-display"></div></div></div>
-      <div class="slot"><div class="gear-icon slot-mask override"></div></div>
-      <div class="selection"><a class="item" data-type="mask">None</a></div>
-    </div>
-    <div id="slot-costume" class="row">
-      <div class="slot slot-left">Costume</div>
-      <div class="slot"><div class="gear-icon slot-costume equipped"></div></div>
-      <div class="slot"><div class="gear-icon slot-costume override"></div></div>
-      <div class="selection">
-        <a class="item" data-type="costume">None</a><div class="dye"></div>
-        <div class="options">
-          <input type="text" class="outfit-text" placeholder="Name Tag">
-        </div>
-      </div>
-    </div>
-    <div id="slot-back" class="row">
-      <div class="slot slot-left">Back</div>
-      <div class="slot"><div class="gear-icon slot-back equipped"></div></div>
-      <div class="slot"><div class="gear-icon slot-back override"></div></div>
-      <div class="selection"><a class="item" data-type="back">None</a></div>
-    </div>
-    <div id="slot-weaponSkin" class="row">
-      <div class="slot slot-left">Weapon</div>
-      <div class="slot"><div class="gear-icon slot-weaponSkin equipped"></div></div>
-      <div class="slot"><div class="gear-icon slot-weaponSkin override"></div></div>
-      <div class="selection"><a class="item" data-type="weaponSkin">None</a></div>
-    </div>
-  </div>
-  <div id="extra" class="page">
-    <div class="row">
-      <div class="togglebox">
-        <input type="checkbox" id="hideidle">
-        <label for="hideidle"></label>
-      </div>
-      <label for="hideidle">Hide idle animations <small class="whisper">!aa idle</small></label>
-    </div>
-    <div class="row">
-      <div class="togglebox">
-        <input type="checkbox" id="hidecb">
-        <label for="hidecb"></label>
-      </div>
-      <label for="hidecb">Hide Crystalbind <small class="whisper">!aa cb</small></label>
-    </div>
-    <div class="row">
-      <br>
-    </div>
-    <div class="changers">
-      <div class="row">
-        Change: <span class="changer-text whisper"></span><br>
-        <img src="img/Icon_Items/Icon_PoongU_item_P_Tex.png" class="changer" data-change="chest">
-        <img src="img/Icon_Items/Icon_JangShin_item_P_Tex.png" class="changer" data-change="height">
-        <img src="img/Icon_Items/Icon_YookDuk_item_P_Tex.png" class="changer" data-change="thighs">
-      </div>
-    </div>
-    <div class="row">
-      <br>
-    </div>
-    <div class="emote-menu">
-      <div class="row">
-        Simulate emote: <span class="emote-text whisper"></span><br>
-        <small>
-          <strong>Kitchen Dance</strong> and <strong>Settle</strong>
-          will automatically enable "Hide idle animations".
-        </small>
-      </div>
-      <div class="row emote-maid">
-        <img src="img/emote/SocialLook_001_Tex.png" class="emote" data-emote="bow">
-        <img src="img/emote/SocialLook_002_Tex.png" class="emote" data-emote="dance">
-      </div>
-      <div class="row emote-school">
-        <img src="img/emote/SocialLook_003_Tex.png" class="emote" data-emote="settle">
-        <img src="img/emote/SocialLook_004_Tex.png" class="emote" data-emote="peace">
-      </div>
-    </div>
-  </div>
+	<div class="row character">
+		<div class="character-name"></div>
+		<div class="character-desc"></div>
+	</div>
+	<div class="row tabs">
+		<div class="tab"><a href="#gear">Gear</a></div>
+		<div class="tab"><a href="#costume">Costume</a></div>
+		<div class="tab"><a href="#extra">Extra</a></div>
+	</div>
+	<div id="gear" class="page">
+		<div class="row">
+			<div class="slot slot-left"></div>
+			<div class="slot slot-top">Equip.</div>
+			<div class="slot slot-top">Over.</div>
+		</div>
+		<div id="slot-weapon" class="row">
+			<div class="slot slot-left">Weapon</div>
+			<div class="slot"><div class="gear-icon slot-weapon equipped"><div class="toggle-display"></div></div></div>
+			<div class="slot"><div class="gear-icon slot-weapon override"></div></div>
+			<div class="selection">
+				<a class="item" data-type="weapon">None</a>
+				<div class="options">
+					<label for="weapon-enchant">Glow:</label>
+					<div class="select">
+						<select id="weapon-enchant">
+							<option>x</option>
+							<option>0</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="slot-body" class="row">
+			<div class="slot slot-left">Chest</div>
+			<div class="slot"><div class="gear-icon slot-body equipped"><div class="toggle-display"></div></div></div>
+			<div class="slot"><div class="gear-icon slot-body override"></div></div>
+			<div class="selection"><a class="item" data-type="body">None</a><div class="dye"></div></div>
+		</div>
+		<div id="slot-hand" class="row">
+			<div class="slot slot-left">Gloves</div>
+			<div class="slot"><div class="gear-icon slot-hand equipped"><div class="toggle-display"></div></div></div>
+			<div class="slot"><div class="gear-icon slot-hand override"></div></div>
+			<div class="selection"><a class="item" data-type="hand">None</a><div class="dye"></div></div>
+		</div>
+		<div id="slot-feet" class="row">
+			<div class="slot slot-left">Boots</div>
+			<div class="slot"><div class="gear-icon slot-feet equipped"><div class="toggle-display"></div></div></div>
+			<div class="slot"><div class="gear-icon slot-feet override"></div></div>
+			<div class="selection"><a class="item" data-type="feet">None</a><div class="dye"></div></div>
+		</div>
+		<div id="slot-underwear" class="row">
+			<div class="slot slot-left">Inner</div>
+			<div class="slot"><div class="gear-icon slot-underwear equipped"></div></div>
+			<div class="slot"><div class="gear-icon slot-underwear override"></div></div>
+			<div class="selection"><a class="item" data-type="underwear">None</a></div>
+		</div>
+	</div>
+	<div id="costume" class="page">
+		<div class="row">
+			<div class="slot slot-left"></div>
+			<div class="slot slot-top">Equip.</div>
+			<div class="slot slot-top">Over.</div>
+		</div>
+		<div id="slot-styleHead" class="row">
+			<div class="slot slot-left">Head</div>
+			<div class="slot"><div class="gear-icon slot-styleHead equipped"><div class="toggle-display"></div></div></div>
+			<div class="slot"><div class="gear-icon slot-styleHead override"></div></div>
+			<div class="selection"><a class="item" data-type="styleHead">None</a></div>
+		</div>
+		<div id="slot-styleFace" class="row">
+			<div class="slot slot-left">Face</div>
+			<div class="slot"><div class="gear-icon slot-styleFace equipped"><div class="toggle-display"></div></div></div>
+			<div class="slot"><div class="gear-icon slot-styleFace override"></div></div>
+			<div class="selection"><a class="item" data-type="styleFace">None</a></div>
+		</div>
+		<div id="slot-styleBody" class="row">
+			<div class="slot slot-left">Costume</div>
+			<div class="slot"><div class="gear-icon slot-styleBody equipped"></div></div>
+			<div class="slot"><div class="gear-icon slot-styleBody override"></div></div>
+			<div class="selection">
+				<a class="item" data-type="styleBody">None</a><div class="dye"></div>
+				<div class="options">
+					<input type="text" class="outfit-text" placeholder="Name Tag">
+				</div>
+			</div>
+		</div>
+		<div id="slot-styleBack" class="row">
+			<div class="slot slot-left">Back</div>
+			<div class="slot"><div class="gear-icon slot-styleBack equipped"></div></div>
+			<div class="slot"><div class="gear-icon slot-styleBack override"></div></div>
+			<div class="selection"><a class="item" data-type="styleBack">None</a></div>
+		</div>
+		<div id="slot-styleWeapon" class="row">
+			<div class="slot slot-left">Weapon</div>
+			<div class="slot"><div class="gear-icon slot-styleWeapon equipped"></div></div>
+			<div class="slot"><div class="gear-icon slot-styleWeapon override"></div></div>
+			<div class="selection"><a class="item" data-type="styleWeapon">None</a></div>
+		</div>
+	</div>
+	<div id="extra" class="page">
+		<div class="row">
+			<div class="togglebox">
+				<input type="checkbox" id="hideidle">
+				<label for="hideidle"></label>
+			</div>
+			<label for="hideidle">Hide idle animations <small class="whisper">!aa idle</small></label>
+		</div>
+		<div class="row">
+			<div class="togglebox">
+				<input type="checkbox" id="hidecb">
+				<label for="hidecb"></label>
+			</div>
+			<label for="hidecb">Hide Crystalbind <small class="whisper">!aa cb</small></label>
+		</div>
+		<div class="row">
+			<br>
+		</div>
+		<div class="changers">
+			<div class="row">
+				Change: <span class="changer-text whisper"></span><br>
+				<img src="img/Status/Icon_PoongU_ab_Tex.png" class="changer" data-change="chest">
+				<img src="img/Status/Icon_JangShin_ab_Tex.png" class="changer" data-change="height">
+				<img src="img/Status/Icon_YookDuk00_ab_Tex.png" class="changer" data-change="thighs">
+			</div>
+		</div>
+		<div class="row">
+			<br>
+		</div>
+		<div class="emote-menu">
+			<div class="row">
+				Simulate emote: <span class="emote-text whisper"></span><br>
+				<small>
+					<strong>Kitchen Dance</strong> and <strong>Settle</strong>
+					will automatically enable "Hide idle animations".
+				</small>
+			</div>
+			<div class="row emote-maid">
+				<img src="img/emote/SocialLook_001_Tex.png" class="emote" data-emote="bow">
+				<img src="img/emote/SocialLook_002_Tex.png" class="emote" data-emote="dance">
+			</div>
+			<div class="row emote-school">
+				<img src="img/emote/SocialLook_003_Tex.png" class="emote" data-emote="settle">
+				<img src="img/emote/SocialLook_004_Tex.png" class="emote" data-emote="peace">
+			</div>
+		</div>
+	</div>
 
-  <div class="picker">
-    <div class="red color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
-    <div class="green color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
-    <div class="blue color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
-    <div class="alpha color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
-    <div class="toggle">
-      <div class="togglebox">
-        <input type="checkbox" id="dyetoggle">
-        <label for="dyetoggle"></label>
-      </div>
-      <label for="dyetoggle">Enable dye</label>
-    </div>
-  </div>
+	<div class="picker">
+		<div class="red color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
+		<div class="green color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
+		<div class="blue color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
+		<div class="alpha color"><input type="range" class="slider" min="1" max="255"><output>1</output></div>
+		<div class="toggle">
+			<div class="togglebox">
+				<input type="checkbox" id="dyetoggle">
+				<label for="dyetoggle"></label>
+			</div>
+			<label for="dyetoggle">Enable dye</label>
+		</div>
+	</div>
 </div>
 
 </body>
