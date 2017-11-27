@@ -24,6 +24,7 @@ The server is run by me for free, if you want your own special server for your g
 
 ## Todo:
 - [x] Release
+- [ ] Reduce file size
 - [ ] Fix changers
 - [ ] Add nude option/show underwear option
 - [ ] Fix nametags (if they're even broken ????)
