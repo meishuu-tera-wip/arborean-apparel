@@ -4,7 +4,7 @@ Apparel **NOW**
 ![Screenshot](https://imgur.com/c3EtmsA.jpg)
 
 ## Update Notes:
-We release early alpha now. This is EU only for the time being (sorry NA, you'll have to wait for elin gunners). Currently many features are planned, I just wanted to get this out there for people unwilling to pay $15 for a module that requires you to type things and has an high risk of getting people banned.
+We release early alpha now. This is EU only for the time being (sorry NA, you'll have to wait for elin gunners). Currently many features are planned, I just wanted to get this out there for people that want it due to a lack of free alternatives.
 
 ## How to:
 Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases) otherwise you will be missing icons and other data. Download minor script updates from the repo. I may add the icons required to make the script work to the repo but then again I might not.
