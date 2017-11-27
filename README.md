@@ -9,7 +9,6 @@ We release early alpha now. This is EU only for the time being (sorry NA, you'll
 ## How to:
 - Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases)
 - Extract/paste contents of the .zip into your `/tera-proxy` directory, overwriting when asked.
-- Run `installer.bat`, wait for it to finish
 - Start tera-proxy normally
 
 If this doesn't work or isnt' clear, hit me up @@@@ Pentagon#0099 on discord.
