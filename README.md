@@ -20,14 +20,3 @@ To open the UI type `aa open` into /proxy or `!aa open` into a normal chat. Ther
 By default Apparel will share your costume selections with other people using the module around you by connecting to an external server. If this doesn't sound like your cup of tea, simply edit index.js and change `online: true` to false.
 
 The server is run by me for free, if you want your own special server for your guild or something, hit me up. Server software is also on this github if you don't trust me at all. This only effects the costume sharing aspect.
-
-## Original text:
-Play all the dressup.
-
-You're going to need a thing to dump the images into `www/img/` and the items into `www/items.json` – check the `scripts` directory for those.
-
-You may want to run the server – check the `server` directory for that. Don't forget to update the `net.connect()` call at the end of `index.js` to point to the server.
-
-I'm not including any assets from TERA in here.
-
-Licensed under GPLv3.
