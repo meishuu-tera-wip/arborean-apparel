@@ -3,7 +3,9 @@ const Command = require('command');
 const fs = require('fs');
 const Networking = require('./networking');
 const Window = require('./window');
-
+const config = {
+    online: true
+};
 const EMOTES = {
 	bow: 43,
 	kitchen: 44,
@@ -36,18 +38,13 @@ module.exports = function ArboreanApparel(dispatch) {
 	const net = new Networking();
 	const win = new Window();
 let		player,
-		userDefaultAppearance,
-		inDressup = false,
-		inDye = false,
-		lastTooltip = 0,
-		lastTooltipTime = 0,
-		reapplyTimeout = null
+		userDefaultAppearance;
                 let presets = {},
 		nametags = {},
 		presetTimeout = null,
 		nametagTimeout = null,
 		presetLock = false,
-                nametagLock = false
+                nametagLock = false;
         
 	try { presets = require('./presets.json') }
 	catch(e) { presets = {} }
@@ -88,7 +85,9 @@ let		player,
 		});
 	};
 
-	let myId;
+	let myId,
+                frace,
+        fgender;
 	let outfit = {};
 	let override = {};
 
@@ -178,7 +177,9 @@ let		player,
 
 		dispatch.toClient('S_SOCIAL', 1, {
 			target: myId,
-			animation: emote
+			animation: emote,
+                        unk1: 0,
+                        unk2: 0
 		});
 	}
 
@@ -311,16 +312,17 @@ let		player,
 	/* ----------- *
 	 * GAME EVENTS *
 	 * ----------- */
+        
 	dispatch.hook('S_LOGIN', 4, (event) => {
 		myId = event.cid;
-player = event.name
+player = event.name;
 		let model = event.model - 10101;
 		const job = model % 100;
 		model = Math.floor(model / 100);
-		const race = model >> 1;
-		const gender = model % 2;
+		race = model >> 1;
+		gender = model % 2;
 		selfInfo = {
-			name: event.name,
+			name: player,
 			job,
 			race,
 			gender
@@ -352,10 +354,18 @@ player = event.name
 				event.characters[index].styleHead = presets[event.characters[index].name].styleHead;
 				event.characters[index].styleFace = presets[event.characters[index].name].styleFace;
 				event.characters[index].styleFace = presets[event.characters[index].name].styleFace;
+                                event.characters[index].styleBack = presets[event.characters[index].name].styleBack;
 				event.characters[index].styleWeapon = presets[event.characters[index].name].styleWeapon;
 				event.characters[index].weaponEnchant = presets[event.characters[index].name].weaponEnchant;
 				event.characters[index].styleBody = presets[event.characters[index].name].styleBody;
 				event.characters[index].styleBodyDye = presets[event.characters[index].name].styleBodyDye;
+                                event.characters[index].weapon = presets[event.characters[index].name].weapon;
+                                event.characters[index].body = presets[event.characters[index].name].body;
+                                event.characters[index].hand = presets[event.characters[index].name].hand;
+                                event.characters[index].feet = presets[event.characters[index].name].feet;
+                                event.characters[index].underwear = presets[event.characters[index].name].underwear;
+                                event.characters[index].underwearDye = presets[event.characters[index].name].underwearDye;
+                                event.characters[index].sttleFootprint = presets[event.characters[index].name].styleFootprint;
             }
         }
 		return true;
@@ -642,6 +652,8 @@ player = event.name
 	/* ---------- *
 	 * INITIALIZE *
 	 * ---------- */
+        if(config.online) {
 	net.connect({ host: '158.69.215.229', port: 3458 });
+    }
 	//win.show();
 };
