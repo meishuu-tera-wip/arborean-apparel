@@ -128,7 +128,7 @@ jQuery(($) => {
 
 	const SLOTS = [
 		'weapon', 'body', 'hand', 'feet', 'underwear',
-		'styleHead', 'styleFace', 'styleBody', 'styleBack', 'styleWeapon'
+		'styleHead', 'styleFace', 'styleBody', 'styleBack', 'styleWeapon' , 'styleFootprint',
 	]
 
 	/***********
@@ -301,7 +301,8 @@ jQuery(($) => {
 			styleFace: [].concat(style.face, gear.face),
 			styleBody: style.body,
 			styleBack: style.back,
-			styleWeapon: style.weapon[jobName]
+			styleWeapon: style.weapon[jobName],
+                        styleFootprint: style.footprint,
 		}
 
 		$.each(prefilter, (type, items) => {

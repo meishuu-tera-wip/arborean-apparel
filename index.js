@@ -86,8 +86,7 @@ let		player,
 	};
 
 	let myId,
-                frace,
-        fgender;
+
 	let outfit = {};
 	let override = {};
 

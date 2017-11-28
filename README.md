@@ -23,11 +23,11 @@ The server is run by me for free, if you want your own special server for your g
 
 ## Todo:
 - [x] Release
+- [x] Add footprints
 - [ ] Reduce file size
 - [ ] Fix changers
 - [ ] Add nude option/show underwear option
 - [ ] Fix nametags (if they're even broken ????)
-- [ ] Add footprints
 - [ ] Tidy up UI
 - [ ] Add more features (Ａｅｓｔｈｅｔｉｃｓ merge)
 - [ ] other stuff
