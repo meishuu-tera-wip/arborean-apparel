@@ -85,8 +85,7 @@ let		player,
 		});
 	};
 
-	let myId,
-
+	let myId
 	let outfit = {};
 	let override = {};
 
