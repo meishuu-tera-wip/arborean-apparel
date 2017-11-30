@@ -85,7 +85,8 @@ let		player,
 		});
 	};
 
-	let myId
+	let myId;
+
 	let outfit = {};
 	let override = {};
 
@@ -313,12 +314,12 @@ let		player,
         
 	dispatch.hook('S_LOGIN', 4, (event) => {
 		myId = event.cid;
-player = event.name;
-		let model = event.model - 10101;
-		const job = model % 100;
-		model = Math.floor(model / 100);
-		race = model >> 1;
-		gender = model % 2;
+                player = event.name;
+	   let model = event.model - 10101;
+    const job = model % 100;
+    model = Math.floor(model / 100);
+    const race = model >> 1;
+    const gender = model % 2;
 		selfInfo = {
 			name: player,
 			job,
@@ -390,24 +391,24 @@ player = event.name;
 	dispatch.hook('S_USER_EXTERNAL_CHANGE', 4, (event) => {
 		// self
 		if (event.gameId.equals(myId)) {
-                    userDefaultAppearance = Object.assign({}, event);
-                    outfit = userDefaultAppearance;
-                    if(presets[player] && (presets[player].gameId !== 0)) {
-                        override = Object.assign({}, event);
-                        override = presets[player];
-                        presetUpdate();
-                        win.send('outfit', outfit, override);
-			//Object.assign(event, override);
-                        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 4, presets[player]);
-			return false;
+                   // console.log('Player detected')
+                    outfit = Object.assign({}, event);
+                    userDefaultAppearance = outfit;
+                    win.send('outfit', outfit);
+                    if(presets[player] && presets[player].id !== 0) {                         
+                        //console.log('Preset loaded')
+                        override = presets[player]
+                        win.send('outfit', override);
+			Object.assign(event, override);
+                       // dispatch.toClient('S_USER_EXTERNAL_CHANGE', 4, Object.assign({}, outfit, override));
+                       return true;
 		}
                 else{
-                    presets[player] = userDefaultAppearance;
+                    //console.log('Preset made');
                     outfit = Object.assign({}, event);
-            //        presets[player] = Object.assign({}, outfit);
-          //          presets[player].id = 0;
-                    presetUpdate();
-                      win.send('outfit', outfit, override);
+                    presets[player] = outfit;
+                      presetUpdate();
+                      win.send('outfit', outfit);
                 }
             }
 
