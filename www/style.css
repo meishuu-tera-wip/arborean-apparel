@@ -21,8 +21,7 @@ body {
 	line-height: 1.42857143;
 	min-height: 100%;
 	overflow: hidden;
-	display: flex;
-	align-items: center
+	display: flex
 }
 
 a {
@@ -51,6 +50,55 @@ select {
 	appearance: none
 }
 
+/*************
+ * TITLE BAR *
+ *************/
+
+#title-bar {
+	height: 32px;	
+	padding: 0px;
+    margin: 0px;  
+	color: #ADADAD;
+	font-family: sans-serif;
+}
+
+#title {
+	-webkit-app-region: drag;
+	position: fixed;
+	top: 0px;
+	left: 32px;	
+	line-height: 32px;
+	font-size: 14px;
+}
+
+#title-icon {
+	-webkit-app-region: drag;
+	position: fixed;
+	top: 4px;
+	left: 4px;
+	width: 24px;
+    height: 24px;
+}
+
+#title-bar-btns {
+	position: fixed;
+	top: 0px;
+	right: 0px;	
+}
+
+#title-bar-btns button {
+	height: 32px;
+	width: 32px;
+	background-color: transparent;
+	border: none;
+	color: #F1F1F1;
+	font-size: 16px;
+}
+
+#title-bar-btns button:hover {
+	background-color: rgba(255, 255, 255, 0.10);
+}
+
 /********
  * MAIN *
  ********/
@@ -66,7 +114,8 @@ select {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	margin-bottom: 8px
+	margin-bottom: 8px;
+	margin-top: 32px
 }
 
 .character-name {
@@ -120,7 +169,7 @@ select {
 
 .page {
 	display: none;
-	height: 310px /* ensure consistent height (can we flexbox this?) */
+	height: 366px /* ensure consistent height (can we flexbox this?) */
 }
 
 #extra {
@@ -168,44 +217,43 @@ select {
 	border: 2px solid #2a9664
 }
 
+.slot-weapon,.slot-body,.slot-hand,
+.slot-feet,.slot-underwear,.slot-styleHead,
+.slot-styleFace,.slot-styleFace,.slot-styleBack,
+.slot-styleWeapon,.slot-styleBody,.slot-styleFootprint{background-repeat:no-repeat}
+
 .slot-weapon {
 	background-image: url('img/slot-weapon.png')
 }
-
-.slot-chest {
-	background-image: url('img/slot-chest.png')
+.slot-body {
+	background-image: url('img/slot-body.png')
 }
-
-.slot-gloves {
-	background-image: url('img/slot-gloves.png')
+.slot-hand {
+	background-image: url('img/slot-hand.png')
 }
-
-.slot-boots {
-	background-image: url('img/slot-boots.png')
+.slot-feet {
+	background-image: url('img/slot-feet.png')
 }
-
-.slot-innerwear {
-	background-image: url('img/slot-innerwear.png')
+.slot-underwear {
+	background-image: url('img/slot-underwear.png')
 }
-
-.slot-hairAdornment {
-	background-image: url('img/slot-hairAdornment.png')
+.slot-styleHead {
+	background-image: url('img/slot-styleHead.png')
 }
-
-.slot-mask {
-	background-image: url('img/slot-mask.png')
+.slot-styleFace {
+	background-image: url('img/slot-styleFace.png')
 }
-
-.slot-costume {
-	background-image: url('img/slot-costume.png')
+.slot-styleBack {
+	background-image: url('img/slot-styleBack.png')
 }
-
-.slot-back {
-	background-image: url('img/slot-back.png')
+.slot-styleWeapon {
+	background-image: url('img/slot-styleWeapon.png')
 }
-
-.slot-weaponSkin {
-	background-image: url('img/slot-weaponSkin.png')
+.slot-styleBody {
+	background-image: url('img/slot-styleBody.png')
+}
+.slot-styleFootprint {
+	background-image: url('img/slot-styleFootprint.png')
 }
 
 .toggle-display {
@@ -258,8 +306,7 @@ select {
 }
 
 .dye.enabled {
-	background-image: none;
-	border: 1px solid #ccc
+	background-image: none
 }
 
 .options {
@@ -311,7 +358,8 @@ select {
 	left: 0;
 	width: 480px;
 	height: 360px;
-	margin-top: -180px
+    margin-top: 48px;
+    margin-left: 16px
 }
 
 .twitter-typeahead {
@@ -341,7 +389,7 @@ select {
 
 .tt-menu {
 	background-color: #111111;
-	max-height: 310px;
+	max-height: 398px;
 	overflow-y: auto;
 	width: 100%
 }
@@ -412,8 +460,9 @@ select {
 .picker {
 	position: absolute;
 	display: none;
-	width: 280px;
-	background-color: rgba(0, 0, 0, 0.8);
+	width: 300px;
+	background-color: rgba(0, 0, 0, 0.9);
+	border-radius: 5px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -421,13 +470,13 @@ select {
 }
 
 .color {
-	margin-bottom: -3px
+	margin-bottom: -3px;
+	margin-left: 5px
 }
 
 .slider {
 	-webkit-appearance: none;
-	border: 1px solid #aaa;
-	border-radius: 3px;
+	border-radius: 4px;
 	width: 255px;
 	height: 8px;
 	outline: none
@@ -441,8 +490,7 @@ select {
 /* webkit */
 .slider::-webkit-slider-thumb {
 	-webkit-appearance: none;
-	background-color: rgba(128, 128, 128, 0.2);
-	border: 1px solid #ccc;
+	background-color: rgba(128, 128, 128, 0.75);
 	border-radius: 2px;
 	width: 6px;
 	height: 16px
@@ -460,7 +508,6 @@ select {
 .slider::-moz-range-thumb {
 	-webkit-appearance: none;
 	background-color: rgba(128, 128, 128, 0.2);
-	border: 1px solid #ccc;
 	border-radius: 2px;
 	width: 4px;
 	height: 14px
@@ -492,8 +539,8 @@ select {
 
 .color output {
 	display: inline-block;
-	width: 20px;
-	margin-left: 2px;
+	width: 0px;
+	margin-left: 5px;
 	font-size: 12px;
 	text-align: center;
 	-webkit-user-select: text;
@@ -504,6 +551,7 @@ select {
 
 .picker .toggle {
 	margin-top: 4px;
+    margin-left: 5px;
 	font-size: 12px
 }
 
@@ -576,18 +624,34 @@ select {
 .whisper {
 	color: #e080e4
 }
-
 .changer {
-	width: 56px;
-	cursor: pointer;
-	transition: opacity 0.2s;
-	opacity: 0.7
+    height: 53px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    opacity: 0.7
+}
+.rmchanger {
+    height: 53px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    opacity: 0.7;
+}
+.abnormal {
+    height: 53px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    opacity: 0.7;
 }
 
 .changer:hover {
 	opacity: 1
 }
-
+.rmchanger:hover {
+	opacity: 1
+}
+.abnormal:hover {
+	opacity: 1
+}
 .emote {
 	width: 56px;
 	cursor: pointer;

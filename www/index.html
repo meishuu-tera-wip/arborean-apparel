@@ -10,22 +10,30 @@
 <script src="main.js"></script>
 </head>
 <body>
-
-<div class="over">
-	<div class="thing">
-		<input class="typeahead" type="text">
+<div id="title-bar">
+		<img src="img/toggle-remodel.png" id="title-icon">
+		<div id="title">Arborean Apparel (ALPHA)</div>
+		<div id="title-bar-btns">
+			<button id="min-btn">-</button>
+			<button id="close-btn">x</button>
+		</div>
 	</div>
-</div>
 
+	<div class="over">
+		<div class="thing">
+			<input class="typeahead" type="text">
+		</div>
+</div>
 <div class="container">
 	<div class="row character">
 		<div class="character-name"></div>
 		<div class="character-desc"></div>
 	</div>
 	<div class="row tabs">
-		<div class="tab"><a href="#gear">Gear</a></div>
-		<div class="tab"><a href="#costume">Costume</a></div>
-		<div class="tab"><a href="#extra">Extra</a></div>
+		<div class="tab"><a href="#gear"> Gear </a></div>
+		<div class="tab"><a href="#costume"> Costume </a></div>
+                <div class="tab"><a href="#changerz"> Changer </a></div>
+		<div class="tab"><a href="#extra"> Extra </a></div>
 	</div>
 	<div id="gear" class="page">
 		<div class="row">
@@ -130,6 +138,46 @@
 			<div class="selection"><a class="item" data-type="styleFootprint">None</a></div>
 		</div>
 	</div>
+        <div id="changerz" class="page">
+		<div class="changers">
+			<div class="row">
+				Size: <span class="changer-text whisper"></span><br>
+                                <img src="img/Status/Icon_DeaDoo_ab_Tex.png" class="changer" data-change="head">
+				<img src="img/Status/Icon_PoongU_ab_Tex.png" class="changer" data-change="chest">
+				<img src="img/Status/Icon_JangShin_ab_Tex.png" class="changer" data-change="height">
+				<img src="img/Status/Icon_YookDuk00_ab_Tex.png" class="changer" data-change="thighs">
+                                <img src="img/Status/Icon_JangGoe_ab_Tex.png" class="changer" data-change="size">
+                                <br>
+                                <img src="img/Status/Icon_DeaDoo_ab_Tex_Minus.png" class="changer" data-change="dhead">
+				<img src="img/Status/Icon_PoongU_ab_Tex_Minus.png" class="changer" data-change="dchest">
+				<img src="img/Status/Icon_JangShin_ab_Tex_Minus.png" class="changer" data-change="dheight">
+				<img src="img/Status/Icon_YookDuk00_ab_Tex_Minus.png" class="changer" data-change="dthighs">
+                                <img src="img/Status/Icon_JangGoe_ab_Tex_Minus.png" class="changer" data-change="dsize">
+                                </div>
+                    
+		</div>
+            <div class="rmchanger">
+			<div class="row">
+                            Remove:<span class="rmchanger-text whisper"></span><br> 
+                                <img src="img/Status/remove_head.png" class="rmchanger" data-rmchanger="head">
+				<img src="img/Status/remove_chest.png" class="rmchanger" data-rmchanger="chest">
+				<img src="img/Status/remove_height.png" class="rmchanger" data-rmchanger="height">
+				<img src="img/Status/remove_thighs.png" class="rmchanger" data-rmchanger="thighs">
+                                <img src="img/Status/remove_size.png" class="rmchanger" data-rmchanger="size">
+                                </div>
+                    
+		</div>
+             <br> <br>
+            <div class="abnormal">
+               
+			<div class="row">
+                             Effects (toggle): <span class="abnormal-text whisper"></span> <br>
+				<img src="img/Status/UnderWear00_M_Tex.png" class="abnormal" data-abnormalName="confidence">
+				
+			</div>
+		</div>
+	
+	</div>
 	<div id="extra" class="page">
 		<div class="row">
 			<div class="togglebox">
@@ -148,17 +196,7 @@
 		<div class="row">
 			<br>
 		</div>
-		<div class="changers">
-			<div class="row">
-				Change: <span class="changer-text whisper"></span><br>
-				<img src="img/Status/Icon_PoongU_ab_Tex.png" class="changer" data-change="chest">
-				<img src="img/Status/Icon_JangShin_ab_Tex.png" class="changer" data-change="height">
-				<img src="img/Status/Icon_YookDuk00_ab_Tex.png" class="changer" data-change="thighs">
-			</div>
-		</div>
-		<div class="row">
-			<br>
-		</div>
+		
 		<div class="emote-menu">
 			<div class="row">
 				Simulate emote: <span class="emote-text whisper"></span><br>
