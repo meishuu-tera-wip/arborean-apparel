@@ -31,3 +31,9 @@ The server is run by me for free, if you want your own special server for your g
 - [ ] Tidy up UI
 - [ ] Add more features (Ａｅｓｔｈｅｔｉｃｓ merge)
 - [ ] other stuff
+
+## FAQ/Errors:
+`TypeError: electron.BrowserWindow is not a constructor`: Proxy isn't running as electron, please make sure you have downloaded and overwritten (or made copies of) the files in the [full release](https://github.com/hugedong69/arborean-apparel/releases).
+`The system cannot find the path specified.`: You don't have electron installed in tera-proxy/node_modules, refer to the above.
+`Script no work` Please make sure you're using an updated version before messaging me, and have read the readme.
+`Electron.exe is not compatible with this version of windows` Please download the electron prebuilt for your OS [here](https://github.com/electron/electron/releases)
