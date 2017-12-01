@@ -39,4 +39,4 @@ The server is run by me for free, if you want your own special server for your g
 
 `Script no work` Please make sure you're using an updated version before messaging me, and have read the readme.
 
-`Electron.exe is not compatible with this version of windows` Please download the electron prebuilt for your OS [here](https://github.com/electron/electron/releases)
+`Electron.exe is not compatible with this version of windows` Please download the electron prebuilt for your OS [here](https://github.com/electron/electron/releases) and extract it into tera-proxy/node_modules over the top of the existing one
