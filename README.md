@@ -9,7 +9,7 @@ We release early alpha now.Now works on NA too!! Currently many features are pla
 ## How to:
 - Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases)
 - Extract/paste contents of the .zip into your `/tera-proxy` directory, overwriting when asked.
-- Start tera-proxy normally
+- Start tera-proxy normally/with the included ElectronStart.bat (I forgot to include this in the main file)
 
 If this doesn't work or isnt' clear, hit me up @@@@ Pentagon#0099 on discord.
 
