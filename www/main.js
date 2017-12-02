@@ -4,7 +4,7 @@ const {
 	ipcRenderer,
 	remote
 } = require('electron')
-const debug = false
+const debug = true;
 
 function topshitbar() {
 	document.getElementById("min-btn").addEventListener("click", function(e) {
@@ -455,7 +455,7 @@ jQuery(($) => {
 	})
 	// .outfit-text [input] -> send text update
 	$('.outfit-text').on('input', function() {
-		var $override = $('#slot-syleBody .override')
+		var $override = $('#slot-styleBody .override')
 		if ($override.hasClass('selected')) {
 			ipc.send('text', {
 				id: $override.data('id'),
