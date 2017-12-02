@@ -3,7 +3,7 @@ const electron = require('electron')
 
 const CHANNEL_NAME = 'arborean-apparel'
 
-const debug = false
+const debug = true
 
 class Window extends events.EventEmitter {
 	constructor() {
@@ -19,9 +19,10 @@ class Window extends events.EventEmitter {
 
 		this.window = new electron.BrowserWindow({
 			title: 'Arborean Apparel (VERY ALPHA)',
-			minWidth: 512,
-			minHeight: 512,
-			frame: false
+			height: 515,
+			width: 580,
+			transparent: true,
+			frame: false			
 		})
 
 		const listener = (event, ...args) => {

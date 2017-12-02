@@ -14,10 +14,10 @@
 }
 
 body {
-	background-color: #000;
-	color: #bbb;
+	background: rgba(200,200,200,0.8);
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 14px;
+	color: black;
 	line-height: 1.42857143;
 	min-height: 100%;
 	overflow: hidden;
@@ -25,12 +25,12 @@ body {
 }
 
 a {
-	color: #428bca;
+	color: black;
 	text-decoration: none
 }
 
 a:hover {
-	color: #2a6496;
+	color: black;
 	text-decoration: underline;
 	cursor: pointer
 }
@@ -58,7 +58,7 @@ select {
 	height: 32px;	
 	padding: 0px;
     margin: 0px;  
-	color: #ADADAD;
+	color: black;
 	font-family: sans-serif;
 }
 
@@ -89,7 +89,7 @@ select {
 #title-bar-btns button {
 	height: 32px;
 	width: 32px;
-	background-color: transparent;
+	background-color: black;
 	border: none;
 	color: #F1F1F1;
 	font-size: 16px;
@@ -128,12 +128,11 @@ select {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	opacity: 0.7;
+	opacity: 0.9;
 	transition: opacity 0.3s
 }
 
 .tabs:hover {
-	opacity: 1
 }
 
 .tab {
@@ -145,12 +144,13 @@ select {
 
 .tab:hover {
 	background-color: #093356;
-	background: linear-gradient(to top, #040e17, #0f3657)
+	background: rgba(251, 251, 251, 0.8);
+	border-color: #0e5189
 }
 
 .tab.active {
-	background-color: #0e5189;
-	background: linear-gradient(to top, #0e5189, #061827);
+	background-color: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.6);
 	border-color: #0e5189
 }
 
@@ -159,11 +159,11 @@ select {
 	margin: 4px 0;
 	text-align: center;
 	font-size: 1.1em;
-	color: #ccc
+	color: #black
 }
 
 .tab a:hover {
-	color: #ccc;
+	color: #black;
 	text-decoration: none !important
 }
 
@@ -315,9 +315,9 @@ select {
 
 .outfit-text {
 	background-color: transparent;
-	border: 1px solid #ccc;
+	border: 1px solid black;
 	border-radius: 2px;
-	color: #ccc;
+	color: rgba(0, 0, 0, 1);
 	outline: none;
 	padding: 1px 3px;
 	width: 100px
@@ -325,23 +325,23 @@ select {
 
 .outfit-text:focus {
 	border: 1px solid #0097cf;
-	color: #e2e2e2
+	color: black;
 }
 
 .outfit-text::-webkit-input-placeholder {
-	color: #999
+	color: black;
 }
 
 .outfit-text:focus::-webkit-input-placeholder {
-	color: #555
+	color: black;
 }
 
 .outfit-text::-moz-placeholder {
-	color: #999
+	color: black;
 }
 
 .outfit-text:focus::-moz-placeholder {
-	color: #555
+	color: black;
 }
 
 /**********
@@ -388,7 +388,7 @@ select {
 }
 
 .tt-menu {
-	background-color: #111111;
+	background-color: rgba(251, 251, 251, 0.8);
 	max-height: 398px;
 	overflow-y: auto;
 	width: 100%
@@ -404,12 +404,12 @@ select {
 }
 
 .tt-suggestion:nth-child(even) {
-	background-color: #1a1a1a
+	background-color: rgba(200, 200, 200, 0.8);
 }
 
 .tt-cursor,
 .tt-suggestion:hover {
-	background-color: #333 !important
+	background-color: rgba(255, 255, 255, 1); !important
 }
 
 .tt-suggestion .icon {
@@ -448,7 +448,7 @@ select {
 }
 
 .name .tt-highlight {
-	color: #ffa414;
+	color: #8d8d8d;
 	font-weight: bold;
 	text-decoration: none
 }
