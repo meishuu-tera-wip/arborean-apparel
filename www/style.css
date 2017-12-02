@@ -55,6 +55,7 @@ select {
  *************/
 
 #title-bar {
+	-webkit-app-region: drag;
 	height: 32px;	
 	padding: 0px;
     margin: 0px;  
@@ -67,6 +68,7 @@ select {
 	position: fixed;
 	top: 0px;
 	left: 32px;	
+	right: 0px;
 	line-height: 32px;
 	font-size: 14px;
 }
@@ -81,12 +83,14 @@ select {
 }
 
 #title-bar-btns {
+	-webkit-app-region: no-drag;
 	position: fixed;
 	top: 0px;
 	right: 0px;	
 }
 
 #title-bar-btns button {
+	-webkit-app-region: no-drag;
 	height: 32px;
 	width: 32px;
 	background-color: black;
@@ -96,6 +100,7 @@ select {
 }
 
 #title-bar-btns button:hover {
+	-webkit-app-region: no-drag;
 	background-color: rgba(255, 255, 255, 0.10);
 }
 
