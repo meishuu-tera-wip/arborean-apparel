@@ -17,13 +17,11 @@ const EMOTES = {
 let STACKS = {
 	head: 1,
 	chest: 4,
-	height: 5,
-	thighs: 5,
-	size: 5
+	height: 4,
+	thighs: 4,
+	size: 4
 };
 const CHANGERS = {
-	head: 7000001,
-	dhead: 7000001,
 	chest: 7000002,
 	dchest: 7000002,
 	height: 7000003,
@@ -34,14 +32,18 @@ const CHANGERS = {
 	dsize: 7000005
 };
 const RMCHANGER = {
-	head: 7000001,
 	chest: 7000002,
+	dchest: 7000002,
 	height: 7000003,
+	dheight: 7000003,
 	thighs: 7000004,
-	size: 7000005
+	dthighs: 7000004,
+	size: 7000005,
+	dsize: 7000005
 };
 const ABNORM = {
-	confidence: 7000027
+	confidence: 7000027,
+        head: 7000001
 };
 
 function id2str(id) {
@@ -236,15 +238,12 @@ module.exports = function ArboreanApparel(dispatch) {
 		lastCallDate = Date.now();
 	}
 
-	function startChanger(name) {
+	function startChanger(name) { // fix this
 		if (Date.now() - lastCallDate < 100) return;
 		const addChange = CHANGERS[name];
 		const stacker = STACKS[name];
 		//console.log(name);
 		switch (name) {
-			case "dhead":
-				dstack = STACKS[`head`]; //QUALITY CODE INCOMING
-				STACKS[`head`] = STACKS[`head`] - 1;
 			case "dchest":
 				dstack = STACKS[`chest`];
 				STACKS[`chest`] = STACKS[`chest`] - 1;
@@ -287,18 +286,31 @@ module.exports = function ArboreanApparel(dispatch) {
 	function endChanger(name) {
 		if (Date.now() - lastCallDate < 100) return;
 		const remChange = RMCHANGER[name];
-		const stacker = STACKS[name];
+                switch (name) {
+			case "dchest":
+				dstack = STACKS[`chest`];
+				STACKS[`chest`] = 0;
+			case "dheight":
+				dstack = STACKS[`height`];
+				STACKS[`height`] = 0;
+			case "dthighs":
+				dstack = STACKS[`thighs`];
+				STACKS[`thighs`] = 0;
+			case "dsize":
+				dstack = STACKS[`size`];
+				STACKS[`size`] = 0;
 		dispatch.toClient('S_ABNORMALITY_END', 1, {
 			target: myId,
-			source: 6969696,
-			id: remChange,
-			duration: 0,
-			unk: 0,
-			stacks: 1,
-			unk2: 0
-		});
-		STACKS[name] = 0;
+			id: remChange			
+		}); break
+            default:
+		dispatch.toClient('S_ABNORMALITY_END', 1, {
+			target: myId,
+			id: remChange	                
+                    });
+                    STACKS[name] = 0;
 	}
+    }
 	/* --------- *
 	 * UI EVENTS *
 	 * --------- */
@@ -322,6 +334,8 @@ module.exports = function ArboreanApparel(dispatch) {
 		net.send('outfit', override); // TODO
 	});
 	win.on('text', (info) => {
+            nametags[player] = info;
+            nametagUpdate()
 		net.send('text', info.id, info.text);
 		dispatch.toClient('S_ITEM_CUSTOM_STRING', 2, {
 			gameId: myId,
@@ -424,6 +438,7 @@ module.exports = function ArboreanApparel(dispatch) {
 	});
 	dispatch.hook('S_GET_USER_LIST', 11, event => {
 		win.close();
+                override = { };
 		for (let index in event.characters) {
 			if (presets[event.characters[index].name] && presets[event.characters[index].name].gameId !== 0) {
 				event.characters[index].styleFace = presets[event.characters[index].name].styleFace;
@@ -492,19 +507,19 @@ module.exports = function ArboreanApparel(dispatch) {
 		if (event.gameId.equals(myId)) {
 			//console.log('Player detected')
 			outfit = Object.assign({}, event);
-			userDefaultAppearance = outfit;
 			if (presets[player] && presets[player].id !== 0) {
 				//console.log('Preset loaded')
 				presets[player] = override;
 				presetUpdate();
 				win.send('outfit', outfit, override);
 				Object.assign(event, override);
+                                if(nametags[player] && (nametags[player].length != 0)) updateNametag(nametags[player])
 				// dispatch.toClient('S_USER_EXTERNAL_CHANGE', 4, Object.assign({}, outfit, override));
 				return true;
 			} else {
 				//console.log('Preset made');
 				outfit = Object.assign({}, event);
-				presets[player] = userDefaultAppearance;
+				presets[player] = outfit
 				presetUpdate();
 				win.send('outfit', outfit);
 			}
@@ -522,10 +537,17 @@ module.exports = function ArboreanApparel(dispatch) {
 			return true*/
 		}
 	});
+        
+        function updateNametag(nametag) {
+dispatch.toClient('S_ITEM_CUSTOM_STRING', 2, {gameId: myId, customStrings: [{dbid: nametag.id, string: nametag.text}]});
+nametagUpdate();
+win.send('text', nametag);
+        }
+
 	dispatch.hook('S_ITEM_CUSTOM_STRING', 2, (event) => {
 		const user = networked.get(id2str(event.gameId));
-		if (user && user.override.costumeText != null);
-		return false
+		if (user && user.override.costumeText !== null);
+		return false;
 	});
 	dispatch.hook('S_SOCIAL', 1, (event) => {
 		if ([31, 32, 33].indexOf(event.animation) === -1) return
@@ -569,62 +591,6 @@ module.exports = function ArboreanApparel(dispatch) {
 					return true;
 				}
 			}
-		}
-	});
-	// CHANGERS
-	dispatch.hook('S_INGAME_CHANGE_USER_APPEARANCE_START', 1, (event) => {
-		changer.state = -1;
-	});
-	dispatch.hook('C_INGAME_CHANGE_USER_APPEARANCE_TRY', 1, (event) => {
-		if (changer.state === 1) {
-			Object.assign(changer, {
-				state: 2
-			}, event);
-			return false;
-		}
-	});
-	dispatch.hook('C_INGAME_CHANGE_USER_APPEARANCE_CANCEL', (event) => {
-		switch (changer.state) {
-			case 2:
-				{
-					process.nextTick(() => {
-						dispatch.toClient('S_PREPARE_INGAME_CHANGE_USER_APPEARANCE', 1, changer);
-					});
-					return false;
-				}
-			case 1:
-				{
-					process.nextTick(() => {
-						dispatch.toClient('S_INGAME_CHANGE_USER_APPEARANCE_CANCEL', 1, {
-							dialogId: -1
-						});
-					});
-					changer.state = 0;
-					return false;
-				}
-			default:
-				{
-					changer.state = 0;
-					break
-				}
-		}
-	});
-	dispatch.hook('C_COMMIT_INGAME_CHANGE_USER_APPEARANCE', 1, (event) => {
-		if (changer.state === 2) {
-			process.nextTick(() => {
-				dispatch.toClient('S_USER_APPEARANCE_CHANGE', 1, {
-					id: myId,
-					field: changer.field,
-					value: changer.value
-				});
-				dispatch.toClient('S_RESULT_INGAME_CHANGE_USER_APPEARANCE', 1, {
-					ok: 1,
-					field: changer.field
-				});
-				net.send('changer', changer.field, changer.value);
-				changer.state = 0;
-			});
-			return false;
 		}
 	});
 	/* ------------- *
