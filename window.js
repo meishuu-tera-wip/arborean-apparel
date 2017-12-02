@@ -3,7 +3,7 @@ const electron = require('electron')
 
 const CHANNEL_NAME = 'arborean-apparel'
 
-const debug = true
+const debug = false
 
 class Window extends events.EventEmitter {
 	constructor() {
