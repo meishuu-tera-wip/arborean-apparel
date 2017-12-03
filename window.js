@@ -21,7 +21,7 @@ class Window extends events.EventEmitter {
 			title: 'Arborean Apparel (VERY ALPHA)',
 			height: 515,
 			width: 580,
-			transparent: true,
+			transparent: false,
 			frame: false			
 		})
 
