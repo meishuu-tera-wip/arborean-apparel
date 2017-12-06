@@ -1,7 +1,7 @@
 # Arborean Apparel
 Apparel **NOW**
 
-![GET SPOOKED](https://imgur.com/qJIDjNT.jpg)
+![GET SPOOKED](https://imgur.com/Za3if3V.png)
 
 ## Update Notes:
 We release early alpha now.Now works on NA too!! Currently many features are planned, I just wanted to get this out there for people that want it due to a lack of free alternatives.
