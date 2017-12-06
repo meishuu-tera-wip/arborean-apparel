@@ -1,7 +1,7 @@
 # Arborean Apparel
 Apparel **NOW**
 
-![Screenshot](https://imgur.com/c3EtmsA.jpg)
+![GET SPOOKED](https://imgur.com/qJIDjNT.jpg)
 
 ## Update Notes:
 We release early alpha now.Now works on NA too!! Currently many features are planned, I just wanted to get this out there for people that want it due to a lack of free alternatives.
@@ -44,3 +44,7 @@ The server is run by me for free, if you want your own special server for your g
 `Script no work` Please make sure you're using an updated version before messaging me, and have read the readme.
 
 `Electron.exe is not compatible with this version of windows` Please download the electron prebuilt for your OS [here](https://github.com/electron/electron/releases) and extract it into tera-proxy/node_modules over the top of the existing one
+
+## Media/Video guide
+https://www.youtube.com/watch?v=i-y2D_2DUZ8
+(i'll make an actual video guide "later" lmao)
