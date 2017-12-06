@@ -27,6 +27,10 @@ The server is run by me for free, if you want your own special server for your g
 - [x] Fix changers
 - [x] Add nude option/show underwear option
 - [x] Fix nametags (if they're even broken ????)
+- [ ] Add effect/slider saving
+- [ ] Add more effects
+- [ ] Make code less bad
+- [ ] Add race/appearance changing
 - [ ] Reduce file size
 - [ ] Tidy up UI
 - [ ] Add more features (Ａｅｓｔｈｅｔｉｃｓ merge)

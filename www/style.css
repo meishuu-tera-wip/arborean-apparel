@@ -28,6 +28,10 @@ a {
 	color: black;
 	text-decoration: none
 }
+.item {
+	color: blue;
+	text-decoration: underline;
+}
 
 a:hover {
 	color: black;
@@ -466,7 +470,7 @@ select {
 	position: absolute;
 	display: none;
 	width: 300px;
-	background-color: rgba(0, 0, 0, 0.9);
+	background-color: rgba(195, 188, 188, 1);
 	border-radius: 5px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -495,7 +499,7 @@ select {
 /* webkit */
 .slider::-webkit-slider-thumb {
 	-webkit-appearance: none;
-	background-color: rgba(128, 128, 128, 0.75);
+	background-color: rgba(234, 234, 234, 1);
 	border-radius: 2px;
 	width: 6px;
 	height: 16px
