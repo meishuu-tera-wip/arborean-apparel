@@ -69,6 +69,10 @@ const basedir = path.join(__dirname, '../../data/json');
       let style = false;
       if (category.startsWith('style_')) {
         category = category.slice(6);
+        if(category === 'foot_print') {
+          category='effect'
+          item.linkLookInfoId = item.icon
+        }
         style = true;
       } else if (category.startsWith('accessory')) {
         category = category.slice(9);
@@ -241,7 +245,7 @@ const categories = {
       gunner: [],
       brawler: [],
       ninja: [],
-	  valkyrie: [],
+      valkyrie: [],
     },
     plate: {
       body: [],
@@ -276,13 +280,13 @@ const categories = {
       gunner: [],
       brawler: [],
       ninja: [],
-	  valkyrie: [],
+      valkyrie: [],
     },
     body: [],
     face: [],
     hair: [],
     back: [],
-	effect: [],
+    effect: [],
   },
 };
 
