@@ -13,7 +13,6 @@ try {
 }
 
 const itemData = require('./items');
-const aes = require('./aes');
 class IPC extends events.EventEmitter {
     constructor() {
         super();
