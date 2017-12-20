@@ -374,19 +374,41 @@ module.exports = function ArboreanApparel(dispatch) {
 	win.on('abn', abnormalStart);
 	win.on('changer', startChanger);
 	win.on('rmchanger', endChanger);
-	command.add('aa', (cmd, arg, arg2, arg3) => {
+	command.add('aa', (cmd, arg) => {
 		switch (cmd) {
                     case 'job':
+                        case 'class':
                         jobId = parseInt(arg);
-                        raceId = parseInt(arg2);
                         selfInfo = {
-			name: arg3,
+			name: player,
 			job: jobId,
-			race: raceId,
+			race,
 			gender
 		};
                 win.send('character', selfInfo);
                         command.message("Job set to:");
+                    break
+               case 'race':
+                        raceId = parseInt(arg);
+                        selfInfo = {
+			name: player,
+			job :job,
+			race: raceId,
+			gender
+		};
+                win.send('character', selfInfo);
+                        command.message("Race set to:");
+                    break
+                case 'reset':
+                        raceId = parseInt(arg);
+                        selfInfo = {
+			name: player,
+			job :job,
+			race,
+			gender
+		};
+                win.send('character', selfInfo);
+                        command.message("Restet race and job changes");
                     break
 			case 'open':
 				{
@@ -428,6 +450,9 @@ module.exports = function ArboreanApparel(dispatch) {
 					command.message([
 				'[AA] Usage:',
 				'!aa open - Opens the AA interface.',
+                                `!aa class [id] - Changes your class in the UI`,
+                                `!aa race [id] - Changes your race in the UI`,
+                                `!aa reset - Resets job and race changes`,
 				'!aa idle [on|off] - Shows or hides your idle animations.',
 				'!aa cb [on|off] - Shows or hides your Crystalbind.'
 				].join('<br>'), true);
@@ -516,7 +541,11 @@ module.exports = function ArboreanApparel(dispatch) {
                     event.id = myMount;
                     return true;    
                 }
-                return true;
+                const user = networked.get(id2str(event.gameId));
+		if (user) {                    
+			Object.assign(event.id, user.mount) // write custom setup
+			return true;
+                    }
     });
 	// sorry for the mess
 	dispatch.hook('S_USER_EXTERNAL_CHANGE', 4, (event) => {
@@ -658,10 +687,16 @@ win.send('text', nametag);
                
 	});
     });
+    
+            net.on('mount', (id, mount) =>{
+            if (!networked.has(id)) return;
+            const user = networked.get(id);
+            user.mount = mount;
+        });
 	net.on('option', (id, key, val) => {
 		if (networked.has(id)) networked.get(id).options[key] = val;
 	});
-// todo : mount
+
         net.on('abnBegin', (id, abnormal) => {
             if (!networked.has(id)) return;
             dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
@@ -674,6 +709,7 @@ win.send('text', nametag);
             unk2: 0
 			});                    
         });
+
         net.on('abnEnd', (id, abnormal) =>{
             if (!networked.has(id)) return;
                 dispatch.toClient('S_ABNORMALITY_END', 1, {
