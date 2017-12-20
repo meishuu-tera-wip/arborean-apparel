@@ -69,7 +69,10 @@ module.exports = function ArboreanApparel(dispatch) {
 	let player,
 		lastCallDate = 1,
         	presets = {},
+                myMount = {},
 		nametags = {},
+                fakeJob = false,
+                jobId,
                 abnormalities = {},
 		presetTimeout = null,
                 effects,
@@ -84,6 +87,11 @@ module.exports = function ArboreanApparel(dispatch) {
 	}
 	try {
 		nametags = require('./nametags.json');
+	} catch (e) {
+		nametags = {};
+	}
+        try {
+		myMount = require('./mount.json');
 	} catch (e) {
 		nametags = {};
 	}
@@ -119,7 +127,9 @@ module.exports = function ArboreanApparel(dispatch) {
 			abnLock = false;
 		});
 	};
-        
+        function saveMount() {
+		fs.writeFileSync(path.join(__dirname, 'mount.json'), JSON.stringify(myMount));
+}
 	function presetSave() {
 		if (presetLock) {
 			presetUpdate();
@@ -257,7 +267,7 @@ module.exports = function ArboreanApparel(dispatch) {
 		lastCallDate = Date.now();
 	}
 
-	function startChanger(name) { // fix this
+	function startChanger(name) { 
 		if (Date.now() - lastCallDate < 100) return;
 		const addChange = CHANGERS[name];
 		const stacker = STACKS[name];
@@ -266,25 +276,24 @@ module.exports = function ArboreanApparel(dispatch) {
                 case "dchest":
                     meme = STACKS.chest--;
                 case "dheight":
-                 meme = STACKS.height--;   
-             case "dthighs":
-               meme = STACKS.thighs--;   
-                         case "dsize":
-                         meme = STACKS.size--;   
-				dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
-					target: myId,
-					source: 6969696,
-					id: addChange,
-					duration: 0,
-					unk: 0,
-					stacks: meme,
-					unk2: 0
-				});
-                                net.send('changer', addChange, meme);
-                                 break
-                            default:
-                            	//console.log('increase');
-				dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
+                    meme = STACKS.height--;   
+                case "dthighs":
+                    meme = STACKS.thighs--;   
+                  case "dsize":
+                      meme = STACKS.size--;   
+                      dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
+                          target: myId,
+                          source: 6969696,
+                          id: addChange,
+                          duration: 0,
+                          unk: 0,
+                          stacks: meme,
+                          unk2: 0
+                      });
+                      net.send('changer', addChange, meme);
+                      break
+                  default:
+                      dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
 					target: myId,
 					source: 6969696,
 					id: addChange,
@@ -314,6 +323,7 @@ module.exports = function ArboreanApparel(dispatch) {
 	 * UI EVENTS *
 	 * --------- */
 	win.on('load', () => {
+            win.send('myMount', myMount);
 		win.send('character', selfInfo);
 		win.send('outfit', outfit, override);
 		for (const k of Object.keys(options)) win.send('option', k, options[k]);
@@ -354,17 +364,40 @@ module.exports = function ArboreanApparel(dispatch) {
 			command.message(`[AA] Crystalbind ${value ? 'dis' : 'en'}abled.`);
 		}
 	});
+        win.on('mount', (mount) => {
+            win.send('myMount', mount); //disgusting
+            myMount = mount;
+            saveMount();
+            net.send('mount', myMount);
+        });
 	win.on('emote', doEmote);
 	win.on('abn', abnormalStart);
 	win.on('changer', startChanger);
 	win.on('rmchanger', endChanger);
-	command.add('aa', (cmd, arg) => {
+	command.add('aa', (cmd, arg, arg2, arg3) => {
 		switch (cmd) {
+                    case 'job':
+                        jobId = parseInt(arg);
+                        raceId = parseInt(arg2);
+                        selfInfo = {
+			name: arg3,
+			job: jobId,
+			race: raceId,
+			gender
+		};
+                win.send('character', selfInfo);
+                        command.message("Job set to:");
+                    break
 			case 'open':
 				{
 					win.show();
 					break
 				}
+                                case 'mount':
+                                {
+                                    win.send('myMount', mount)
+                                    break
+                                }
 			case 'idle':
 				{
 					setOption('hideidle', arg ? !!arg.match(/^(0|no|off|disabled?)$/i) : !options.hideidle);
@@ -408,14 +441,14 @@ module.exports = function ArboreanApparel(dispatch) {
 	dispatch.hook('S_LOGIN', 4, (event) => {
 		myId = event.cid;
 		player = event.name;
-		let model = event.model - 10101;
-		const job = model % 100;
+		model = event.model - 10101;
+		job = model % 100;
 		model = Math.floor(model / 100);
-		const race = model >> 1;
-		const gender = model % 2;
+		race = model >> 1;
+		gender = model % 2;
 		selfInfo = {
 			name: player,
-			job,
+			job: job,
 			race,
 			gender
 		};
@@ -429,11 +462,13 @@ module.exports = function ArboreanApparel(dispatch) {
 		//override = {};
 		net.send('login', id2str(myId));
 		win.send('character', selfInfo);
+                win.send('myMount', myMount);
 		for (const key of Object.keys(options)) {
 			broadcast('option', key, options[key]);
 		}
 		//broadcast('outfit', outfit, override)
 		net.send('outfit', override);
+                win.send('')
 		win.send('outfit', outfit, override);
 	});
         dispatch.hook('S_ABNORMALITY_BEGIN', 2, event =>{
@@ -472,19 +507,23 @@ module.exports = function ArboreanApparel(dispatch) {
 		}
 		return true;
 	});
-	//Marrow brooch handling thanks Cosplayer
+	//Marrow brooch handling thanks Cosplayer, kasea please die
 	dispatch.hook('S_UNICAST_TRANSFORM_DATA', 'raw', (code, data) => {
         return false;
         });
-
+        dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => { 
+            if (event.gameId.equals(myId)) {
+                    event.id = myMount;
+                    return true;    
+                }
+                return true;
+    });
 	// sorry for the mess
 	dispatch.hook('S_USER_EXTERNAL_CHANGE', 4, (event) => {
 		// self
 		if (event.gameId.equals(myId)) {
-			//console.log('Player detected')
 			outfit = Object.assign({}, event);
 			if (presets[player] && presets[player].id !== 0) {
-				//console.log('Preset loaded')
 				presets[player] = override;
 				presetUpdate();
 				win.send('outfit', outfit, override);
@@ -493,7 +532,6 @@ module.exports = function ArboreanApparel(dispatch) {
 				// dispatch.toClient('S_USER_EXTERNAL_CHANGE', 4, Object.assign({}, outfit, override));
 				return true;
 			} else {
-				//console.log('Preset made');
 				outfit = Object.assign({}, event);
 				presets[player] = outfit;
 				presetUpdate();
@@ -623,6 +661,7 @@ win.send('text', nametag);
 	net.on('option', (id, key, val) => {
 		if (networked.has(id)) networked.get(id).options[key] = val;
 	});
+// todo : mount
         net.on('abnBegin', (id, abnormal) => {
             if (!networked.has(id)) return;
             dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
