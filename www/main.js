@@ -6,21 +6,6 @@ const {
 } = require('electron');
 const debug = false;
 
-function topshitbar() {
-    document.getElementById("min-btn").addEventListener("click", function (e) {
-        const window = remote.getCurrentWindow();
-        window.minimize();
-    });
-    document.getElementById("close-btn").addEventListener("click", function (e) {
-        const window = remote.getCurrentWindow();
-        window.close();
-    });
-}
-document.onreadystatechange = function () {
-    if (document.readyState === "complete") {
-        topshitbar();
-    }
-};
 try {
     suggestions = require('./mounts.json');
 } catch (e) {
@@ -837,6 +822,12 @@ jQuery(($) => {
         // focus textbox
         $('.tt-input').focus();
     });
+    $('#min-btn').click(function () {
+        remote.getCurrentWindow()minimize()
+    })
+    $('#close-btn').click(function () {
+        remote.getCurrentWindow().close()
+    })
     // ----
     // INIT
     // ----
