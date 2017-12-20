@@ -415,11 +415,6 @@ module.exports = function ArboreanApparel(dispatch) {
 					win.show();
 					break
 				}
-                                case 'mount':
-                                {
-                                    win.send('myMount', mount)
-                                    break
-                                }
 			case 'idle':
 				{
 					setOption('hideidle', arg ? !!arg.match(/^(0|no|off|disabled?)$/i) : !options.hideidle);
@@ -493,7 +488,7 @@ module.exports = function ArboreanApparel(dispatch) {
 		}
 		//broadcast('outfit', outfit, override)
 		net.send('outfit', override);
-                win.send('')
+                win.send('');
 		win.send('outfit', outfit, override);
 	});
         dispatch.hook('S_ABNORMALITY_BEGIN', 2, event =>{
