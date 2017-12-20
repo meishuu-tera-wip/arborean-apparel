@@ -4,6 +4,8 @@ Apparel **NOW**
 ![:thonk:](https://i.imgur.com/0cnwIz8.jpg)
 
 ## Update Notes:
+**woops Pushed an incorrect update, I can't currently upload a fix, so go to `bin/node_modules/arborean-apparel/www/` and edit `main.js` and remove the line that says `aes = require(./aes)` up the top.**
+
 Recent update containing mounts contains an updated Electron version and it is recommended you re-download the FULL version. Also networking might be wrong for mounts so please let me know if you can't see other peoples mounts thanks.
 
 ## How to:
