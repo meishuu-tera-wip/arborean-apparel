@@ -27,6 +27,7 @@ The server is run by me for free, if you want your own special server for your g
 - [x] Fix changers
 - [x] Add nude option/show underwear option
 - [x] Fix nametags (if they're even broken ????)
+- [ ] Remove or fix emotes
 - [ ] Add effect/slider saving
 - [ ] Add more effects
 - [ ] Make code less bad
