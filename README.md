@@ -1,10 +1,10 @@
 # Arborean Apparel
 Apparel **NOW**
 
-![GET SPOOKED](https://imgur.com/Za3if3V.png)
+![:thonk:](https://i.imgur.com/0cnwIz8.jpg)
 
 ## Update Notes:
-We release early alpha now.Now works on NA too!! Currently many features are planned, I just wanted to get this out there for people that want it due to a lack of free alternatives.
+Recent update containing mounts contains an updated Electron version and it is recommended you re-download the FULL version. Also networking might be wrong for mounts so please let me know if you can't see other peoples mounts thanks.
 
 ## How to:
 - Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases)
