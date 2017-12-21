@@ -6,6 +6,21 @@ const {
 } = require('electron');
 const debug = false;
 
+function topshitbar() {
+    document.getElementById("min-btn").addEventListener("click", function (e) {
+        const window = remote.getCurrentWindow();
+        window.minimize();
+    });
+    document.getElementById("close-btn").addEventListener("click", function (e) {
+        const window = remote.getCurrentWindow();
+        window.close();
+    });
+}
+document.onreadystatechange = function () {
+    if (document.readyState === "complete") {
+        topshitbar();
+    }
+};
 try {
     suggestions = require('./mounts.json');
 } catch (e) {
@@ -153,7 +168,7 @@ jQuery(($) => {
             TRANSPARENT));
     });
     $('.mount-icon').each(function () {
-        $(this).data('id', 0).append($make('img').attr('src',
+        $(this).data('id', "0").append($make('img').attr('src',
             `./img/undefined.png`));
     });
 
@@ -219,11 +234,14 @@ jQuery(($) => {
     }
 
     function getMount(vehicleId) {
+        if (vehicleId === "undefined"){
+            vehicleId = 6969;
+        };
         return suggestions.filter(
             function (data) {
                 return data.vehicleId === vehicleId;
             }
-        );
+        )
     }
 
     function updatePicker() {
@@ -821,12 +839,6 @@ jQuery(($) => {
         // focus textbox
         $('.tt-input').focus();
     });
-    $('#min-btn').click(function () {
-        remote.getCurrentWindow()minimize()
-    })
-    $('#close-btn').click(function () {
-        remote.getCurrentWindow().close()
-    })
     // ----
     // INIT
     // ----
