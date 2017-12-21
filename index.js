@@ -69,7 +69,6 @@ module.exports = function ArboreanApparel(dispatch) {
     let player,
         lastCallDate = 1,
         presets = {},
-        myMount = {},
         nametags = {},
         fakeJob = false,
         jobId,
@@ -90,11 +89,7 @@ module.exports = function ArboreanApparel(dispatch) {
     } catch (e) {
         nametags = {};
     }
-    try {
-        myMount = require('./mount.json');
-    } catch (e) {
-        nametags = {};
-    }
+
     try {
         abnormalities = require('./abnormalities.json');
     } catch (e) {
@@ -128,11 +123,6 @@ module.exports = function ArboreanApparel(dispatch) {
             abnLock = false;
         });
     };
-
-    function saveMount() {
-        fs.writeFileSync(path.join(__dirname, 'mount.json'), JSON.stringify(
-            myMount));
-    }
 
     function presetSave() {
         if (presetLock) {
@@ -329,7 +319,9 @@ module.exports = function ArboreanApparel(dispatch) {
      * UI EVENTS *
      * --------- */
     win.on('load', () => {
-        win.send('myMount', myMount);
+        if (presets[player].myMount) {
+            win.send('myMount', presets[player].myMount);
+        }
         win.send('character', selfInfo);
         win.send('outfit', outfit, override);
         for (const k of Object.keys(options)) win.send('option', k,
@@ -377,10 +369,13 @@ module.exports = function ArboreanApparel(dispatch) {
         }
     });
     win.on('mount', (mount) => {
+        if (presets[player].myMount) {
+            win.send('myMount', presets[player].myMount);
+        }
         win.send('myMount', mount); //disgusting
-        myMount = mount;
-        saveMount();
-        net.send('mount', myMount);
+        presets[player].myMount = mount;
+        presetUpdate();
+        net.send('mount', mount);
     });
     win.on('emote', doEmote);
     win.on('abn', abnormalStart);
@@ -499,7 +494,9 @@ module.exports = function ArboreanApparel(dispatch) {
         //override = {};
         net.send('login', id2str(myId));
         win.send('character', selfInfo);
-        win.send('myMount', myMount);
+        if (presets[player] && presets[player].myMount) {
+            win.send('myMount', presets[player].myMount);
+        }
         for (const key of Object.keys(options)) {
             broadcast('option', key, options[key]);
         }
@@ -554,9 +551,13 @@ module.exports = function ArboreanApparel(dispatch) {
         return false;
     });
     dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
-        if (event.gameId.equals(myId)) {
-            event.id = myMount;
+        if (event.gameId.equals(myId) && (presets[player] &&
+                presets[player].myMount && presets[player].myMount !==
+                "696969")) {
+            event.id = presets[player].myMount;
             return true;
+        } else {
+            return true
         }
         const user = networked.get(id2str(event.gameId));
         if (user) {
