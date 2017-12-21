@@ -1,6 +1,11 @@
 [
    {
-      "name":"Summon: Bay Gelding ",
+      "name":"None",
+      "icon":"undefined",
+      "vehicleId":"696969"
+   },
+   {
+      "name":"Summon: Bay Gelding",
       "icon":"Icon_Skills/mounthorse01_Tex",
       "vehicleId":"1"
    },
