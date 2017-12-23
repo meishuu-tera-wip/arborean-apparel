@@ -169,7 +169,7 @@ jQuery(($) => {
     });
     $('.mount-icon').each(function () {
         $(this).data('id', "0").append($make('img').attr('src',
-            `./img/undefined.png`));
+            `./img.asar/undefined.png`));
     });
 
     // set default dye color
@@ -383,8 +383,8 @@ jQuery(($) => {
         //console.log(mount);
         var elem = document.getElementById('mount-icon');
         var item = getMount(mount);
-        var img = (item ? `img/${item[0].icon}.png` :
-            `img/undefined.png`);
+        var img = (item ? `img.asar/${item[0].icon}.png` :
+            `img.asar/undefined.png`);
         $('.mountIcon', elem).data('id', item.id).children(
             'img').attr('src', img);
         $('.item', elem).text(item.name);
@@ -405,8 +405,8 @@ jQuery(($) => {
                 0;
             id = _dupes[id] || id;
             var item = getItem(slot, id);
-            var img = (item ? `img/${item.icon}.png` :
-                `img/slot-${slot}.png`);
+            var img = (item ? `img.asar/${item.icon}.png` :
+                `img.asar/slot-${slot}.png`);
             $('.equipped', elem).data('id', id).children(
                 'img').attr('src', img);
             // remodel
@@ -440,11 +440,11 @@ jQuery(($) => {
                         name: false
                     },
                     name: 'None',
-                    img: `img/slot-${slot}.png`,
+                    img: `img.asar/slot-${slot}.png`,
                     desc: ''
                 };
-                img = (item.id ? `img/${item.icon}.png` :
-                    `img/slot-${slot}.png`);
+                img = (item.id ? `img.asar/${item.icon}.png` :
+                    `img.asar/slot-${slot}.png`);
                 $('.override', elem).data('id', id).children(
                     'img').attr('src', img);
                 $('.item', elem).text(item.name);
@@ -522,7 +522,7 @@ jQuery(($) => {
             'remodel-id' : 'base-id');
         var item = getItem(slot, id);
         $equipped.find('img').attr('src', item ?
-            `img/${item.icon}.png` : `img/slot-${slot}.png`
+            `img.asar/${item.icon}.png` : `img.asar/slot-${slot}.png`
         );
         $this.toggleClass('off');
         if ($equipped.hasClass('selected')) sendSlot(slot);
@@ -694,7 +694,7 @@ jQuery(($) => {
                             $make('div', 'icon').append(
                                 $make('img').attr(
                                     'src',
-                                    `img/${item.icon}.png`
+                                    `img.asar/${item.icon}.png`
                                 )), $make('div',
                                 'info').append(
                                 $make('span',
@@ -762,7 +762,7 @@ jQuery(($) => {
                         if (item.dyeable) {
                             $extra.append($make('img',
                                 'dyeable').attr({
-                                src: 'img/Icon_Items/dye_result_random_Tex.png',
+                                src: 'img.asar/Icon_Items/dye_result_random_Tex.png',
                                 alt: 'Dyeable',
                                 title: 'Dyeable'
                             }));
@@ -770,7 +770,7 @@ jQuery(($) => {
                         if (item.nameable) {
                             $extra.append($make('img',
                                 'nameable').attr({
-                                src: 'img/Icon_Items/CharName_Change_Tex.png',
+                                src: 'img.asar/Icon_Items/CharName_Change_Tex.png',
                                 alt: 'Nameable',
                                 title: 'Nameable'
                             }));
@@ -779,7 +779,7 @@ jQuery(($) => {
                             $make('div', 'icon').append(
                                 $make('img').attr(
                                     'src',
-                                    `img/${item.icon}.png`
+                                    `img.asar/${item.icon}.png`
                                 )), $make('div',
                                 'info').append(
                                 $make('span',
@@ -802,7 +802,7 @@ jQuery(($) => {
                     // set id, image, and text
                     $override.data('id', choice.id).children(
                         'img').attr('src',
-                        `img/${choice.icon}.png`);
+                        `img.asar/${choice.icon}.png`);
                     $('.item', _type).text(choice.name);
                     // dye
                     var $dye = $('.dye', _type);
