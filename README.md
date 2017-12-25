@@ -1,7 +1,6 @@
 # Arborean Apparel
 Apparel **NOW**
 
-![:thonk:](https://i.imgur.com/0cnwIz8.jpg)
 
 ## Update Notes:
 **Christmas news/Proxy node version check**
