@@ -4,8 +4,13 @@ Apparel **NOW**
 ![:thonk:](https://i.imgur.com/0cnwIz8.jpg)
 
 ## Update Notes:
-**Fixed mount crashes/issues**
+**Christmas news/Proxy node version check**
+Due to recent core changes performed by Pinkie, his tera-proxy version is no longer compatible with Electron-based mods such as AA. 
 
+I highly recommend moving to Caali's proxy which can be found in #proxy [in this discord](https://discord.gg/maqBmJV). This version of proxy not only supports Electron modules such as AA and [Proxy GUI](https://github.com/Mathicha/tera-proxy-gui), but will auto update modules (AA will support this soon) for you, as well as download the latest opcodes, packet definitions, etc, removing the need to worry about updating tera-data or mods not working when they should.
+
+
+**oldnewz**
 Recent update containing mounts contains an updated Electron version and it is recommended you re-download the FULL version. Also networking might be wrong for mounts so please let me know if you can't see other peoples mounts thanks.
 
 ## How to:
