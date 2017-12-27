@@ -6,7 +6,8 @@ Apparel **NOW**
 **Release, pls read**
 Due to recent core changes performed by Pinkie, his tera-proxy version is no longer compatible with Electron-based mods such as AA. 
 
-This module now requires Caali's proxy which can be found in #proxy [in this discord](https://discord.gg/maqBmJV). This version of proxy not only supports Electron modules such as AA and [Proxy GUI](https://github.com/Mathicha/tera-proxy-gui), but will auto update modules (AA now supports this) for you, as well as download the latest opcodes, packet definitions, etc, removing the need to worry about updating tera-data or mods not working when they should. The module can also now be downloaded directly from the github, however still requires electron to be installed in `proxy/node_modules`.
+This module now requires Caali's proxy which can be found in #proxy [in this discord](https://discord.gg/maqBmJV). This version of proxy not only supports Electron modules such as AA and [Proxy GUI](https://github.com/Mathicha/tera-proxy-gui), but will auto update modules (AA now supports this) for you, as well as download the latest opcodes, packet definitions, etc, removing the need to worry about updating tera-data or mods not working when they should. The module can also now be downloaded directly from the github, however still requires electron to be installed in `proxy/node_modules`. 
+Please download the new version of AA from the releases page. This also comes with [Tera Proxy GUI](https://github.com/Mathicha/Tera-Proxy-Gui) from Mathicha which will need to be updated seperately if neccessary. Happy holidays.
 
 ## How to:
 - Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases)
