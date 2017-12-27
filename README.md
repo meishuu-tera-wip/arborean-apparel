@@ -3,14 +3,14 @@ Apparel **NOW**
 
 
 ## Update Notes:
-**Christmas news/Proxy node version check**
+**Release, pls read**
 Due to recent core changes performed by Pinkie, his tera-proxy version is no longer compatible with Electron-based mods such as AA. 
 
-I highly recommend moving to Caali's proxy which can be found in #proxy [in this discord](https://discord.gg/maqBmJV). This version of proxy not only supports Electron modules such as AA and [Proxy GUI](https://github.com/Mathicha/tera-proxy-gui), but will auto update modules (AA will support this soon) for you, as well as download the latest opcodes, packet definitions, etc, removing the need to worry about updating tera-data or mods not working when they should.
+This module now requires Caali's proxy which can be found in #proxy [in this discord](https://discord.gg/maqBmJV). This version of proxy not only supports Electron modules such as AA and [Proxy GUI](https://github.com/Mathicha/tera-proxy-gui), but will auto update modules (AA now supports this) for you, as well as download the latest opcodes, packet definitions, etc, removing the need to worry about updating tera-data or mods not working when they should. The module can also now be downloaded directly from the github, however still requires electron to be installed in `proxy/node_modules`. 
 
+Please download the new version of AA from the releases page. This also comes with [Tera Proxy GUI](https://github.com/Mathicha/Tera-Proxy-Gui) from Mathicha (A work in progress mod) which will need to be updated seperately if neccessary. 
 
-**oldnewz**
-Recent update containing mounts contains an updated Electron version and it is recommended you re-download the FULL version. Also networking might be wrong for mounts so please let me know if you can't see other peoples mounts thanks.
+Happy holidays.
 
 ## How to:
 - Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases)
@@ -44,6 +44,8 @@ The server is run by me for free, if you want your own special server for your g
 - [ ] other stuff
 
 ## FAQ/Errors:
+`Your version of Node.JS is too old to run tera-proxy. Version 9.0.0 or newer is required.` Please switch to caali-proxy/bug pinkie instead of me.
+
 `TypeError: electron.BrowserWindow is not a constructor`: Proxy isn't running as electron, please make sure you have downloaded and overwritten (or made copies of) the files in the [full release](https://github.com/hugedong69/arborean-apparel/releases).
 
 `The system cannot find the path specified.`: You don't have electron installed in tera-proxy/node_modules, refer to the above.

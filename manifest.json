@@ -1,0 +1,29 @@
+{
+   "files":{
+      "index.js":"a18ce7fb0371237665087f36cea66b0904d428319f687dcbf53d0728c4c2feea",
+      "LICENSE.md":"589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+      "networking.js":"7a197e67a98c9d53939b309800065941cde9465c00fcd22a79dda345e7ecf3ea",
+      "README.md":"700558d9b5a637e38085f94ac01171aefab15cc8a3f94f2703e233a3d5bca54d",
+      "window.js":"796557b95d112fa4d7a19318eb90b68588125ecff9a7fb477dd4f690a526f2d4",
+      "www/img.asar":"adf3a787771e1c6f0c4cbe4a8ba82170ff2417b578af2a5fd14a56c3171a712b",
+      "www/index.html":"d20d146133da9705910168b055f747f67de23418f89a620d4e0df967c3524625",
+      "www/items.json":"41685d712250255ca2b1cc7a4e7b89fc5df2740ed56526a07af708d7460ec546",
+      "www/main.js":"727539349c7678ec08b67effc3d7bffb529345e8bbba4494aae357c754830e02",
+      "www/mounts.json":"8b2e9e833e233953223e48af07035c3cacc7659827eeee3a58ca9f3d4f349fc8",
+      "www/style.css":"5a3a0dcb215504bf54f248a996ab630c2d9e0669a9ffcedc36fdbd48ee009b9b",
+      "www/js/jquery-3.2.0.slim.min.js":"a8b02fd240408a170764b2377efdd621329e46c517dbb85deaea4105ad0c4a8c",
+      "www/js/typeahead.bundle.min.js":"456894e2899453bb50d8cdf099140d5bd50be74301e02b9c6d13c26ec42ff97d"
+   },
+   "defs":{
+      "S_ABNORMALITY_END":1,
+      "S_ABNORMALITY_BEGIN":2,
+      "S_ABNORMALITY_REFRESH":1,
+      "S_SOCIAL":1,
+      "S_USER_EXTERNAL_CHANGE":4,
+      "S_ITEM_CUSTOM_STRING":2,
+      "S_LOGIN":4,
+      "S_GET_USER_LIST":11,
+      "S_SPAWN_USER":11,
+      "S_MOUNT_VEHICLE":1
+   }
+}
