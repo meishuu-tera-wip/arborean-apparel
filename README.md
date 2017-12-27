@@ -4,6 +4,8 @@ Apparel **NOW**
 
 ## Update Notes:
 **Release, pls read**
+
+**actually nevermind don't update, something broke with caali proxy compatibility**
 Due to recent core changes performed by Pinkie, his tera-proxy version is no longer compatible with Electron-based mods such as AA. 
 
 This module now requires Caali's proxy which can be found in #proxy [in this discord](https://discord.gg/maqBmJV). This version of proxy not only supports Electron modules such as AA and [Proxy GUI](https://github.com/Mathicha/tera-proxy-gui), but will auto update modules (AA now supports this) for you, as well as download the latest opcodes, packet definitions, etc, removing the need to worry about updating tera-data or mods not working when they should. The module can also now be downloaded directly from the github, however still requires electron to be installed in `proxy/node_modules`. 
