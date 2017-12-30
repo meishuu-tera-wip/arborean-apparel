@@ -232,37 +232,37 @@ select {
 .slot-styleWeapon,.slot-styleBody,.slot-styleFootprint{background-repeat:no-repeat}
 
 .slot-weapon {
-	background-image: url('img/slot-weapon.png')
+	background-image: url('img.asar/slot-weapon.png')
 }
 .slot-body {
-	background-image: url('img/slot-body.png')
+	background-image: url('img.asar/slot-body.png')
 }
 .slot-hand {
-	background-image: url('img/slot-hand.png')
+	background-image: url('img.asar/slot-hand.png')
 }
 .slot-feet {
-	background-image: url('img/slot-feet.png')
+	background-image: url('img.asar/slot-feet.png')
 }
 .slot-underwear {
-	background-image: url('img/slot-underwear.png')
+	background-image: url('img.asar/slot-underwear.png')
 }
 .slot-styleHead {
-	background-image: url('img/slot-styleHead.png')
+	background-image: url('img.asar/slot-styleHead.png')
 }
 .slot-styleFace {
-	background-image: url('img/slot-styleFace.png')
+	background-image: url('img.asar/slot-styleFace.png')
 }
 .slot-styleBack {
-	background-image: url('img/slot-styleBack.png')
+	background-image: url('img.asar/slot-styleBack.png')
 }
 .slot-styleWeapon {
-	background-image: url('img/slot-styleWeapon.png')
+	background-image: url('img.asar/slot-styleWeapon.png')
 }
 .slot-styleBody {
-	background-image: url('img/slot-styleBody.png')
+	background-image: url('img.asar/slot-styleBody.png')
 }
 .slot-styleFootprint {
-	background-image: url('img/slot-styleFootprint.png')
+	background-image: url('img.asar/slot-styleFootprint.png')
 }
 
 .toggle-display {
@@ -272,7 +272,7 @@ select {
 	height: 16px;
 	margin-left: 32px;
 	margin-top: 32px;
-	background-image: url('img/toggle-remodel.png');
+	background-image: url('img.asar/toggle-remodel.png');
 	transition: opacity 0.3s;
 	opacity: 0.7
 }
@@ -301,7 +301,7 @@ select {
 	display: none;
 	vertical-align: text-bottom;
 	margin-left: 5px;
-	background: url('img/Icon_Items/dye_result_random_Tex.png') center;
+	background: url('img.asar/Icon_Items/dye_result_random_Tex.png') center;
 	background-size: 16px;
 	width: 16px;
 	height: 16px;
