@@ -4,9 +4,6 @@ const Command = require('command');
 const fs = require('fs');
 const Networking = require('./networking');
 const Window = require('./window');
-const config = {
-    online: true
-};
 const EMOTES = {
     bow: 43,
     kitchen: 44,
@@ -89,7 +86,16 @@ module.exports = function ArboreanApparel(dispatch) {
     } catch (e) {
         nametags = {};
     }
-
+    try {
+        config = require('./config.json');
+    } catch (e) {
+        config = {
+            "online" : true,
+            "allowEffects": true,
+            "allowChangers": true
+        };
+        saveConfig();        
+    }
     try {
         abnormalities = require('./abnormalities.json');
     } catch (e) {
@@ -100,6 +106,13 @@ module.exports = function ArboreanApparel(dispatch) {
         clearTimeout(abnTimeout);
         abnTimeout = setTimeout(abnSave, 1000);
     }
+    
+    function saveConfig() {
+        fs.writeFile(path.join(__dirname, 'config.json'), JSON.stringify(
+            config, null, 4), err => {
+        console.log('[ArboreanApparel]- Config file generated!');
+        });
+    };
 
 
     function presetUpdate() {
@@ -730,6 +743,7 @@ module.exports = function ArboreanApparel(dispatch) {
 
     net.on('abnBegin', (id, abnormal) => {
         if (!networked.has(id)) return;
+        if (config.allowEffects){
         dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
             target: str2id(id),
             source: 6969696,
@@ -739,14 +753,17 @@ module.exports = function ArboreanApparel(dispatch) {
             stacks: 1,
             unk2: 0
         });
+    }
     });
 
     net.on('abnEnd', (id, abnormal) => {
         if (!networked.has(id)) return;
+        if (config.allowEffects){
         dispatch.toClient('S_ABNORMALITY_END', 1, {
             target: str2id(id),
             id: abnormal
         });
+    }
     });
     net.on('cb', (id, cb) => {
         const cid = str2id(id);
@@ -774,6 +791,7 @@ module.exports = function ArboreanApparel(dispatch) {
         });
     });
     net.on('changer', (id, field, value) => {
+        if (config.allowChangers){
         dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
             target: str2id(id),
             source: 6969696,
@@ -783,6 +801,7 @@ module.exports = function ArboreanApparel(dispatch) {
             stacks: value,
             unk2: 0
         });
+        }
     });
     net.on('error', (err) => {
         // TODO
