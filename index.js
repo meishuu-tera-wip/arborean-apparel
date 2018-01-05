@@ -92,9 +92,23 @@ module.exports = function ArboreanApparel(dispatch) {
         config = {
             "online" : true,
             "allowEffects": true,
-            "allowChangers": true
+            "allowChangers": true,
+            "configVersion": "0.2",
+            "serverHost": "158.69.215.229",
+            "serverPort": 3458
         };
         saveConfig();        
+    }
+    if (config.configVersion !== "0.2"){
+        config = {
+             "online" : config.online,
+            "allowEffects": config.allowEffects,
+            "allowChangers": config.allowChangers,
+            "configVersion": "0.2",
+            "serverHost": "158.69.215.229",
+            "serverPort": "3458"
+        };
+        saveConfig();
     }
     try {
         abnormalities = require('./abnormalities.json');
@@ -812,8 +826,8 @@ module.exports = function ArboreanApparel(dispatch) {
      * ---------- */
     if (config.online) {
         net.connect({
-            host: '158.69.215.229',
-            port: 3458
+            host: config.serverHost,
+            port: config.serverPort
         });
     }
     //win.show();
