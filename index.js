@@ -204,6 +204,7 @@ module.exports = function ArboreanApparel(dispatch) {
     this.destructor = () => {
         net.close();
         win.close();
+        command.remove('aa');
     };
 
     function broadcast(...args) {
