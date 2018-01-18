@@ -204,7 +204,6 @@ module.exports = function ArboreanApparel(dispatch) {
     this.destructor = () => {
         net.close();
         win.close();
-        command.remove('aa');
     };
 
     function broadcast(...args) {
@@ -443,7 +442,7 @@ module.exports = function ArboreanApparel(dispatch) {
                 gender
             };
             win.send('character', selfInfo);
-            command.message("Restet race and job changes");
+            command.message("NICE MEME");
             break
         case 'open':
             {
