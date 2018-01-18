@@ -442,7 +442,7 @@ module.exports = function ArboreanApparel(dispatch) {
                 gender
             };
             win.send('character', selfInfo);
-            command.message("NICE MEME");
+            command.message("Restet race and job changes");
             break
         case 'open':
             {
