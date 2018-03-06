@@ -60,6 +60,15 @@ function dye2int({
     return o ? (a << 24) | (r << 16) | (g << 8) | b : 0;
 }
 module.exports = function ArboreanApparel(dispatch) {
+	dispatch.hook('S_CHECK_VERSION', 1, (event) =>{
+	 if (dispatch.base.protocolVersion === 328305 ||dispatch.base.protocolVersion === 328427){
+		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
+		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
+		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
+		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
+		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
+	 return}
+	})
     const command = Command(dispatch);
     const net = new Networking();
     const win = new Window();
@@ -268,26 +277,28 @@ module.exports = function ArboreanApparel(dispatch) {
 
     function abnormalStart(name) {
         if (Date.now() - lastCallDate < 100) return; // BLESS YOU KASEA
-        const abnormal = ABNORM[name];
+        const abnormalities = ABNORM[name];
         if (abnstate.activated === false) {
-            //console.log('started');
+            
+            console.log('started');
             dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
                 target: myId,
                 source: 6969696,
-                id: abnormal,
+                id: abnormalities,
                 duration: 0,
                 unk: 0,
                 stacks: 1,
                 unk2: 0
             });
-            net.send('abnBegin', abnormal);
+            abnUpdate();
+            net.send('abnBegin', abnormalities);
             abnstate.activated = true;
         } else {
             dispatch.toClient('S_ABNORMALITY_END', 1, {
                 target: myId,
-                id: abnormal
+                id: abnormalities
             });
-            net.send('abnEnd', abnormal);
+            net.send('abnEnd', abnormalities);
             abnstate.activated = false;
             //console.log('ended');
         }
