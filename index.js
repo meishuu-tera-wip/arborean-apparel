@@ -60,15 +60,12 @@ function dye2int({
     return o ? (a << 24) | (r << 16) | (g << 8) | b : 0;
 }
 module.exports = function ArboreanApparel(dispatch) {
-	dispatch.hook('S_CHECK_VERSION', 1, (event) =>{
-	 if (dispatch.base.protocolVersion === 328305 ||dispatch.base.protocolVersion === 328427){
-		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
-		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
-		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
-		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
-		 console.log(`Arborean Apparel - Unsuported region please yell at me on discord, bye`)
-	 return}
-	})
+	dispatch.hook('C_CHECK_VERSION', 1, (event) =>{
+	 if (dispatch.base.majorPatchVersion >= 66){
+		 console.log(`[Arborean Apparel] - EU/Other regions are now supported, hats are supported but somewhat buggy, will fix later.`);		 
+	 return;
+     }
+	});
     const command = Command(dispatch);
     const net = new Networking();
     const win = new Window();
@@ -313,10 +310,13 @@ module.exports = function ArboreanApparel(dispatch) {
         switch (name) {
             case "dchest":
                 meme = STACKS.chest--;
+                break
             case "dheight":
                 meme = STACKS.height--;
+                break
             case "dthighs":
                 meme = STACKS.thighs--;
+                break
             case "dsize":
                 meme = STACKS.size--;
                 dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
@@ -342,7 +342,7 @@ module.exports = function ArboreanApparel(dispatch) {
                 });
                 net.send('changer', addChange, stacker);
                 STACKS[name]++;
-
+break
         }
     }
 
@@ -381,7 +381,7 @@ module.exports = function ArboreanApparel(dispatch) {
         }
         //override = presets[player];
         presetUpdate();
-        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 4, Object.assign({},
+        dispatch.toClient('S_USER_EXTERNAL_CHANGE',(dispatch.base.majorPatchVersion >= 66) ? 5 : 4, Object.assign({},
             outfit, override));
         net.send('outfit', override); // TODO
     });
@@ -512,6 +512,12 @@ module.exports = function ArboreanApparel(dispatch) {
     /* ----------- *
      * GAME EVENTS *
      * ----------- */
+    dispatch.hook('C_CHECK_VERSION', 1, (event) => {
+        enable();
+    });
+    function addHook(packetName, packetVersion, func) {
+        dispatch.hook(packetName, packetVersion, func);
+}
     dispatch.hook('S_LOGIN', 9, (event) => {
         ingame = true;
         myId = event.gameId;
@@ -554,7 +560,29 @@ module.exports = function ArboreanApparel(dispatch) {
         }
 
     });
-    dispatch.hook('S_GET_USER_LIST', 11, event => {
+
+
+    //Marrow brooch handling thanks Cosplayer, kasea please die
+    dispatch.hook('S_UNICAST_TRANSFORM_DATA', 'raw', (code, data) => {
+        return false;
+    });
+    dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
+        if (event.gameId.equals(myId) && (presets[player] &&
+            presets[player].myMount && presets[player].myMount !==
+            "696969")) {
+            event.id = presets[player].myMount;
+            return true;
+        } else {
+            return true;
+        }
+        const user = networked.get(id2str(event.gameId));
+        if (user) {
+            Object.assign(event.id, user.mount) // write custom setup
+            return true;
+        }
+    });
+    function enable(){
+            addHook('S_GET_USER_LIST', (dispatch.base.majorPatchVersion >= 66) ? 12 : 11, event => {
         win.close();
         override = {};
         for (let index in event.characters) {
@@ -566,7 +594,7 @@ module.exports = function ArboreanApparel(dispatch) {
         }
         return true;
     });
-    dispatch.hook('S_SPAWN_USER', 11, (event) => {
+            addHook('S_SPAWN_USER',(dispatch.base.majorPatchVersion >= 66) ? 12 : 11, (event) => {
         const user = networked.get(id2str(event.gameId));
         if (!user) return;
         Object.assign(user.outfit, event); // save real setup
@@ -587,27 +615,8 @@ module.exports = function ArboreanApparel(dispatch) {
         }
         return true;
     });
-    //Marrow brooch handling thanks Cosplayer, kasea please die
-    dispatch.hook('S_UNICAST_TRANSFORM_DATA', 'raw', (code, data) => {
-        return false;
-    });
-    dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
-        if (event.gameId.equals(myId) && (presets[player] &&
-            presets[player].myMount && presets[player].myMount !==
-            "696969")) {
-            event.id = presets[player].myMount;
-            return true;
-        } else {
-            return true
-        }
-        const user = networked.get(id2str(event.gameId));
-        if (user) {
-            Object.assign(event.id, user.mount) // write custom setup
-            return true;
-        }
-    });
     // sorry for the mess
-    dispatch.hook('S_USER_EXTERNAL_CHANGE', 4, (event) => {
+    addHook('S_USER_EXTERNAL_CHANGE', (dispatch.base.majorPatchVersion >= 66) ? 5 : 4, (event) => {
         // self
         if (event.gameId.equals(myId)) {
             outfit = Object.assign({}, event);
@@ -639,7 +648,8 @@ module.exports = function ArboreanApparel(dispatch) {
             event.innerwear = event.inner // TODO
             return true*/
         }
-    });
+    })
+    };
 
     function updateNametag(nametag) {
         dispatch.toClient('S_ITEM_CUSTOM_STRING', 2, {
@@ -745,7 +755,7 @@ module.exports = function ArboreanApparel(dispatch) {
             enable: true
         };
         const outfit = Object.assign(base, user.outfit, user.override);
-        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 4, outfit);
+        dispatch.toClient('S_USER_EXTERNAL_CHANGE',(dispatch.base.majorPatchVersion >= 66) ? 5 : 4, outfit);
     }
     });
     net.on('text', (id, dbid, string) => {
