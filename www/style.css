@@ -133,7 +133,7 @@ select {
 }
 
 .tabs {
-	width: 270px;
+	width: 580px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -147,7 +147,6 @@ select {
 .tab {
 	flex: 1;
 	border: 1px solid transparent;
-	border-radius: 6px;
 	margin: 4px 1px
 }
 
@@ -213,7 +212,7 @@ select {
 	width: 48px;
 	height: 48px;
 	background-size: 100%;
-	border: 2px solid rgba(0, 0, 0, 0);
+	border: 2px solid rgb(255, 255, 255);
 	border-radius: 4px;
 	box-sizing: content-box;
 	-webkit-user-select: none;
@@ -223,7 +222,7 @@ select {
 }
 
 .gear-icon.selected {
-	border: 2px solid #2a9664
+	border: 2px solid #b7abe4
 }
 
 .slot-weapon,.slot-body,.slot-hand,
@@ -495,7 +494,15 @@ select {
 	background: transparent;
 	border: none
 }
+h1 {
+    font-family: Helvetica, Arial;   
+    font-weight: bold;
+    font-size: 18px;
+}
 
+body, p{
+    font-family: Helvetica, Arial;
+}
 /* webkit */
 .slider::-webkit-slider-thumb {
 	-webkit-appearance: none;
@@ -631,7 +638,7 @@ select {
 }
 
 .whisper {
-	color: #e080e4
+	color: #1f18bf
 }
 .changer {
     height: 53px;
@@ -646,7 +653,7 @@ select {
     opacity: 0.7;
 }
 .abnormal {
-    height: 53px;
+    height: 43px;
     cursor: pointer;
     transition: opacity 0.2s;
     opacity: 0.7;
