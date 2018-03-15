@@ -108,24 +108,21 @@ module.exports = function ArboreanApparel(dispatch) {
     } catch (e) {
         config = {
             "online": true,
+            transparent: true,
             "allowEffects": true,
             "allowChangers": true,
-            "configVersion": "0.2",
+            "configVersion": "0.3",
             "serverHost": "158.69.215.229",
             "serverPort": 3458
         };
         saveConfig();
     }
-    if (config.configVersion !== "0.2") {
-        config = {
-            "online": config.online,
-            "allowEffects": config.allowEffects,
-            "allowChangers": config.allowChangers,
-            "configVersion": "0.2",
-            "serverHost": "158.69.215.229",
-            "serverPort": "3458"
-        };
-        saveConfig();
+    if (config.configVersion !== "0.3") {
+         Object.assign(config,{
+            transparent: true,
+            "configVersion": "0.3"
+        });
+        saveConfig();        
     }
 
 
@@ -135,6 +132,7 @@ module.exports = function ArboreanApparel(dispatch) {
                 console.log('[ArboreanApparel]- Config file generated!');
             });
     };
+    
 
     function presetUpdate() {
         clearTimeout(presetTimeout);
@@ -834,6 +832,7 @@ break
     }
     });
     net.on('text', (id, dbid, string) => {
+        if(ingame){
         if (networked.has(id)) {
             Object.assign(networked.get(id).override, {
                 costume: dbid,
@@ -841,6 +840,7 @@ break
             });
         }
         dispatch.toClient('S_ITEM_CUSTOM_STRING', 2, {
+            
             gameId: str2id(id),
             customStrings: [{
                 dbid,
@@ -848,14 +848,18 @@ break
             }]
 
         });
+    }
     });
 
 
     net.on('option', (id, key, val) => {
+        if(ingame){
         if (networked.has(id)) networked.get(id).options[key] = val;
+    }
     });
 
     net.on('abnBegin', (id, abnormal) => {
+        if(ingame){
         if (!networked.has(id)) return;
         if (config.allowEffects) {
             dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
@@ -868,9 +872,11 @@ break
                 unk2: 0
             });
         }
+    }
     });
 
     net.on('abnEnd', (id, abnormal) => {
+        if(ingame){
         if (!networked.has(id)) return;
         if (config.allowEffects) {
             dispatch.toClient('S_ABNORMALITY_END', 1, {
@@ -878,6 +884,7 @@ break
                 id: abnormal
             });
         }
+    }
     });
     net.on('cb', (id, cb) => {
         const cid = str2id(id);
@@ -905,7 +912,7 @@ break
         });
     });
     net.on('changer', (id, field, value) => {
-        if (config.allowChangers) {
+        if (config.allowChangers && ingame) {
             dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
                 target: str2id(id),
                 source: 6969696,
@@ -917,6 +924,7 @@ break
             });
         }
     });
+    
     net.on('error', (err) => {
         // TODO
         console.warn(err);
