@@ -212,7 +212,7 @@ select {
 	width: 48px;
 	height: 48px;
 	background-size: 100%;
-	border: 2px solid rgb(255, 255, 255);
+	border: 2px solid rgba(255, 255, 255, 0.65);
 	border-radius: 4px;
 	box-sizing: content-box;
 	-webkit-user-select: none;
@@ -222,7 +222,17 @@ select {
 }
 
 .gear-icon.selected {
-	border: 2px solid #b7abe4
+		margin: auto;
+	width: 48px;
+	height: 48px;
+	background-size: 100%;
+	border: 2px solid rgba(0, 0, 255, 0.60);
+	border-radius: 4px;
+	box-sizing: content-box;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none
 }
 
 .slot-weapon,.slot-body,.slot-hand,
