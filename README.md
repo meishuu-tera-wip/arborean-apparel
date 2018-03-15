@@ -1,6 +1,9 @@
 
 # Arborean Apparel
-Apparel **NOW**
+
+
+![<sub>update when?</sub>](https://i.imgur.com/llIq0bx.jpg)
+
 
  [Funnel money into my dumb mouth so I work on this and other things more thanks](https://ko-fi.com/hugedong)
 *** 
