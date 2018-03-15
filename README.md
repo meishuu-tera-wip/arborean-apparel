@@ -44,6 +44,8 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong),
 
 `Crypto error, falling back to slower JS version` Update electron, either through downloading the prebuild version in releases, downloading it from [here](https://github.com/electron/electron/releases), or npm installing it.
 
+`The UI is invisible!!!` Try turning `transparent` to false. Some users with older operating system may experience this bug.
+
 `Your version of Node.JS is too old to run tera-proxy. Version 9.0.0 or newer is required.` Please read the readme and download the proxy linked above.
 
 `Things have no icons, halp!!!!` As updates come out, new icons are added to the game and to the module itself. As such, you'll have to download the` www/img.asar` portion of the mod again, as currently auto-updating doesn't download it.
