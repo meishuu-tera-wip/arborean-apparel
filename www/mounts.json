@@ -6,12 +6,12 @@
    },
    {
       "name":"Summon: Bay Gelding",
-      "icon":"Icon_Skills/mounthorse01_Tex",
+      "icon":"Icon_Skills/MountHorse01_Tex",
       "vehicleId":"1"
    },
    {
       "name":"Summon: Fast White Stallion",
-      "icon":"Icon_Skills/mounthorse04_Tex",
+      "icon":"Icon_Skills/MountHorse04_Tex",
       "vehicleId":"3"
    },
    {
@@ -46,7 +46,7 @@
    },
    {
       "name":"Summon: Honor Steed",
-      "icon":"Icon_Skills/mounthorse03_Tex",
+      "icon":"Icon_Skills/MountHorse03_Tex",
       "vehicleId":"11"
    },
    {

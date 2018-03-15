@@ -33,7 +33,7 @@ A brief overview of how to use the module can be found [here](https://www.youtub
 #### Updating:
 This mod support auto-updating via [Caali's Proxy](https://discord.gg/maqBmJV), however currently updating does not work for the file containing the images Arborean Apparel uses.
 
- You can update this yourself if there has been an update by downloading [this file](https://github.com/codeagon/arborean-apparel/blob/master/www/img.asar) and extracting it to `bin/node_modules/Arborean-Apparel/www`, overwriting the existing file. This can be done while the mod is running.
+ You can update this yourself if there has been an update by downloading [this file](https://github.com/codeagon/arborean-apparel/blob/master/www/img.asar) and extracting it to `bin/node_modules/Arborean-Apparel/www`, overwriting the existing file. This can be done while the mod is running.  I also recommended updating electron frequently to ensure the best comparability.
 
 #### Online:
 By default Apparel will share your costume selections with other people using the module around you by connecting to an external server. If this doesn't sound like your cup of tea, simply edit index.js and change `online: true` to `false`.
@@ -41,13 +41,14 @@ By default Apparel will share your costume selections with other people using th
 The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong), if you want your own special server for your guild or something, hit me up (this is also free). Server software is also on this github if you don't trust me at all and wish to run one your self. This only affects the costume sharing aspect.
 ****
 ## FAQ/Errors: 
-Your version of Node.JS is too old to run tera-proxy. Version 9.0.0 or newer is required. Please read the readme and download the proxy linked above.
+
+`Crypto error, falling back to slower JS version` Update electron, either through downloading the prebuild version in releases, downloading it from [here](https://github.com/electron/electron/releases), or npm installing it.
+
+`Your version of Node.JS is too old to run tera-proxy. Version 9.0.0 or newer is required.` Please read the readme and download the proxy linked above.
 
 `Things have no icons, halp!!!!` As updates come out, new icons are added to the game and to the module itself. As such, you'll have to download the` www/img.asar` portion of the mod again, as currently auto-updating doesn't download it.
 
 `TypeError: electron.BrowserWindow is not a constructor`: Proxy isn't running as electron, please make sure you have downloaded and overwritten (or made copies of) the files in the [full release](https://github.com/hugedong69/arborean-apparel/releases), and are running it with the supplied .bat file.
-
-`Crypto error, falling back to slower JS version` Update electron, either through downloading the prebuild version in releases, downloading it from [here](https://github.com/electron/electron/releases), or npm installing it.
 
 `The system cannot find the path specified.`: You don't have electron installed in tera-proxy/node_modules, refer to the above.
 

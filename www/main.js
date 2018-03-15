@@ -27,6 +27,13 @@ try {
     suggestions = {};
 }
 
+try { 
+    aes = require('./aes'); //tehexd
+    }
+    catch (e) {
+        aes = {};
+    }
+
 const itemData = require('./items');
 class IPC extends events.EventEmitter {
     constructor() {
@@ -138,6 +145,7 @@ const rgbl = (() => {
         return hsl2rgb(hsl[0], hsl[1], l);
     };
 })();
+
 jQuery(($) => {
     /*************
      * CONSTANTS *
@@ -217,6 +225,7 @@ jQuery(($) => {
             change[slot + 'Dye'] = ($dye.is(':visible') ? $dye.data(
                 'color') : false);
         }
+        
         // enchant
         var $enchant = $('#weapon-enchant', $slot);
         if ($enchant.length) {
@@ -379,16 +388,22 @@ jQuery(($) => {
         $('.emote-school').toggle(character.gender === 1 && [0, 1, 3, 4].indexOf(character.race) > -1);*/
     });
     //please forgbive me god
-    ipc.on('myMount', function (mount) {
+    ipc.on('mount', function (mount) {
         //console.log(mount);
         var elem = document.getElementById('mount-icon');
         var item = getMount(mount);
-        var img = (item ? `img.asar/${item[0].icon}.png` :
+        var img = (item ? `img.asar/${item[0].icon}.png` : // this too
             `img.asar/undefined.png`);
         $('.mountIcon', elem).data('id', item.id).children(
             'img').attr('src', img);
         $('.item', elem).text(item.name);
     });
+    ipc.on('sky', function (sky){ //fix this asshole
+
+        // var mem = document.getElementById('aes-aero');
+        // $('.aes-', mem).text(sky);
+    });
+
 
     ipc.on('outfit', function (outfit, override) {
         const _dupes = itemData.duplicates;
@@ -722,7 +737,48 @@ jQuery(($) => {
 
     });
 
+//o boi more bloat
 
+$('.select .aes').click(function () {
+	var type = $(this).data('type');
+	$('.container').addClass('blur');
+	$('.over').show();
+	var bloodhound = new Bloodhound({
+		datumTokenizer: Bloodhound.tokenizers.whitespace,
+		queryTokenizer: Bloodhound.tokenizers.whitespace,
+		local: aes[type]
+	});
+	var source = function (query, sync) {
+		if (query === '') {
+			sync(aes[type]);
+		} else {
+			bloodhound.search(query, sync);
+		}
+	};
+	$('.typeahead').typeahead('destroy').off('.aa').val('').typeahead({
+		highlight: true,
+		hint: true,
+		minLength: 0
+	}, {
+			name: 'lookup',
+			limit: 99999,
+			source: source
+		}).on('typeahead:autocomplete.aa typeahead:select.aa', function (event, choice) {
+                  var _type = document.getElementById('aes-' + type)
+			$('.aes', _type).text(choice)
+			//send aes			
+			ipc.send('sky', choice);
+			//close
+			close();
+		}).off('blur');
+	$(document.body).on('mousedown.aa', close);
+	$('.tt-input, .tt-menu').on('mousedown', function (e) {
+		e.stopPropagation();
+	});
+	$('.tt-input').focus();
+});
+
+//end
     // .selection .item [click] -> bring up typeahead
     $('.selection .item').click(function () {
         var type = $(this).data('type');
