@@ -20,9 +20,10 @@
 ***
 ### How to:
 
+- Download and install [Caali's Proxy](https://discord.gg/maqBmJV)
 - Download the prepackaged script from the [releases tab](https://github.com/hugedong69/arborean-apparel/releases)
 - Extract/paste contents of the .zip into your `tera-proxy` directory, overwriting when asked.
-- Start Tera-Proxy with the included ElectronStart.bat instead of TeraProxy.bat
+- Start Tera-Proxy normally. You may wish to make a copy of the original Tera-Proxy.bat to start the game without electron.
 
 If this doesn't work or isn't clear, hit me up @@@@ Pentagon#0099 on discord.
 
