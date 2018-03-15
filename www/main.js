@@ -4,7 +4,7 @@ const {
     ipcRenderer,
     remote
 } = require('electron');
-const debug = false;
+const debug = true;
 
 function topshitbar() {
     document.getElementById("min-btn").addEventListener("click", function (e) {
