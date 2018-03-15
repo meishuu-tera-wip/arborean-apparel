@@ -35,7 +35,25 @@ const RMCHANGER = {
 };
 const ABNORM = {
     confidence: 7000027,
-    head: 7000001
+    head: 7000001,
+    p2wings: 97950009,
+    wing2: 905641,
+    murderous: 903,
+    darkswirl: 950327,
+    tornado: 950328,
+    burning: 950329,
+    healing: 5010000,
+    electricity: 10154030,
+    swirl: 999001024,
+    noct: 921,
+    redhand: 4767,
+    overpower: 300300,
+    sniperseye: 601100,
+    tenacity: 700300,
+    unyielding: 700600,
+    bluenacity: 3000020,
+    hyperhand: 757053,
+    succ: 98000101    
 };
 
 function id2str(id) {
@@ -60,12 +78,7 @@ function dye2int({
     return o ? (a << 24) | (r << 16) | (g << 8) | b : 0;
 }
 module.exports = function ArboreanApparel(dispatch) {
-	dispatch.hook('C_CHECK_VERSION', 1, (event) =>{
-	 if (dispatch.base.majorPatchVersion >= 66){
-		 console.log(`[Arborean Apparel] - EU/Other regions are now supported, hats are supported but somewhat buggy, will fix later.`);		 
-	 return;
-     }
-	});
+
     const command = Command(dispatch);
     const net = new Networking();
     const win = new Window();
@@ -75,12 +88,9 @@ module.exports = function ArboreanApparel(dispatch) {
         nametags = {},
         fakeJob = false,
         jobId,
-        abnormalities = {},
         presetTimeout = null,
-        effects,
         nametagTimeout = null,
         presetLock = false,
-        abnLock = false,
         nametagLock = false,
         ingame = false;
     try {
@@ -117,16 +127,7 @@ module.exports = function ArboreanApparel(dispatch) {
         };
         saveConfig();
     }
-    try {
-        abnormalities = require('./abnormalities.json');
-    } catch (e) {
-        abnormalities = {};
-    }
 
-    function abnUpdate() {
-        clearTimeout(abnTimeout);
-        abnTimeout = setTimeout(abnSave, 1000);
-    }
 
     function saveConfig() {
         fs.writeFile(path.join(__dirname, 'config.json'), JSON.stringify(
@@ -134,7 +135,6 @@ module.exports = function ArboreanApparel(dispatch) {
                 console.log('[ArboreanApparel]- Config file generated!');
             });
     };
-
 
     function presetUpdate() {
         clearTimeout(presetTimeout);
@@ -145,19 +145,7 @@ module.exports = function ArboreanApparel(dispatch) {
         clearTimeout(nametagTimeout);
         nametagTimeout = setTimeout(nametagSave, 1000);
     }
-
-    function abnSave() {
-        if (abnLock) {
-            abnUpdate();
-            return;
-        }
-        abnLock = true;
-        fs.writeFile(path.join(__dirname, 'abnormalities.json'), JSON.stringify(
-            abnormalities, null, 4), err => {
-                abnLock = false;
-            });
-    };
-
+    
     function presetSave() {
         if (presetLock) {
             presetUpdate();
@@ -271,33 +259,78 @@ module.exports = function ArboreanApparel(dispatch) {
             unk2: 0
         });
     }
+    function remove(arr, what) {
+        var found = arr.indexOf(what);
 
-    function abnormalStart(name) {
-        if (Date.now() - lastCallDate < 100) return; // BLESS YOU KASEA
-        const abnormalities = ABNORM[name];
-        if (abnstate.activated === false) {
-            
-            console.log('started');
-            dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
+        while (found !== -1) {
+            arr.splice(found, 1);
+            found = arr.indexOf(what);
+        }
+    }
+        function checkName(name, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i] === name) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    function skyChange(name){       
+         if (name === undefined || name === null){
+            return;
+        } else
+        dispatch.toClient('S_AERO', 1, {
+            enabled: 1,
+            blendTime: 0,
+            aeroSet: name
+        });     
+        presets[player].sky = name;
+        presetUpdate();
+    }
+    
+    function reeeabnormies (name){
+        const abnormal = ABNORM[name];
+        dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
                 target: myId,
                 source: 6969696,
-                id: abnormalities,
+                id: abnormal,
                 duration: 0,
                 unk: 0,
                 stacks: 1,
                 unk2: 0
             });
-            abnUpdate();
-            net.send('abnBegin', abnormalities);
-            abnstate.activated = true;
+            net.send('abnBegin', abnormal);
+    }
+    function abnormalStart(name) {  
+        if (name === undefined || name === null){
+            return;
+        }
+        if (Date.now() - lastCallDate < 100) return; // BLESS YOU KASEA
+        const abnormal = ABNORM[name];
+        if (!presets[player].abnlist.includes(name)) {            
+            dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
+                target: myId,
+                source: 6969696,
+                id: abnormal,
+                duration: 0,
+                unk: 0,
+                stacks: 1,
+                unk2: 0
+            });
+            presets[player].abnlist.push(name);
+            presetUpdate();
+            net.send('abnBegin', abnormal);
         } else {
             dispatch.toClient('S_ABNORMALITY_END', 1, {
                 target: myId,
-                id: abnormalities
+                id: abnormal
             });
-            net.send('abnEnd', abnormalities);
-            abnstate.activated = false;
-            //console.log('ended');
+            net.send('abnEnd', abnormal);
+            remove(presets[player].abnlist, name);
+            //presets[player].abnlist = normies;
+            presetUpdate();
         }
         lastCallDate = Date.now();
     }
@@ -364,6 +397,9 @@ break
         if (presets[player].myMount) {
             win.send('myMount', presets[player].myMount);
         }
+        if (presets[player].sky){
+            win.send('sky', presets[player].sky);
+        }
         win.send('character', selfInfo);
         win.send('outfit', outfit, override);
         for (const k of Object.keys(options)) win.send('option', k,
@@ -381,7 +417,7 @@ break
         }
         //override = presets[player];
         presetUpdate();
-        dispatch.toClient('S_USER_EXTERNAL_CHANGE',(dispatch.base.majorPatchVersion >= 66) ? 5 : 4, Object.assign({},
+        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 5, Object.assign({},
             outfit, override));
         net.send('outfit', override); // TODO
     });
@@ -418,6 +454,12 @@ break
         presets[player].myMount = mount;
         presetUpdate();
         net.send('mount', mount);
+    });
+    win.on('sky', (sky) => {
+        if (presets[player].myMount) {
+            win.send('sky', presets[player].sky);
+        }
+        skyChange(sky);
     });
     win.on('emote', doEmote);
     win.on('abn', abnormalStart);
@@ -512,14 +554,14 @@ break
     /* ----------- *
      * GAME EVENTS *
      * ----------- */
-    dispatch.hook('C_CHECK_VERSION', 1, (event) => {
+    dispatch.hook('C_CHECK_VERSION', 1, () => {
         enable();
     });
     function addHook(packetName, packetVersion, func) {
         dispatch.hook(packetName, packetVersion, func);
 }
     dispatch.hook('S_LOGIN', 9, (event) => {
-        ingame = true;
+        ingame = true;        
         myId = event.gameId;
         player = event.name;
         model = event.templateId - 10101;
@@ -542,24 +584,43 @@ break
     net.send('login', id2str(myId));
         win.send('character', selfInfo);
         if (presets[player] && presets[player].myMount) {
-            win.send('myMount', presets[player].myMount);
+            broadcast('mount', presets[player].myMount);
         }
         for (const key of Object.keys(options)) {
             broadcast('option', key, options[key]);
         }
         //broadcast('outfit', outfit, override)
         net.send('outfit', override);
-        win.send('');
         win.send('outfit', outfit, override);
     });
-    dispatch.hook('S_ABNORMALITY_BEGIN', 2, event => {
-        if (event.source === 6969696) {
-            effects = Object.assign({}, event);
-            abnormalities[player] = effects;
-            abnUpdate();
+    dispatch.hook('C_LOAD_TOPO_FIN', 1, () => {
+        if (!presets[player].abnlist){
+            presets[player].abnlist = [];
         }
-
+        if (presets[player].abnlist){
+            for (var i=0; i < presets[player].abnlist.length; i++){
+                reeeabnormies(presets[player].abnlist[i]);
+            }
+        }   
+        if (presets[player].sky === undefined){
+            presets[player].sky = [];
+        }
     });
+    dispatch.hook('S_USER_EXTERNAL_CHANGE', 5, {order: 1}, (event) => {
+        if(event.accessoryTransform1 === 0){ // haha idc any more lets just get this shit done xdddd
+            event.accessoryTransform1 = 1;
+            return true;
+        }
+        if(event.accessoryTransform10 === 0){
+            event.accessoryTransform10 = 1;
+            return true;
+        }
+        if(event.accessoryTransform20 === 0){
+            event.accessoryTransform20 = 1;
+            return true;
+        }
+    });
+  
 
 
     //Marrow brooch handling thanks Cosplayer, kasea please die
@@ -567,6 +628,10 @@ break
         return false;
     });
     dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
+        const user = networked.get(id2str(event.gameId));
+                if (user) {
+            Object.assign(event.id, user.mount); // write custom setup
+            }
         if (event.gameId.equals(myId) && (presets[player] &&
             presets[player].myMount && presets[player].myMount !==
             "696969")) {
@@ -575,14 +640,11 @@ break
         } else {
             return true;
         }
-        const user = networked.get(id2str(event.gameId));
-        if (user) {
-            Object.assign(event.id, user.mount) // write custom setup
-            return true;
-        }
+        
+
     });
     function enable(){
-            addHook('S_GET_USER_LIST', (dispatch.base.majorPatchVersion >= 66) ? 12 : 11, event => {
+            addHook('S_GET_USER_LIST', 12, event => {
         win.close();
         override = {};
         for (let index in event.characters) {
@@ -594,7 +656,7 @@ break
         }
         return true;
     });
-            addHook('S_SPAWN_USER',(dispatch.base.majorPatchVersion >= 66) ? 12 : 11, (event) => {
+            addHook('S_SPAWN_USER', 12, (event) => {
         const user = networked.get(id2str(event.gameId));
         if (!user) return;
         Object.assign(user.outfit, event); // save real setup
@@ -616,7 +678,7 @@ break
         return true;
     });
     // sorry for the mess
-    addHook('S_USER_EXTERNAL_CHANGE', (dispatch.base.majorPatchVersion >= 66) ? 5 : 4, (event) => {
+    addHook('S_USER_EXTERNAL_CHANGE', 5, (event) => {
         // self
         if (event.gameId.equals(myId)) {
             outfit = Object.assign({}, event);
@@ -648,7 +710,7 @@ break
             event.innerwear = event.inner // TODO
             return true*/
         }
-    })
+    });
     };
 
     function updateNametag(nametag) {
@@ -729,6 +791,7 @@ break
         net.send('login', id2str(myId));
         net.send('options', options);
         net.send('outfit', override);
+        net.send('mount', presets[player].myMount);
         // TODO: text, cb?
     });
     net.on('users', (users) => {
@@ -745,6 +808,18 @@ break
     net.on('ping', () => {
         net.send('pong');
     });
+    
+    net.on('mount', (id, mount) => {
+        if(ingame){
+        if (!networked.has(id)) return;
+        const user = networked.get(id);
+        user.mount = mount;
+        Object.assign(networked.get(id).override, {
+                mount: mount
+            });
+    }
+    });
+    
     net.on('outfit', (id, over) => {
         if(ingame){
         if (!networked.has(id)) return;
@@ -755,7 +830,7 @@ break
             enable: true
         };
         const outfit = Object.assign(base, user.outfit, user.override);
-        dispatch.toClient('S_USER_EXTERNAL_CHANGE',(dispatch.base.majorPatchVersion >= 66) ? 5 : 4, outfit);
+        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 5, outfit);
     }
     });
     net.on('text', (id, dbid, string) => {
@@ -775,11 +850,7 @@ break
         });
     });
 
-    net.on('mount', (id, mount) => {
-        if (!networked.has(id)) return;
-        const user = networked.get(id);
-        user.mount = mount;
-    });
+
     net.on('option', (id, key, val) => {
         if (networked.has(id)) networked.get(id).options[key] = val;
     });
