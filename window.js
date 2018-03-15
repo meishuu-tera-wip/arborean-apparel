@@ -1,15 +1,47 @@
 const events = require('events')
 const electron = require('electron')
+const fs = require('fs'); // Wow this too can be bloated now!!!!!!!!
+const path = require('path');
 
 const CHANNEL_NAME = 'arborean-apparel'
 
 const debug = false
+try {
+        config = require('./config.json');
+    } catch (e) {
+        config = {
+            "online": true,
+            transparent: true,
+            "allowEffects": true,
+            "allowChangers": true,
+            "configVersion": "0.3",
+            "serverHost": "158.69.215.229",
+            "serverPort": 3458
+        };
+        saveConfig();
+    }
+    if (config.configVersion !== "0.3") {
+         Object.assign(config,{
+            transparent: true,
+            "configVersion": "0.3"
+        });
+        saveConfig();        
+    }
 
+
+    function saveConfig() {
+        fs.writeFile(path.join(__dirname, 'config.json'), JSON.stringify(
+            config, null, 4), err => {
+                console.log('[ArboreanApparel]- Config file generated!');
+            });
+    };
+    
 class Window extends events.EventEmitter {
 	constructor() {
 		super()
 		this.window = null
 	}
+ 
 
 	show() {
 		if (this.window) {
@@ -18,10 +50,9 @@ class Window extends events.EventEmitter {
 		}
 
 		this.window = new electron.BrowserWindow({
-			title: 'Arborean Apparel (VERY ALPHA)',
 			height: 515,
 			width: 580,
-			transparent: false,
+			transparent: config.transparent,
 			frame: false			
 		})
 
