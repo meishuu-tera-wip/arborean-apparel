@@ -5,7 +5,15 @@ Apparel **NOW**
  [Funnel money into my dumb mouth so I work on this and other things more thanks](https://ko-fi.com/hugedong)
 *** 
 
-[[toc]]
+- [Arborean Apparel](#arborean-apparel)
+    - [How to:](#how-to)
+    - [Usage:](#usage)
+      - [Updating:](#updating)
+      - [Online:](#online)
+  - [FAQ/Errors:](#faqerrors)
+  - [Todo:](#todo)
+  - [Update log (15 March):](#update-log-15-march)
+
 ***
 ### How to:
 
