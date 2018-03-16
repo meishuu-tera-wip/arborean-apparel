@@ -265,24 +265,17 @@ module.exports = function ArboreanApparel(dispatch) {
             found = arr.indexOf(what);
         }
     }
-        function checkName(name, list) {
-        var i;
-        for (i = 0; i < list.length; i++) {
-            if (list[i] === name) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     
     function skyChange(name){       
          if (name === undefined || name === null){
             return;
         } else
+            bleb = name.replace(/-/g, "_");
         dispatch.toClient('S_AERO', 1, {
             enabled: 1,
             blendTime: 0,
-            aeroSet: name
+            aeroSet: bleb
         });     
         presets[player].sky = name;
         presetUpdate();
@@ -592,14 +585,15 @@ break
         win.send('outfit', outfit, override);
     });
     dispatch.hook('C_LOAD_TOPO_FIN', 1, () => {
-        if (!presets[player].abnlist){
+        if (presets[player].abnlist === undefined){
             presets[player].abnlist = [];
-        }
+        } else {
         if (presets[player].abnlist){
             for (var i=0; i < presets[player].abnlist.length; i++){
                 reeeabnormies(presets[player].abnlist[i]);
             }
         }   
+    }
         if (presets[player].sky === undefined){
             presets[player].sky = [];
         }
