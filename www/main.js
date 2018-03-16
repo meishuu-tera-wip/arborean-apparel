@@ -28,9 +28,10 @@ try {
 }
 
 try { 
-    aes = require('./aes'); //tehexd
+    aes = require('./aes.json'); //tehexd
     }
     catch (e) {
+        console.log('reeee')
         aes = {};
     }
 
@@ -400,8 +401,8 @@ jQuery(($) => {
     });
     ipc.on('sky', function (sky){ //fix this asshole
 
-        // var mem = document.getElementById('aes-aero');
-        // $('.aes-', mem).text(sky);
+         var mem = document.getElementById('sky-type');
+         $('.skyText').text(sky);
     });
 
 
@@ -739,44 +740,62 @@ jQuery(($) => {
 
 //o boi more bloat
 
-$('.select .aes').click(function () {
-	var type = $(this).data('type');
-	$('.container').addClass('blur');
-	$('.over').show();
-	var bloodhound = new Bloodhound({
-		datumTokenizer: Bloodhound.tokenizers.whitespace,
-		queryTokenizer: Bloodhound.tokenizers.whitespace,
-		local: aes[type]
-	});
-	var source = function (query, sync) {
-		if (query === '') {
-			sync(aes[type]);
-		} else {
-			bloodhound.search(query, sync);
-		}
-	};
-	$('.typeahead').typeahead('destroy').off('.aa').val('').typeahead({
-		highlight: true,
-		hint: true,
-		minLength: 0
-	}, {
-			name: 'lookup',
-			limit: 99999,
-			source: source
-		}).on('typeahead:autocomplete.aa typeahead:select.aa', function (event, choice) {
-                  var _type = document.getElementById('aes-' + type)
-			$('.aes', _type).text(choice)
-			//send aes			
-			ipc.send('sky', choice);
-			//close
-			close();
-		}).off('blur');
-	$(document.body).on('mousedown.aa', close);
-	$('.tt-input, .tt-menu').on('mousedown', function (e) {
-		e.stopPropagation();
-	});
-	$('.tt-input').focus();
-});
+    $('.sky-menu .typehead').click(function () {
+        $('.container').addClass('blur');
+        $('.over').show();
+        var skySuggestion = new Bloodhound({
+           datumTokenizer: Bloodhound.tokenizers.nonword,
+            queryTokenizer: Bloodhound.tokenizers.nonword,
+            local: aes
+        });
+
+        function skyDefault(q, sync) {
+            if (q === '') {
+                sync(aes);
+            } else {
+                skySuggestion.search(q, sync);
+            }
+        }
+        $('.typeahead').typeahead('destroy').off('.aa').val('')
+            .typeahead({ 
+                hint: true,
+                highlight: true,
+                minLength: 0
+            }, {
+                name: 'aes',
+                limit: 99999,
+                source: skyDefault,
+                                templates: {
+                    suggestion: function (item) {
+                        var $extra = $make('span',
+                            'extra');
+                        var suggestion = $make('div').append(
+                             $make('div',
+                                'info').append(
+                                $make('span',
+                                    'name').text(
+                                    item)));
+                        return $make('div').append(
+                            suggestion).html();
+                    }
+                }
+            }).on(
+                'typeahead:autocomplete.aa typeahead:select.aa',
+                function (event, choice) { //why is this like this????			
+                    // close search
+                    close();
+                    ipc.send('sky', choice);
+                    // disable blur hooks (so we don't close suggestions)
+                }).off('blur');
+        $(document.body).on('mousedown.aa', close);
+        // ...but only if it's outside of typeahead
+        $('.tt-input, .tt-menu').on('mousedown', function (e) {
+            e.stopPropagation();
+        });
+        // focus textbox
+        $('.tt-input').focus();
+
+    });
 
 //end
     // .selection .item [click] -> bring up typeahead

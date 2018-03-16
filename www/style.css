@@ -28,6 +28,12 @@ a {
 	color: black;
 	text-decoration: none
 }
+
+ .sky-type {
+ 	color: rgb(98, 40, 222);
+ 	font-weight: bold;
+ }
+ 
 .item {
 	color: blue;
 	text-decoration: underline;
