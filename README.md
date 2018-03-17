@@ -80,7 +80,7 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong),
  ## Update log (16/17 March):
  - Made Sky searching work correctly, also fixed it not displaying the users currently selected sky
  - Changed some CSS
- - Fixed (hopefully) and error with preset creation
+ - Fixed (hopefully) an error with preset creation
  - Renamed tera-proxy.bat to ElectronStart.bat and added the file required for auto-updating (woops) **please redownload if you are having issues**
  
 ## Update log (15 March):
