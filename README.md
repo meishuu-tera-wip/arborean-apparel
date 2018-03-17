@@ -15,8 +15,8 @@
       - [Online:](#online)
   - [FAQ/Errors:](#faqerrors)
   - [Todo:](#todo)
-  - [Update log (16/17 March):](#update-log-1617-march)
-  - [Update log (15 March):](#update-log-15-march) PLS READ THIS
+  - [Update log (16/17 March):](#update-log-1617-march)PLS READ THIS
+  - [Update log (15 March):](#update-log-15-march) 
 
 
 
@@ -81,7 +81,7 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong),
  - Made Sky searching work correctly, also fixed it not displaying the users currently selected sky
  - Changed some CSS
  - Fixed (hopefully) and error with preset creation
- - Renamed tera-proxy.bat to ElectronStart.bat and added the file required for auto-updating (woops)
+ - Renamed tera-proxy.bat to ElectronStart.bat and added the file required for auto-updating (woops) **please redownload if you are having issues**
  
 ## Update log (15 March):
 - Updated costume db and added more ~~bloat~~ useful images.
