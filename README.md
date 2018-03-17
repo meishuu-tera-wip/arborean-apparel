@@ -1,4 +1,5 @@
 
+
 # Arborean Apparel
 
 
@@ -7,7 +8,6 @@
 
  [Funnel money into my dumb mouth so I work on this and other things more thanks](https://ko-fi.com/hugedong)
 *** 
-
 - [Arborean Apparel](#arborean-apparel)
     - [How to:](#how-to)
     - [Usage:](#usage)
@@ -15,7 +15,10 @@
       - [Online:](#online)
   - [FAQ/Errors:](#faqerrors)
   - [Todo:](#todo)
-  - [Update log (15 March):](#update-log-15-march)
+  - [Update log (16/17 March):](#update-log-1617-march)
+  - [Update log (15 March):](#update-log-15-march) PLS READ THIS
+
+
 
 ***
 ### How to:
@@ -73,6 +76,13 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong),
 - Add more features 
 - other stuff
  ***
+ 
+ ## Update log (16/17 March):
+ - Made Sky searching work correctly, also fixed it not displaying the users currently selected sky
+ - Changed some CSS
+ - Fixed (hopefully) and error with preset creation
+ - Renamed tera-proxy.bat to ElectronStart.bat and added the file required for auto-updating (woops)
+ 
 ## Update log (15 March):
 - Updated costume db and added more ~~bloat~~ useful images.
 - Now works for tera-crypto and I didn't even have to do anything!
