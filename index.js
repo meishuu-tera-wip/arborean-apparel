@@ -717,10 +717,13 @@ break
         win.send('text', nametag);
     }
 
-    dispatch.hook('S_ITEM_CUSTOM_STRING', 2, (event) => {
+    dispatch.hook('S_ITEM_CUSTOM_STRING', 2, {order: 1}, (event) => {
         const user = networked.get(id2str(event.gameId));
-        if (user && user.override.costumeText !== null);
-        return false;
+        if (user && user.override.costumeText !== null){;
+        costumStrings:[{
+                string: user.override.costumeText
+        }];
+    }
     });
     dispatch.hook('S_SOCIAL', 1, (event) => {
         if ([31, 32, 33].indexOf(event.animation) === -1) return;
