@@ -330,7 +330,6 @@ module.exports = function ArboreanApparel(dispatch) {
         if (Date.now() - lastCallDate < 100) return;
         const addChange = CHANGERS[name];
         const stacker = STACKS[name];
-        //console.log(name);
         switch (name) {
             case "dchest":
                 meme = STACKS.chest--;
@@ -622,7 +621,8 @@ break
     dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
         const user = networked.get(id2str(event.gameId));
                 if (user) {
-            Object.assign(event.id, user.mount); // write custom setup
+                    event.id = user.mount;
+                    return true
             }
         if (event.gameId.equals(myId) && (presets[player] &&
             presets[player].myMount && presets[player].myMount !==
@@ -652,7 +652,7 @@ break
         const user = networked.get(id2str(event.gameId));
         if (!user) return;
         Object.assign(user.outfit, event); // save real setup
-        Object.assign(event, user.override) // write custom setup
+        Object.assign(event, user.override); // write custom setup
         if (user.override.costume && user.override.costumeText !==
             null) {
             process.nextTick(() => {
@@ -662,7 +662,7 @@ break
                         dbid: user.override
                             .costume,
                         string: user.override
-                            .costumetext
+                            .costumeText
                     }]
                 });
             });
@@ -717,7 +717,7 @@ break
         win.send('text', nametag);
     }
 
-    dispatch.hook('S_ITEM_CUSTOM_STRING', 2, {order: 1}, (event) => {
+    dispatch.hook('S_ITEM_CUSTOM_STRING', 2, (event) => {
         const user = networked.get(id2str(event.gameId));
         if (user && user.override.costumeText !== null){;
         costumStrings:[{
@@ -835,16 +835,17 @@ break
                 costume: dbid,
                 costumeText: string
             });
-        }
+        
         dispatch.toClient('S_ITEM_CUSTOM_STRING', 2, {
             
             gameId: str2id(id),
             customStrings: [{
-                dbid,
-                string
+                dbid: dbid,
+                string: string
             }]
 
         });
+        }
     }
     });
 
