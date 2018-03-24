@@ -40,7 +40,7 @@ This mod support auto-updating via [Caali's Proxy](https://discord.gg/maqBmJV), 
  You can update this yourself if there has been an update by downloading [this file](https://github.com/codeagon/arborean-apparel/blob/master/www/img.asar) and extracting it to `bin/node_modules/Arborean-Apparel/www`, overwriting the existing file. This can be done while the mod is running.  I also recommended updating electron frequently to ensure the best comparability.
 
 #### Online:
-By default Apparel will share your costume selections with other people using the module around you by connecting to an external server. If this doesn't sound like your cup of tea, simply edit index.js and change `online: true` to `false`.
+By default Apparel will share your costume selections with other people using the module around you by connecting to an external server. If this doesn't sound like your cup of tea, simply edit config.json and change `online: true` to `false`.
 
 The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong), if you want your own special server for your guild or something, hit me up (this is also free). Server software is also on this github if you don't trust me at all and wish to run one your self. This only affects the costume sharing aspect.
 ****
