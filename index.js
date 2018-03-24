@@ -618,23 +618,23 @@ break
     dispatch.hook('S_UNICAST_TRANSFORM_DATA', 'raw', (code, data) => {
         return false;
     });
+    
     dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
-        const user = networked.get(id2str(event.gameId));
-                if (user.mount) {
-                    event.id = user.mount;
-                    return true
-            };
         if (event.gameId.equals(myId) && (presets[player] &&
             presets[player].myMount && presets[player].myMount !==
             "696969")) {
             event.id = presets[player].myMount;
             return true;
         } else {
-            return true;
+       const user = networked.get(id2str(event.gameId));
+        if (user && user.mount !== undefined && user.mount !== null && user.mount !== "696969") {
+                    event.id = user.mount;
+                    return true;
+            }
         }
         
-
-    });
+            return true;
+        });
     function enable(){
             addHook('S_GET_USER_LIST', 12, event => {
         win.close();
@@ -925,7 +925,8 @@ break
     
     net.on('error', (err) => {
         // TODO
-        console.warn(err);
+        console.log('[ARBOREAN APPAREL] - Your connection to the costume sharing server has been terminated! Please hit me up on Discord about it!');
+        //console.warn(err);
     });
     /* ---------- *
      * INITIALIZE *
