@@ -217,7 +217,7 @@ module.exports = function ArboreanApparel(dispatch) {
     }
 
     function toggleCrystalbind() {
-        if (!crystalbind.expires) return // no cb to toggle
+        if (!crystalbind.expires) return; // no cb to toggle
         const {
             hidecb
         } = options;
@@ -620,10 +620,10 @@ break
     });
     dispatch.hook('S_MOUNT_VEHICLE', 2, (event) => {
         const user = networked.get(id2str(event.gameId));
-                if (user) {
+                if (user.mount) {
                     event.id = user.mount;
                     return true
-            }
+            };
         if (event.gameId.equals(myId) && (presets[player] &&
             presets[player].myMount && presets[player].myMount !==
             "696969")) {
@@ -694,7 +694,7 @@ break
         const user = networked.get(id2str(event.gameId));
         if (user) {
             Object.assign(user.outfit, event); // save real setup
-            Object.assign(event, user.override) // write custom setup
+            Object.assign(event, user.override); // write custom setup
             return true;
             /*Object.assign(user.outfit, event);
             user.outfit.inner = user.outfit.innerwear; // TODO
