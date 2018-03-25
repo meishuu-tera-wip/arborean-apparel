@@ -393,7 +393,7 @@ module.exports = function ArboreanApparel(dispatch) {
      * --------- */
     win.on('load', () => {
         if (presets[player].myMount) {
-            win.send('myMount', presets[player].myMount);
+            win.send('mount', presets[player].myMount);
         }
         if (presets[player].sky) {
             win.send('sky', presets[player].sky);
@@ -448,9 +448,9 @@ module.exports = function ArboreanApparel(dispatch) {
     });
     win.on('mount', (mount) => {
         if (presets[player].myMount) {
-            win.send('myMount', presets[player].myMount);
+            win.send('mount', presets[player].myMount);
         }
-        win.send('myMount', mount); //disgusting
+        win.send('mount', mount); //disgusting
         presets[player].myMount = mount;
         presetUpdate();
         net.send('mount', mount);
