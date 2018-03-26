@@ -6,8 +6,6 @@
 ![<sub>update when?</sub>](https://i.imgur.com/llIq0bx.jpg)
 
 
- [Funnel money into my dumb mouth so I work on this and other things more thanks](https://ko-fi.com/hugedong)
-*** 
 - [Arborean Apparel](#arborean-apparel)
     - [How to:](#how-to)
     - [Usage:](#usage)
@@ -15,8 +13,8 @@
       - [Online:](#online)
   - [FAQ/Errors:](#faqerrors)
   - [Todo:](#todo)
-  - [Update log (16/17 March):](#update-log-1617-march)PLS READ THIS
-  - [Update log (15 March):](#update-log-15-march) 
+  - [Update log (Last few, 26th March) -](#update-log-last-few-26th-march-)
+
 
 
 
@@ -77,16 +75,9 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong),
 - other stuff
  ***
  
- ## Update log (16/17 March):
- - Made Sky searching work correctly, also fixed it not displaying the users currently selected sky
- - Changed some CSS
- - Fixed (hopefully) an error with preset creation
- - Renamed tera-proxy.bat to ElectronStart.bat and added the file required for auto-updating (woops) **please redownload if you are having issues**
- 
-## Update log (15 March):
-- Updated costume db and added more ~~bloat~~ useful images.
-- Now works for tera-crypto and I didn't even have to do anything!
-- Added several new effects, these now save and apply correctly (or should). Changes don't work gud yet.
-- Added sky changing, this is found under "other". Only you can see the change.
-- Changed some UI stuff to be more clear, somehow made everything uglier. WTB someone else's style.
-- Fixed some bugs, added some more
+## Update log (Last few, 26th March) - 
+- Fixed mount sharing and UI
+- Fixed some crashes and other potential issues
+- Added some new things
+- Worked on server connectivity issues, unsure what the main issue is just yet
+- Support for next patch version
