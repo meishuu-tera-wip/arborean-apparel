@@ -53,7 +53,8 @@ const ABNORM = {
     unyielding: 700600,
     bluenacity: 3000020,
     hyperhand: 757053,
-    succ: 98000101
+    succ: 98000101,
+    hearts: 4866
 };
 
 function id2str(id) {
@@ -74,7 +75,7 @@ r,
         b,
         a,
         o
-        }) {
+}) {
     return o ? (a << 24) | (r << 16) | (g << 8) | b : 0;
 }
 module.exports = function ArboreanApparel(dispatch) {
@@ -456,7 +457,7 @@ module.exports = function ArboreanApparel(dispatch) {
         net.send('mount', mount);
     });
     win.on('sky', (sky) => {
-        if (presets[player].myMount) {
+        if (presets[player].sky) {
             win.send('sky', presets[player].sky);
         }
         skyChange(sky);
@@ -514,6 +515,21 @@ module.exports = function ArboreanApparel(dispatch) {
                         'dis' : 'en') + "abled.");
                 break
             }
+            case 'mem':
+            win.mouseIgnore();
+            break
+            case 'disconnect':
+                net.send('logout');
+                net.close();
+                break
+            case 'reconnect':
+                net.connect({
+                    host: config.serverHost,
+                    port: config.serverPort
+                });
+                net.send('login', id2str(myId));
+                net.send('outfit', override);
+                break
             case 'cb':
             case 'crystalbind':
             {
@@ -606,6 +622,12 @@ module.exports = function ArboreanApparel(dispatch) {
         if (presets[player].sky === undefined) {
             presets[player].sky = [];
         }
+         if (presets[player] && presets[player].id !== 0) {
+             setTimeout(function () {
+            dispatch.toClient('S_USER_EXTERNAL_CHANGE', 5, Object.assign({}, outfit, override)); //fixes CU issue
+        }, 9000);
+        
+         }
     });
     dispatch.hook('S_USER_EXTERNAL_CHANGE', 5, {order: 1}, (event) => {
         if (event.accessoryTransform1 === 0) { // haha idc any more lets just get this shit done xdddd
@@ -642,7 +664,6 @@ module.exports = function ArboreanApparel(dispatch) {
                 return true;
             }
         }
-
         return true;
     });
     function enable() {
