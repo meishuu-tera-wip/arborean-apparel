@@ -19,6 +19,7 @@
 
 
 ***
+[Please funnel money into my mouth to support development](https://ko-fi.com/codeagon)
 ### How to:
 
 - Download and install [Caali's Proxy](https://discord.gg/maqBmJV)
@@ -40,7 +41,7 @@ This mod support auto-updating via [Caali's Proxy](https://discord.gg/maqBmJV), 
 #### Online:
 By default Apparel will share your costume selections with other people using the module around you by connecting to an external server. If this doesn't sound like your cup of tea, simply edit config.json and change `online: true` to `false`.
 
-The server is run by me for free [(gib monei plis)](https://ko-fi.com/hugedong), if you want your own special server for your guild or something, hit me up (this is also free). Server software is also on this github if you don't trust me at all and wish to run one your self. This only affects the costume sharing aspect.
+The server is run by me for free [(gib monei plis)](https://ko-fi.com/codeagon), if you want your own special server for your guild or something, hit me up (this is also free). Server software is also on this github if you don't trust me at all and wish to run one your self. This only affects the costume sharing aspect.
 ****
 ## FAQ/Errors: 
 
