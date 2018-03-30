@@ -1,4 +1,4 @@
-
+Discord: [![Discord](https://discordapp.com/api/guilds/385946679733518338/widget.png)](https://discord.gg/dzB7xZK)
 
 # Arborean Apparel
 
