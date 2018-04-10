@@ -667,7 +667,7 @@ module.exports = function ArboreanApparel(dispatch) {
             }
             return true;
         });
-        addHook('S_GET_USER_LIST', (dispatch.base.majorPatchVersion >= 67) ? 13 : 12, event => {
+        addHook('S_GET_USER_LIST', (dispatch.base.majorPatchVersion >= 67) ? 14 : 13, event => {
             win.close();
             override = {};
             for (let index in event.characters) {
