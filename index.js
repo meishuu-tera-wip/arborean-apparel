@@ -577,7 +577,7 @@ module.exports = function ArboreanApparel(dispatch) {
         dispatch.hook(packetName, packetVersion, func);
     }
     function enable() {
-        addHook('S_LOGIN', (dispatch.base.majorPatchVersion >= 67) ? 10 : 9, (event) => {
+        addHook('S_LOGIN', 10, (event) => {
             ingame = true;
             myId = event.gameId;
             player = event.name;
@@ -667,7 +667,7 @@ module.exports = function ArboreanApparel(dispatch) {
             }
             return true;
         });
-        addHook('S_GET_USER_LIST', (dispatch.base.majorPatchVersion >= 67) ? 14 : 13, event => {
+        addHook('S_GET_USER_LIST', 14, event => {
             win.close();
             override = {};
             for (let index in event.characters) {
