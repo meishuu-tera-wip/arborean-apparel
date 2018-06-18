@@ -2,7 +2,7 @@ const Server = require('./networking')
 
 const port = process.env.PORT || 3458
 const secure = false
-
+const skey = "4878"
 const users = {}
 const EMOTES = {
 	bow: 43,
@@ -35,14 +35,13 @@ const server = new Server({}, (client) => {
 		users[id] = { override: {}, options: {} }
 		client.broadcast('add', id)
 	})
-
 	client.on('outfit', check((override) => {
 		users[curId].override = override;
 		client.broadcast('outfit', curId, override)
 	}))
 	client.on('mount', check((mount) => {
 		users[curId].mount = mount;
-		client.broadcast('outfit', curId, mount)
+		client.broadcast('mount', curId, mount)
 	}))
 	client.on('text', check((costume, costumeText) => {
 		Object.assign(users[curId], { costume, costumeText })
