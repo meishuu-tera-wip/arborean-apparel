@@ -2,7 +2,6 @@ const Server = require('./networking')
 
 const port = process.env.PORT || 3458
 const secure = false
-const skey = "4878"
 const users = {}
 const EMOTES = {
 	bow: 43,
