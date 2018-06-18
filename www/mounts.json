@@ -1,7 +1,7 @@
 [
    {
       "name":"None",
-      "icon":"undefined",
+      "icon":"icon_items/homonculus1_tex",
       "vehicleId":"696969"
    },
    {
@@ -933,6 +933,21 @@
       "name":"Free Flight",
       "icon":"Icon_Skills/FlyingCostume_Tex",
       "vehicleId":"261"
+   },
+   {
+      "name":"Summon: Elephant",
+      "icon":"Icon_Skills/Vehicle_Elephant_Tex",
+      "vehicleId":"263"
+   },
+   {
+      "name":"Flight: Somno",
+      "icon":"Icon_Skills/Vehicle_Bluebird_A_Tex",
+      "vehicleId":"269"
+   },
+   {
+      "name":"Flight: Vakna",
+      "icon":"Icon_Skills/Vehicle_Bluebird_B_Tex",
+      "vehicleId":"275"
    },
    {
       "name":"Summon: Munchhausen",
