@@ -541,9 +541,6 @@ module.exports = function ArboreanApparel(dispatch) {
                 net.send('login', id2str(myId));
                 net.send('outfit', override);
                 break
-            case 'chat':
-                net.send('message', arg, arg2);
-                break
             case 'cb':
             case 'crystalbind':
             {
@@ -975,9 +972,6 @@ module.exports = function ArboreanApparel(dispatch) {
             target: str2id(id),
             animation: emote
         });
-    });
-    net.on('message', (msg) => {
-        message(msg);
     });
     net.on('changer', (id, field, value) => {
         if (config.allowChangers && ingame) {
