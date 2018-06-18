@@ -27,25 +27,26 @@ try {
     suggestions = {};
 }
 
-try { 
+try {
     aes = require('./aes.json'); //tehexd
-    }
-    catch (e) {
-        console.log('reeee')
-        aes = {};
-    }
+} catch (e) {
+    console.log('reeee')
+    aes = {};
+}
 
 const itemData = require('./items');
 class IPC extends events.EventEmitter {
     constructor() {
         super();
         ipcRenderer.on('arborean-apparel', (event, ...args) => {
-            if (debug) console.log('on', ...args);
+            if (debug)
+                console.log('on', ...args);
             this.emit(...args);
         });
     }
     send(...args) {
-        if (debug) console.log('send', ...args);
+        if (debug)
+            console.log('send', ...args);
         ipcRenderer.send('arborean-apparel', ...args);
     }
 }
@@ -83,7 +84,7 @@ const describe = (() => {
         'Valkyrie'
     ];
     return c =>
-        `${races[c.race * 2 + c.gender] || '?'} ${classes[c.job] || '?'}`;
+            `${races[c.race * 2 + c.gender] || '?'} ${classes[c.job] || '?'}`;
 })();
 const rgbl = (() => {
     function rgb2hsl(r, g, b) {
@@ -101,15 +102,15 @@ const rgbl = (() => {
             const d = max - min;
             s = (l > 0.5) ? d / (2 - max - min) : d / (max + min);
             switch (max) {
-            case r:
-                h = (g - b) / d + (g < b ? 6 : 0);
-                break
-            case g:
-                h = (b - r) / d + 2;
-                break
-            case b:
-                h = (r - g) / d + 4;
-                break
+                case r:
+                    h = (g - b) / d + (g < b ? 6 : 0);
+                    break
+                case g:
+                    h = (b - r) / d + 2;
+                    break
+                case b:
+                    h = (r - g) / d + 4;
+                    break
             }
             h /= 6;
         }
@@ -133,11 +134,16 @@ const rgbl = (() => {
     }
 
     function hue2rgb(p, q, t) {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + (q - p) * 6 * t;
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        if (t < 0)
+            t += 1;
+        if (t > 1)
+            t -= 1;
+        if (t < 1 / 6)
+            return p + (q - p) * 6 * t;
+        if (t < 1 / 2)
+            return q;
+        if (t < 2 / 3)
+            return p + (q - p) * (2 / 3 - t) * 6;
         return p;
     }
     return (r, g, b, l) => {
@@ -152,7 +158,7 @@ jQuery(($) => {
      * CONSTANTS *
      *************/
     const TRANSPARENT =
-        'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+            'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
     const SLOTS = [
         'weapon', 'body', 'hand', 'feet', 'underwear',
         'styleHead', 'styleFace', 'styleBody', 'styleBack',
@@ -174,11 +180,11 @@ jQuery(($) => {
     // add transparent <img> on top of each slot
     $('.gear-icon').each(function () {
         $(this).data('id', 0).append($make('img').attr('src',
-            TRANSPARENT));
+                `https://simplesalt.feedia.co/shared/blank.png`));
     });
     $('.mount-icon').each(function () {
         $(this).data('id', "0").append($make('img').attr('src',
-            `./img.asar/undefined.png`));
+                `https://simplesalt.feedia.co/shared/icon_items/homonculus1_tex.png`));
     });
 
     // set default dye color
@@ -194,10 +200,10 @@ jQuery(($) => {
     // checkbox hack
     $('label').mouseenter(function () {
         $(document.getElementById($(this).attr('for'))).siblings(
-            'label').addClass('hover');
+                'label').addClass('hover');
     }).mouseleave(function () {
         $(document.getElementById($(this).attr('for'))).siblings(
-            'label').removeClass('hover');
+                'label').removeClass('hover');
     });
     // -------
     // HELPERS
@@ -210,13 +216,14 @@ jQuery(($) => {
         if ($remodel.length && $('.equipped', $slot).hasClass(
                 'selected')) {
             change[slot + 'Model'] = ($remodel.is(':visible') &&
-                $remodel.hasClass('off')) ? 0 : false;
+                    $remodel.hasClass('off')) ? 0 : false;
         }
         // slots
         var $override = $('.override', $slot);
         if ($override.hasClass('selected')) {
             change[slot] = $override.data('id');
-            if ($remodel.length) change[slot + 'Model'] = 0;
+            if ($remodel.length)
+                change[slot + 'Model'] = 0;
         } else {
             change[slot] = false;
         }
@@ -224,16 +231,17 @@ jQuery(($) => {
         var $dye = $('.dye', $slot);
         if ($dye.length) {
             change[slot + 'Dye'] = ($dye.is(':visible') ? $dye.data(
-                'color') : false);
+                    'color') : false);
         }
-        
+
         // enchant
         var $enchant = $('#weapon-enchant', $slot);
         if ($enchant.length) {
             change[slot + 'Enchant'] = $override.hasClass('selected') ?
-                +$enchant.val() : false;
-            if (isNaN(change[slot + 'Enchant'])) change[slot +
-                'Enchant'] = false;
+                    +$enchant.val() : false;
+            if (isNaN(change[slot + 'Enchant']))
+                change[slot +
+                        'Enchant'] = false;
         }
         // emit
         ipc.send('change', change);
@@ -244,14 +252,7 @@ jQuery(($) => {
     }
 
     function getMount(vehicleId) {
-        if (vehicleId === "undefined"){
-            vehicleId = 6969;
-        };
-        return suggestions.filter(
-            function (data) {
-                return data.vehicleId === vehicleId;
-            }
-        )
+        return suggestions.find(x => x.vehicleId === vehicleId)
     }
 
     function updatePicker() {
@@ -275,7 +276,7 @@ jQuery(($) => {
         if (d.o) {
             var rgb = rgbl(d.r, d.g, d.b, d.a);
             $dye.addClass('enabled').css('background-color',
-                `rgb(${rgb.join(',')})`);
+                    `rgb(${rgb.join(',')})`);
         } else {
             $dye.removeClass('enabled');
         }
@@ -290,7 +291,8 @@ jQuery(($) => {
     // IPC
     // ---
     ipc.on('character', (character) => {
-        if (!character.name) return;
+        if (!character.name)
+            return;
         const race = (character.race * 2) + character.gender;
         const {
             job
@@ -345,13 +347,15 @@ jQuery(($) => {
         };
         $.each(prefilter, (type, items) => {
             prefilter[type] = items.map(id => itemData.items[
-                id]).filter((item) => {
+                        id]).filter((item) => {
                 if (item.races !== false &&
-                    item.races.indexOf(race) ===
-                    -1) return false;
+                        item.races.indexOf(race) ===
+                        -1)
+                    return false;
                 if (item.classes !== false &&
-                    item.classes.indexOf(job) ===
-                    -1) return false;
+                        item.classes.indexOf(job) ===
+                        -1)
+                    return false;
                 return true;
             }).sort((a, b) => {
                 const an = a.name;
@@ -359,7 +363,7 @@ jQuery(($) => {
                 if (an.startsWith('[') !== bn.startsWith(
                         '[')) {
                     return (an.startsWith('[') ?
-                        1 : -1);
+                            1 : -1);
                 } else {
                     return an.localeCompare(bn);
                 }
@@ -385,24 +389,23 @@ jQuery(($) => {
         $('.outfit-text').prop('disabled', true);
         $('.picker').hide();
         /*$('.emote-menu').toggle(character.gender === 1 && [0, 1, 3, 4].indexOf(character.race) > -1);
-        $('.emote-maid').toggle(character.gender === 1 && character.race === 4);
-        $('.emote-school').toggle(character.gender === 1 && [0, 1, 3, 4].indexOf(character.race) > -1);*/
+         $('.emote-maid').toggle(character.gender === 1 && character.race === 4);
+         $('.emote-school').toggle(character.gender === 1 && [0, 1, 3, 4].indexOf(character.race) > -1);*/
     });
     //please forgbive me god
     ipc.on('mount', function (mount) {
         //console.log(mount);
         var elem = document.getElementById('mount-icon');
         var item = getMount(mount);
-        var img = (item ? `img.asar/${item[0].icon}.png` : // this too
-            `img.asar/undefined.png`);
+        var img = item ? `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png` : `https://simplesalt.feedia.co/shared/blank.png`;
         $('.mountIcon', elem).data('id', item.id).children(
-            'img').attr('src', img);
+                'img').attr('src', img);
         $('.item', elem).text(item.name);
     });
-    ipc.on('sky', function (sky){ //fix this asshole
+    ipc.on('sky', function (sky) { //fix this asshole
 
-         var mem = document.getElementById('sky-type');
-         $('.skyText').text(sky);
+        var mem = document.getElementById('sky-type');
+        $('.skytext').text(sky);
     });
 
 
@@ -410,32 +413,32 @@ jQuery(($) => {
         const _dupes = itemData.duplicates;
         SLOTS.forEach(function (slot) {
             var elem = document.getElementById('slot-' +
-                slot);
+                    slot);
             var base = outfit[slot];
             var remodel = outfit[slot + 'Model'];
             var over = override[slot];
             var useRemodel = (override[slot + 'Model'] !==
-                0 || typeof over !== 'undefined');
+                    0 || typeof over !== 'undefined');
             // equipped
             var id = (useRemodel && remodel) || base ||
-                0;
+                    0;
             id = _dupes[id] || id;
             var item = getItem(slot, id);
-            var img = (item ? `img.asar/${item.icon}.png` :
-                `img.asar/slot-${slot}.png`);
+            var img = (item ? `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png` :
+                    `https://simplesalt.feedia.co/shared/blank.png`);
             $('.equipped', elem).data('id', id).children(
-                'img').attr('src', img);
+                    'img').attr('src', img);
             // remodel
             if (typeof remodel !== 'undefined') {
                 var $toggle = $('.toggle-display', elem);
                 if (remodel !== 0) {
                     $toggle.toggleClass('off', !
-                        useRemodel).show().data({
+                            useRemodel).show().data({
                         'base-id': _dupes[base] ||
-                            base,
+                                base,
                         'remodel-id': _dupes[
                                 remodel] ||
-                            remodel
+                                remodel
                     });
                 } else {
                     $toggle.hide();
@@ -456,13 +459,13 @@ jQuery(($) => {
                         name: false
                     },
                     name: 'None',
-                    img: `img.asar/slot-${slot}.png`,
+                    img: `https://simplesalt.feedia.co/shared/blank.png`,
                     desc: ''
                 };
-                img = (item.id ? `img.asar/${item.icon}.png` :
-                    `img.asar/slot-${slot}.png`);
+                img = (item.id ? `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png` :
+                        `https://simplesalt.feedia.co/shared/blank.png`);
                 $('.override', elem).data('id', id).children(
-                    'img').attr('src', img);
+                        'img').attr('src', img);
                 $('.item', elem).text(item.name);
                 // TODO dye & name support
                 var $dye = $('.dye', elem);
@@ -473,26 +476,26 @@ jQuery(($) => {
                     $dye.hide();
                 }
                 $('.options', elem).toggle(item.nameable ||
-                    slot === 'weapon');
+                        slot === 'weapon');
                 $('.outfit-text', elem).prop('disabled', !
-                    item.nameable);
+                        item.nameable);
                 // enchant
                 var enchant = override[slot + 'Enchant'];
                 if (typeof enchant !== 'undefined') {
                     $('#weapon-enchant', elem).val(
-                        enchant);
+                            enchant);
                 }
                 // set override as active
                 $('.equipped', elem).removeClass(
-                    'selected');
+                        'selected');
                 $('.override', elem).addClass(
-                    'selected');
+                        'selected');
             }
         });
     });
     ipc.on('option', function (option, setting) {
         $(document.getElementById(option)).prop('checked',
-            setting);
+                setting);
     });
     // --
     // UI
@@ -501,10 +504,11 @@ jQuery(($) => {
     $('.tab a').click(function (e) {
         e.preventDefault();
         var $this = $(this);
-        if ($this.parent().hasClass('active')) return;
+        if ($this.parent().hasClass('active'))
+            return;
         // set new .active
         $this.parent().addClass('active').siblings().removeClass(
-            'active');
+                'active');
         // show page
         var href = $(this).attr('href');
         $('.page').hide();
@@ -535,13 +539,14 @@ jQuery(($) => {
         var $equipped = $row.find('.equipped');
         var slot = $row.find('.item').data('type');
         var id = $this.data($this.hasClass('off') ?
-            'remodel-id' : 'base-id');
+                'remodel-id' : 'base-id');
         var item = getItem(slot, id);
         $equipped.find('img').attr('src', item ?
-            `img.asar/${item.icon}.png` : `img.asar/slot-${slot}.png`
-        );
+                `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png` : `https://simplesalt.feedia.co/shared/blank.png`
+                );
         $this.toggleClass('off');
-        if ($equipped.hasClass('selected')) sendSlot(slot);
+        if ($equipped.hasClass('selected'))
+            sendSlot(slot);
     });
     // .outfit-text [input] -> send text update
     $('.outfit-text').on('input', function () {
@@ -589,9 +594,11 @@ jQuery(($) => {
     // window [resize] -> move dye panel
     $(window).resize(function () {
         var $picker = $('.picker');
-        if ($picker.is(':visible')); {
+        if ($picker.is(':visible'))
+            ;
+        {
             var $dye = $('.dye', document.getElementById(
-                'slot-' + $picker.data('slot')));
+                    'slot-' + $picker.data('slot')));
             var offset = $dye.offset();
             offset.top -= 100;
             offset.left += $dye.width() - 280;
@@ -619,7 +626,7 @@ jQuery(($) => {
     // #extra input [change] -> update options
     $('#extra input').change(function () {
         ipc.send('option', $(this).attr('id'), $(this).prop(
-            'checked'));
+                'checked'));
     });
     // #weapon-enchant [change] -> send weapon slot
     $('#weapon-enchant').change(function () {
@@ -658,20 +665,20 @@ jQuery(($) => {
     });
     // .emote [mouseenter] -> show emote command
     /*
-	$('.emote').mouseenter(function() {
-		$('.emote-text').text('!aa ' + $(this).data('emote'))
-		// .emote [mouseleave] -> hide emote command
-	}).mouseleave(function() {
-		$('.emote-text').text('')
-		// .emote [click] -> send emote
-	}).click(function() {
-		var emote = $(this).data('emote')
-		if ((emote === 'dance' || emote === 'settle') && !$('#hideidle').prop('checked')) {
-			// disable idle anims for dance/settle
-			$('#hideidle').prop('checked', true).change()
-		}
-		ipc.send('emote', emote)
-	})*/
+     $('.emote').mouseenter(function() {
+     $('.emote-text').text('!aa ' + $(this).data('emote'))
+     // .emote [mouseleave] -> hide emote command
+     }).mouseleave(function() {
+     $('.emote-text').text('')
+     // .emote [click] -> send emote
+     }).click(function() {
+     var emote = $(this).data('emote')
+     if ((emote === 'dance' || emote === 'settle') && !$('#hideidle').prop('checked')) {
+     // disable idle anims for dance/settle
+     $('#hideidle').prop('checked', true).change()
+     }
+     ipc.send('emote', emote)
+     })*/
     const $tagsInput = $('#tagsInput');
     var typeTest = $tagsInput.typeahead;
 
@@ -680,7 +687,7 @@ jQuery(($) => {
         $('.over').show();
         var mountSuggestions = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace(
-                'name'),
+                    'name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: suggestions
         });
@@ -693,34 +700,34 @@ jQuery(($) => {
             }
         }
         $('.typeahead').typeahead('destroy').off('.aa').val('')
-            .typeahead({ //uwu typehead ur so shit
-                hint: true,
-                highlight: true,
-                minLength: 0
-            }, {
-                name: 'suggestions',
-                displayKey: 'name',
-                limit: 99999,
-                source: mountDefault,
-                templates: {
-                    suggestion: function (item) {
-                        var $extra = $make('span',
-                            'extra');
-                        var suggestion = $make('div').append(
-                            $make('div', 'icon').append(
-                                $make('img').attr(
+                .typeahead({//uwu typehead ur so shit
+                    hint: true,
+                    highlight: true,
+                    minLength: 0
+                }, {
+                    name: 'suggestions',
+                    displayKey: 'name',
+                    limit: 99999,
+                    source: mountDefault,
+                    templates: {
+                        suggestion: function (item) {
+                            var $extra = $make('span',
+                                    'extra');
+                            var suggestion = $make('div').append(
+                                    $make('div', 'icon').append(
+                                    $make('img').attr(
                                     'src',
-                                    `img.asar/${item.icon}.png`
-                                )), $make('div',
-                                'info').append(
-                                $make('span',
-                                    'name').text(
+                                    `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png`
+                                    )), $make('div',
+                                    'info').append(
+                                    $make('span',
+                                            'name').text(
                                     item.name)));
-                        return $make('div').append(
-                            suggestion).html();
+                            return $make('div').append(
+                                    suggestion).html();
+                        }
                     }
-                }
-            }).on(
+                }).on(
                 'typeahead:autocomplete.aa typeahead:select.aa',
                 function (event, choice) { //why is this like this????			
                     // close search
@@ -744,7 +751,7 @@ jQuery(($) => {
         $('.container').addClass('blur');
         $('.over').show();
         var skySuggestion = new Bloodhound({
-           datumTokenizer: Bloodhound.tokenizers.nonword,
+            datumTokenizer: Bloodhound.tokenizers.nonword,
             queryTokenizer: Bloodhound.tokenizers.nonword,
             local: aes
         });
@@ -757,29 +764,29 @@ jQuery(($) => {
             }
         }
         $('.typeahead').typeahead('destroy').off('.aa').val('')
-            .typeahead({ 
-                hint: true,
-                highlight: true,
-                minLength: 0
-            }, {
-                name: 'aes',
-                limit: 99999,
-                source: skyDefault,
-                                templates: {
-                    suggestion: function (item) {
-                        var $extra = $make('span',
-                            'extra');
-                        var suggestion = $make('div').append(
-                             $make('div',
-                                'info').append(
-                                $make('span',
-                                    'name').text(
+                .typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 0
+                }, {
+                    name: 'aes',
+                    limit: 99999,
+                    source: skyDefault,
+                    templates: {
+                        suggestion: function (item) {
+                            var $extra = $make('span',
+                                    'extra');
+                            var suggestion = $make('div').append(
+                                    $make('div',
+                                            'info').append(
+                                    $make('span',
+                                            'name').text(
                                     item)));
-                        return $make('div').append(
-                            suggestion).html();
+                            return $make('div').append(
+                                    suggestion).html();
+                        }
                     }
-                }
-            }).on(
+                }).on(
                 'typeahead:autocomplete.aa typeahead:select.aa',
                 function (event, choice) { //why is this like this????			
                     // close search
@@ -807,7 +814,7 @@ jQuery(($) => {
         // set up search function with bloodhound
         var bloodhound = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace(
-                ['name', 'tooltip']),
+                    ['name', 'tooltip']),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             //identify: function(datum) { return datum.id }, // this breaks things?
             local: prefilter[type]
@@ -821,63 +828,63 @@ jQuery(($) => {
         };
         // initialize typeahead
         $('.typeahead').typeahead('destroy').off('.aa').val('')
-            .typeahead({
-                highlight: true,
-                hint: true,
-                minLength: 0
-            }, {
-                name: 'lookup',
-                displayKey: 'name',
-                limit: 99999,
-                source: source,
-                templates: {
-                    suggestion: function (item) {
-                        var $extra = $make('span',
-                            'extra');
-                        if (item.dyeable) {
-                            $extra.append($make('img',
-                                'dyeable').attr({
-                                src: 'img.asar/Icon_Items/dye_result_random_Tex.png',
-                                alt: 'Dyeable',
-                                title: 'Dyeable'
-                            }));
-                        }
-                        if (item.nameable) {
-                            $extra.append($make('img',
-                                'nameable').attr({
-                                src: 'img.asar/Icon_Items/CharName_Change_Tex.png',
-                                alt: 'Nameable',
-                                title: 'Nameable'
-                            }));
-                        }
-                        var suggestion = $make('div').append(
-                            $make('div', 'icon').append(
-                                $make('img').attr(
+                .typeahead({
+                    highlight: true,
+                    hint: true,
+                    minLength: 0
+                }, {
+                    name: 'lookup',
+                    displayKey: 'name',
+                    limit: 99999,
+                    source: source,
+                    templates: {
+                        suggestion: function (item) {
+                            var $extra = $make('span',
+                                    'extra');
+                            if (item.dyeable) {
+                                $extra.append($make('img',
+                                        'dyeable').attr({
+                                    src: 'https://simplesalt.feedia.co/shared/icon_items/dye_result_random_tex.png',
+                                    alt: 'Dyeable',
+                                    title: 'Dyeable'
+                                }));
+                            }
+                            if (item.nameable) {
+                                $extra.append($make('img',
+                                        'nameable').attr({
+                                    src: 'https://simplesalt.feedia.co/shared/icon_items/charname_change_tex.png',
+                                    alt: 'Nameable',
+                                    title: 'Nameable'
+                                }));
+                            }
+                            var suggestion = $make('div').append(
+                                    $make('div', 'icon').append(
+                                    $make('img').attr(
                                     'src',
-                                    `img.asar/${item.icon}.png`
-                                )), $make('div',
-                                'info').append(
-                                $make('span',
-                                    'name').text(
+                                    `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png`
+                                    )), $make('div',
+                                    'info').append(
+                                    $make('span',
+                                            'name').text(
                                     item.name),
-                                $extra, $make('br'),
-                                $make('span',
-                                    'desc').html(
+                                    $extra, $make('br'),
+                                    $make('span',
+                                            'desc').html(
                                     item.tooltip)));
-                        return $make('div').append(
-                            suggestion).html();
+                            return $make('div').append(
+                                    suggestion).html();
+                        }
                     }
-                }
-            }).on(
+                }).on(
                 'typeahead:autocomplete.aa typeahead:select.aa',
                 function (event, choice) {
                     var _type = document.getElementById('slot-' +
-                        type);
+                            type);
                     var $override = $('.override', _type);
                     // set id, image, and text
                     $override.data('id', choice.id).children(
-                        'img').attr('src',
-                        `img.asar/${choice.icon}.png`);
+                            'img').attr('src',
+                            `https://simplesalt.feedia.co/shared/${choice.icon.toLowerCase()}.png`);
                     $('.item', _type).text(choice.name);
                     // dye
                     var $dye = $('.dye', _type);
@@ -892,9 +899,9 @@ jQuery(($) => {
                     }
                     // name
                     $('.options', _type).toggle(choice.nameable ||
-                        (choice.id && type === 'weapon'));
+                            (choice.id && type === 'weapon'));
                     $('.outfit-text', _type).prop('disabled', !
-                        choice.nameable);
+                            choice.nameable);
                     // set selected and send outfit
                     if ($override.hasClass('selected')) {
                         sendSlot(type);

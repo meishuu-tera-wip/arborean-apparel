@@ -247,37 +247,37 @@ select {
 .slot-styleWeapon,.slot-styleBody,.slot-styleFootprint{background-repeat:no-repeat}
 
 .slot-weapon {
-	background-image: url('img.asar/slot-weapon.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-weapon.png')
 }
 .slot-body {
-	background-image: url('img.asar/slot-body.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-body.png')
 }
 .slot-hand {
-	background-image: url('img.asar/slot-hand.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-hand.png')
 }
 .slot-feet {
-	background-image: url('img.asar/slot-feet.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-feet.png')
 }
 .slot-underwear {
-	background-image: url('img.asar/slot-underwear.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-underwear.png')
 }
 .slot-styleHead {
-	background-image: url('img.asar/slot-styleHead.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-stylehead.png')
 }
 .slot-styleFace {
-	background-image: url('img.asar/slot-styleFace.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-styleface.png')
 }
 .slot-styleBack {
-	background-image: url('img.asar/slot-styleBack.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-styleback.png')
 }
 .slot-styleWeapon {
-	background-image: url('img.asar/slot-styleWeapon.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-styleweapon.png')
 }
 .slot-styleBody {
-	background-image: url('img.asar/slot-styleBody.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-stylebody.png')
 }
 .slot-styleFootprint {
-	background-image: url('img.asar/slot-styleFootprint.png')
+	background-image: url('https://simplesalt.feedia.co/shared/slot-stylefootprint.png')
 }
 
 .toggle-display {
@@ -287,7 +287,7 @@ select {
 	height: 16px;
 	margin-left: 32px;
 	margin-top: 32px;
-	background-image: url('img.asar/toggle-remodel.png');
+	background-image: url('https://teralore.com/items/icon_items/homonculus1_tex.png');
 	transition: opacity 0.3s;
 	opacity: 0.7
 }
@@ -316,7 +316,7 @@ select {
 	display: none;
 	vertical-align: text-bottom;
 	margin-left: 5px;
-	background: url('img.asar/Icon_Items/dye_result_random_Tex.png') center;
+	background: url('https://teralore.com/items/icon_items/dye_result_random_tex.png') center;
 	background-size: 16px;
 	width: 16px;
 	height: 16px;
