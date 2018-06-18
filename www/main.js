@@ -395,17 +395,16 @@ jQuery(($) => {
     //please forgbive me god
     ipc.on('mount', function (mount) {
         //console.log(mount);
-        var elem = document.getElementById('mount-icon');
+        var elem = document.getElementById('mountIcon');
         var item = getMount(mount);
         var img = item ? `https://simplesalt.feedia.co/shared/${item.icon.toLowerCase()}.png` : `https://simplesalt.feedia.co/shared/blank.png`;
         $('.mountIcon', elem).data('id', item.id).children(
                 'img').attr('src', img);
-        $('.item', elem).text(item.name);
     });
     ipc.on('sky', function (sky) { //fix this asshole
 
         var mem = document.getElementById('sky-type');
-        $('.skytext').text(sky);
+        $('.skyText').text(sky);
     });
 
 
