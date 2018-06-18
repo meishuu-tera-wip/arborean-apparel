@@ -27,6 +27,8 @@
 - Extract/paste contents of the .zip into your `tera-proxy` directory, overwriting when asked.
 - Start Tera-Proxy with the included ElectronStart.bat
 
+I also recommend checking the options in `config.json`.
+
 If this doesn't work or isn't clear, hit me up @@@@ Pentagon#0099 on discord.
 
 ### Usage:
@@ -34,9 +36,9 @@ To open the UI type `aa open` into /proxy or `!aa open` into a normal chat. Ther
 A brief overview of how to use the module can be found [here](https://www.youtube.com/watch?v=i-y2D_2DUZ8.com) (the UI has changed a little but it's the same stuff).
 
 #### Updating:
-This mod support auto-updating via [Caali's Proxy](https://discord.gg/maqBmJV), however currently updating does not work for the file containing the images Arborean Apparel uses.
+This mod support auto-updating via [Caali's Proxy](https://discord.gg/maqBmJV). 
 
- You can update this yourself if there has been an update by downloading [this file](https://github.com/codeagon/arborean-apparel/blob/master/www/img.asar) and extracting it to `bin/node_modules/Arborean-Apparel/www`, overwriting the existing file. This can be done while the mod is running.  I also recommended updating electron frequently to ensure the best comparability.
+I also updating electron frequently to ensure the best comparability, which can be done by downloading the latest release from [this page](https://github.com/electron/electron/releases), and extracting it to `/Tera-Proxy/electron/dist`
 
 #### Online:
 By default Apparel will share your costume selections with other people using the module around you by connecting to an external server. If this doesn't sound like your cup of tea, simply edit config.json and change `online: true` to `false`.
@@ -70,15 +72,12 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/codeagon),
 - Add more effects
 - Make code less bad
 - Add race/appearance changing
-- Reduce file size - haha jk
 - Tidy up UI
 - Add more features 
 - other stuff
  ***
  
-## Update log (Last few, 26th March) - 
-- Fixed mount sharing and UI
-- Fixed some crashes and other potential issues
-- Added some new things
-- Worked on server connectivity issues, unsure what the main issue is just yet
-- Support for next patch version
+## Update log (Jun 18)
+- Images now loaded from server provided by [SaltyMonkey](https://github.com/SaltyMonkey/).
+- Fixed several minor issues in regards to the UI.
+- Added `skyEveryMap`to the config, allowing the selected sky preset to be applied every time a new map is loaded.
