@@ -75,7 +75,7 @@ r,
         b,
         a,
         o
-        }) {
+}) {
     return o ? (a << 24) | (r << 16) | (g << 8) | b : 0;
 }
 module.exports = function ArboreanApparel(dispatch) {
@@ -89,6 +89,11 @@ module.exports = function ArboreanApparel(dispatch) {
             config = {},
             nametags = {},
             jobId,
+            gender,
+            model,
+            bleb,
+            job,
+            race,
             presetTimeout = null,
             nametagTimeout = null,
             presetLock = false,
@@ -107,22 +112,24 @@ module.exports = function ArboreanApparel(dispatch) {
     try {
         config = require('./config.json');
     } catch (e) {
+        console.log('[ArboreanApparel]- Config file generated!');
         config = {
             "online": true,
-            transparent: true,
+            "transparent": true,
+            "skyEveryMap": true,
             "allowEffects": true,
             "allowChangers": true,
-            "configVersion": "0.3",
+            "configVersion": "0.4",
             "serverHost": "158.69.215.229",
             "serverPort": 3458
         };
         saveConfig();
     }
-    if (config.configVersion !== "0.4") {
+    if (config.configVersion !== 0.4) {
         console.log(`Hewwo, AA has updated, please check the readme page for more information!`);
         console.log(`Hewwo, AA has updated, please check the readme page for more information!`);
         Object.assign(config, {
-            skyEveryMap: true,
+            "skyEveryMap": true,
             "configVersion": "0.4"
         });
         saveConfig();
@@ -132,11 +139,8 @@ module.exports = function ArboreanApparel(dispatch) {
     function saveConfig() {
         fs.writeFile(path.join(__dirname, 'config.json'), JSON.stringify(
                 config, null, 4), err => {
-            console.log('[ArboreanApparel]- Config file generated!');
         });
     }
-    ;
-
 
     function presetUpdate() {
         clearTimeout(presetTimeout);
@@ -279,7 +283,7 @@ module.exports = function ArboreanApparel(dispatch) {
 
 
     function skyChange(name) {
-        if (name === undefined || name === null) {
+        if (name == null || name == "") {
             return;
         } else
         if (name == "Remove/None") {
