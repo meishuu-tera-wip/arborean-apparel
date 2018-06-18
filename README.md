@@ -3,7 +3,7 @@
 # Arborean Apparel
 
 
-![<sub>update when?</sub>](https://i.imgur.com/llIq0bx.jpg)
+![<sub>update when?</sub>](https://i.imgur.com/YNBcrI5.pngg)
 
 
 - [Arborean Apparel](#arborean-apparel)
@@ -20,6 +20,7 @@
 
 ***
 [Please funnel money into my mouth to support development](https://ko-fi.com/codeagon)
+***
 ### How to:
 
 - Download and install [Caali's Proxy](https://discord.gg/maqBmJV)
@@ -78,6 +79,6 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/codeagon),
  ***
  
 ## Update log (Jun 18)
-- Images now loaded from server provided by [SaltyMonkey](https://github.com/SaltyMonkey/).
+- Images now loaded from server provided by [SaltyMonkey](https://github.com/SaltyMonkey/), you can delete img.asar from the /www folder now.
 - Fixed several minor issues in regards to the UI.
 - Added `skyEveryMap`to the config, allowing the selected sky preset to be applied every time a new map is loaded.
