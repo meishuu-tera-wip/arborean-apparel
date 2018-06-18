@@ -118,10 +118,10 @@ module.exports = function ArboreanApparel(dispatch) {
         };
         saveConfig();
     }
-    if (config.configVersion !== "0.3") {
+    if (config.configVersion !== "0.4") {
         Object.assign(config, {
-            transparent: true,
-            "configVersion": "0.3"
+            skyEveryMap: true,
+            "configVersion": "0.4"
         });
         saveConfig();
     }
@@ -280,12 +280,20 @@ module.exports = function ArboreanApparel(dispatch) {
         if (name === undefined || name === null) {
             return;
         } else
-            bleb = name.replace(/-/g, "_");
+        if (name == "Remove/None") {
+            dispatch.toClient('S_START_ACTION_SCRIPT', 3, {
+                gameId: myId,
+                script: 105,
+                unk2: 0
+            });
+        }
+        bleb = name.replace(/-/g, "_");
         dispatch.toClient('S_AERO', 1, {
             enabled: 1,
             blendTime: 0,
             aeroSet: bleb
         });
+        win.send('sky', name);
         presets[player].sky = name;
         presetUpdate();
     }
@@ -436,6 +444,7 @@ module.exports = function ArboreanApparel(dispatch) {
                 }]
         });
     });
+
     win.on('option', (option, value) => {
         const changed = setOption(option, value);
         if (option === 'hideidle') {
@@ -450,6 +459,7 @@ module.exports = function ArboreanApparel(dispatch) {
                     );
         }
     });
+
     win.on('mount', (mount) => {
         if (presets[player].mountId) {
             win.send('mount', presets[player].mountId);
@@ -459,17 +469,16 @@ module.exports = function ArboreanApparel(dispatch) {
         presetUpdate();
         net.send('mount', mount);
     });
+
     win.on('sky', (sky) => {
-        if (presets[player].sky) {
-            win.send('sky', presets[player].sky);
-        }
         skyChange(sky);
     });
+
     win.on('emote', doEmote);
     win.on('abn', abnormalStart);
     win.on('changer', startChanger);
     win.on('rmchanger', endChanger);
-    command.add('aa', (cmd, arg) => {
+    command.add('aa', (cmd, arg, arg2) => {
         switch (cmd) {
             case 'job':
             case 'class':
@@ -529,6 +538,9 @@ module.exports = function ArboreanApparel(dispatch) {
                 });
                 net.send('login', id2str(myId));
                 net.send('outfit', override);
+                break
+            case 'chat':
+                net.send('message', arg, arg2);
                 break
             case 'cb':
             case 'crystalbind':
@@ -622,6 +634,12 @@ module.exports = function ArboreanApparel(dispatch) {
             }
             if (presets[player].sky === undefined) {
                 presets[player].sky = [];
+            } else {
+                if (config.skyEveryMap) {
+                    setTimeout(function () {
+                        skyChange(presets[player].sky);
+                    }, 5000);
+                }
             }
             if (presets[player] && presets[player].id !== 0) {
                 setTimeout(function () {
@@ -957,8 +975,7 @@ module.exports = function ArboreanApparel(dispatch) {
         });
     });
     net.on('message', (msg) => {
-        if (ingame)
-            message(msg);
+        message(msg);
     });
     net.on('changer', (id, field, value) => {
         if (config.allowChangers && ingame) {
