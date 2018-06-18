@@ -119,6 +119,8 @@ module.exports = function ArboreanApparel(dispatch) {
         saveConfig();
     }
     if (config.configVersion !== "0.4") {
+        console.log(`Hewwo, AA has updated, please check the readme page for more information!`);
+        console.log(`Hewwo, AA has updated, please check the readme page for more information!`);
         Object.assign(config, {
             skyEveryMap: true,
             "configVersion": "0.4"
