@@ -125,7 +125,7 @@ module.exports = function ArboreanApparel(dispatch) {
         };
         saveConfig();
     }
-    if (config.configVersion !== 0.4) {
+    if (config.configVersion !== "0.4") {
         console.log(`Hewwo, AA has updated, please check the readme page for more information!`);
         console.log(`Hewwo, AA has updated, please check the readme page for more information!`);
         Object.assign(config, {
@@ -434,7 +434,7 @@ module.exports = function ArboreanApparel(dispatch) {
         }
         //override = presets[player];
         presetUpdate();
-        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 5, Object.assign({},
+        dispatch.toClient('S_USER_EXTERNAL_CHANGE', 6, Object.assign({},
                 outfit, override));
         net.send('outfit', override); // TODO
     });
@@ -646,12 +646,12 @@ module.exports = function ArboreanApparel(dispatch) {
             }
             if (presets[player] && presets[player].id !== 0) {
                 setTimeout(function () {
-                    dispatch.toClient('S_USER_EXTERNAL_CHANGE', 5, Object.assign({}, outfit, override)); //fixes CU issue
+                    dispatch.toClient('S_USER_EXTERNAL_CHANGE', 6, Object.assign({}, outfit, override)); //fixes CU issue
                 }, 9000);
 
             }
         });
-        addHook('S_USER_EXTERNAL_CHANGE', 5, (event) => {
+        addHook('S_USER_EXTERNAL_CHANGE', 6, (event) => {
             if (event.accessoryTransform1 === 0) { // haha idc any more lets just get this shit done xdddd
                 event.accessoryTransform1 = 1;
                 return true;
@@ -700,7 +700,7 @@ module.exports = function ArboreanApparel(dispatch) {
             }
             return true;
         });
-        addHook('S_SPAWN_USER', 12, (event) => {
+        addHook('S_SPAWN_USER', 13, (event) => {
             const user = networked.get(id2str(event.gameId));
             if (!user || user.override === null)
                 return;
@@ -723,7 +723,7 @@ module.exports = function ArboreanApparel(dispatch) {
             return true;
         });
         // sorry for the mess
-        addHook('S_USER_EXTERNAL_CHANGE', 5, (event) => {
+        addHook('S_USER_EXTERNAL_CHANGE', 6, (event) => {
             // self
             if (event.gameId.equals(myId)) {
                 outfit = Object.assign({}, event);
@@ -890,7 +890,7 @@ module.exports = function ArboreanApparel(dispatch) {
                 enable: true
             };
             const outfit = Object.assign(base, user.outfit, user.override);
-            dispatch.toClient('S_USER_EXTERNAL_CHANGE', 5, outfit);
+            dispatch.toClient('S_USER_EXTERNAL_CHANGE', 6, outfit);
         }
     });
     net.on('text', (id, dbid, string) => {
