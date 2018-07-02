@@ -54,8 +54,6 @@ The server is run by me for free [(gib monei plis)](https://ko-fi.com/codeagon),
 
 `Your version of Node.JS is too old to run tera-proxy. Version 9.0.0 or newer is required.` Please read the readme and download the proxy linked above.
 
-`Things have no icons, halp!!!!` As updates come out, new icons are added to the game and to the module itself. As such, you'll have to download the [www/img.asar](https://github.com/codeagon/arborean-apparel/blob/master/www/img.asar) portion of the mod again and extract to `bin/node_modules/Arborean-Apparel/www`
-
 `TypeError: electron.BrowserWindow is not a constructor or cannot find module 'Electron'`: Proxy isn't running as electron, please make sure you have downloaded and overwritten (or made copies of) the files in the [full release](https://github.com/hugedong69/arborean-apparel/releases), and are running it with the supplied .bat file.
 
 `The system cannot find the path specified.`: You don't have electron installed in tera-proxy/node_modules, refer to the above.
