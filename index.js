@@ -75,7 +75,7 @@ r,
         b,
         a,
         o
-}) {
+        }) {
     return o ? (a << 24) | (r << 16) | (g << 8) | b : 0;
 }
 module.exports = function ArboreanApparel(dispatch) {
@@ -83,15 +83,33 @@ module.exports = function ArboreanApparel(dispatch) {
     const command = Command(dispatch);
     const net = new Networking();
     const win = new Window();
+    const networked = new Map();
     let player,
             lastCallDate = 1,
             presets = {},
-            config = {},
             nametags = {},
+            outfit = {},
+            selfInfo = {
+                name: '',
+                job: -1,
+                race: -1,
+                gender: -1
+            },
+            options = {
+                hideidle: false,
+                hidecb: false
+            },
+            crystalbind = {
+                expires: 0,
+                stacks: 0,
+                type: 0
+            },
+            override = {},
             jobId,
             gender,
             model,
             bleb,
+            myId,
             job,
             race,
             presetTimeout = null,
@@ -99,6 +117,7 @@ module.exports = function ArboreanApparel(dispatch) {
             presetLock = false,
             nametagLock = false,
             ingame = false;
+
     try {
         presets = require('./presets.json');
     } catch (e) {
@@ -110,10 +129,10 @@ module.exports = function ArboreanApparel(dispatch) {
         nametags = {};
     }
     try {
-        config = require('./config.json');
+        var config = require('./config.json');
     } catch (e) {
         console.log('[ArboreanApparel]- Config file generated!');
-        config = {
+        var config = {
             "online": true,
             "transparent": true,
             "skyEveryMap": true,
@@ -179,41 +198,6 @@ module.exports = function ArboreanApparel(dispatch) {
     function message(msg) {
         command.message(`<font color="#916d7b">  [Arborean-Apparel] - </font> <font color="#eaf2ef">${msg}`);
     }
-    let myId;
-    let outfit = {};
-    let override = {};
-    const networked = new Map();
-    let selfInfo = {
-        name: '',
-        job: -1,
-        race: -1,
-        gender: -1
-    };
-    let options = {
-        hideidle: false,
-        hidecb: false
-    };
-    let crystalbind = {
-        expires: 0,
-        stacks: 0,
-        type: 0
-    };
-    const abnstate = {
-        activated: false
-    };
-    const changer = {
-        state: 0,
-        field: 0,
-        value: 0
-    };
-    this.destructor = () => {
-        net.close();
-        win.close();
-        try {
-            command.remove('aa');
-        } catch (e) {
-        }
-    };
 
     function broadcast(...args) {
         win.send(...args);
@@ -666,8 +650,6 @@ module.exports = function ArboreanApparel(dispatch) {
             }
         });
 
-
-
         //Marrow brooch handling thanks Cosplayer, kasea please die
         addHook('S_UNICAST_TRANSFORM_DATA', 'raw', (code, data) => {
             return false;
@@ -1005,5 +987,13 @@ module.exports = function ArboreanApparel(dispatch) {
             port: config.serverPort
         });
     }
+    this.destructor = () => {
+        net.close();
+        win.close();
+        try {
+            command.remove('aa');
+        } catch (e) {
+        }
+    };
     //win.show();
 };

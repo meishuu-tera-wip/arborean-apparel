@@ -8,11 +8,21 @@ const CHANNEL_NAME = 'arborean-apparel'
 const debug = false
 
 try {
-    config = require('./config.json');
+    var config = require('./config.json');
 } catch (e) {
-    config = {"transparent": true};
+    var config = {"transparent": true};
 }
 
+if (process.versions.electron !== `3.0.0-beta.1`) {
+    electron.dialog.showMessageBox({type: 'info', title: "Arborean Apparel", message: "An electron update is required.",
+        buttons: ["Go to download", "Later"]}, meme => {
+        if (meme === 0) {
+            electron.shell.openExternal('https://github.com/codeagon/arborean-apparel/releases');
+        } else {
+            return;
+        }
+    });
+}
 
 class Window extends events.EventEmitter {
     constructor() {
