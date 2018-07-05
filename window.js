@@ -8,11 +8,10 @@ const CHANNEL_NAME = 'arborean-apparel'
 const debug = false
 
 try {
-    config = require('./config.json');
+    var config = require('./config.json');
 } catch (e) {
-    config = {"transparent": true};
+    var config = {"transparent": true};
 }
-
 
 class Window extends events.EventEmitter {
     constructor() {
