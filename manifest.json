@@ -14,6 +14,7 @@
       "www/js/typeahead.bundle.min.js":"456894e2899453bb50d8cdf099140d5bd50be74301e02b9c6d13c26ec42ff97d"
    },
    "defs":{
+      "S_USER_WEAPON_APPEARANCE_CHANGE": 2,
       "C_LOAD_TOPO_FIN":1,
       "S_RETURN_TO_LOBBY": 1,
       "S_ABNORMALITY_END":1,
