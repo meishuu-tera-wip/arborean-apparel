@@ -240,7 +240,7 @@ module.exports = function ArboreanApparel(dispatch) {
             target: game.me.gameId,
             source: game.me.gameId,
             id: hidecb ? rem : add,
-            duration: duration,
+            duration,
             stacks: crystalbind.stacks
         });
     }
@@ -396,9 +396,11 @@ module.exports = function ArboreanApparel(dispatch) {
         STACKS[name] = 4;
         net.send('abnEnd', remChange);
     }
+
     /* --------- *
      * UI EVENTS *
      * --------- */
+
     win.on('load', () => {
         if (presets[player].mountId) {
             win.send('mount', presets[player].mountId);
@@ -410,7 +412,8 @@ module.exports = function ArboreanApparel(dispatch) {
         win.send('outfit', outfit, override);
         for (const k of Object.keys(options))
             win.send('option', k,
-                options[k]);
+                options[k]
+            );
     });
     win.on('change', (over) => {
         for (const type of Object.keys(over)) {
