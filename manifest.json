@@ -25,7 +25,7 @@
       "S_ITEM_CUSTOM_STRING":2,
       "S_LOGIN": 10,
       "S_GET_USER_LIST": 14,
-      "S_SPAWN_USER":12,
+      "S_SPAWN_USER":13,
       "S_MOUNT_VEHICLE":2
    }
 }
