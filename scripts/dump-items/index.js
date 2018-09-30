@@ -7,9 +7,9 @@ const duplicates = {};
 
 const RACES = ['human', 'highelf', 'aman', 'castanic', 'popori', 'baraka'];
 const CLASSES = {
-  name: ['warrior', 'lancer', 'slayer', 'berserker', 'sorcerer', 'archer', 'priest', 'mystic', 'reaper', 'gunner', 'brawler', 'ninja'],
-  id: ['WARRIOR', 'LANCER', 'SLAYER', 'BERSERKER', 'SORCERER', 'ARCHER', 'PRIEST', 'ELEMENTALIST', 'SOULLESS', 'ENGINEER', 'FIGHTER', 'ASSASSIN'],
-  weapon: ['dual', 'lance', 'twohand', 'axe', 'circle', 'bow', 'staff', 'rod', 'chain', 'blaster', 'gauntlet', 'shuriken'],
+  name: ['warrior', 'lancer', 'slayer', 'berserker', 'sorcerer', 'archer', 'priest', 'mystic', 'reaper', 'gunner', 'brawler', 'ninja', 'valkyrie'],
+  id: ['WARRIOR', 'LANCER', 'SLAYER', 'BERSERKER', 'SORCERER', 'ARCHER', 'PRIEST', 'ELEMENTALIST', 'SOULLESS', 'ENGINEER', 'FIGHTER', 'ASSASSIN', 'GLAIVER'],
+  weapon: ['dual', 'lance', 'twohand', 'axe', 'circle', 'bow', 'staff', 'rod', 'chain', 'blaster', 'gauntlet', 'shuriken', 'glaive'],
 };
 
 const basedir = path.join(__dirname, '../../data/json');
@@ -69,6 +69,10 @@ const basedir = path.join(__dirname, '../../data/json');
       let style = false;
       if (category.startsWith('style_')) {
         category = category.slice(6);
+        if(category === 'foot_print') {
+          category='effect'
+          item.linkLookInfoId = item.icon
+        }
         style = true;
       } else if (category.startsWith('accessory')) {
         category = category.slice(9);
@@ -241,21 +245,22 @@ const categories = {
       gunner: [],
       brawler: [],
       ninja: [],
+      valkyrie: [],
     },
     plate: {
-      chest: [],
-      gloves: [],
-      boots: [],
+      body: [],
+      hand: [],
+      feet: [],
     },
     leather: {
-      chest: [],
-      gloves: [],
-      boots: [],
+      body: [],
+      hand: [],
+      feet: [],
     },
     cloth: {
-      chest: [],
-      gloves: [],
-      boots: [],
+      body: [],
+      hand: [],
+      feet: [],
     },
     face: [],
     hair: [],
@@ -275,11 +280,13 @@ const categories = {
       gunner: [],
       brawler: [],
       ninja: [],
+      valkyrie: [],
     },
     body: [],
     face: [],
     hair: [],
     back: [],
+    effect: [],
   },
 };
 
@@ -287,9 +294,9 @@ const categories = {
   const unused = [];
   const conv = {
     part: {
-      body: 'chest',
-      hand: 'gloves',
-      feet: 'boots',
+      body: 'body',
+      hand: 'hand',
+      feet: 'feet',
     },
     type: {
       mail: 'plate',
@@ -308,7 +315,7 @@ const categories = {
     let match;
     if (index !== -1) {
       categories[style].weapon[CLASSES.name[index]].push(id);
-    } else if (['back', 'body', 'face', 'hair', 'underwear'].indexOf(category) !== -1) {
+    } else if (['back', 'effect', 'body', 'face', 'hair', 'underwear'].indexOf(category) !== -1) {
       categories[style][category].push(id);
     } else if (match = category.match(/^(body|hand|feet)(mail|leather|robe)$/)) {
       const part = conv.part[match[1]];
